@@ -1,5 +1,6 @@
 <?php
 use function Livewire\Volt\{state, rules};
+use App\Models\Inquiry; // 💡 1. นำเข้าโมเดล Inquiry ที่เราเพิ่งสร้างมาใช้งาน
 
 state([
     'name' => '',
@@ -22,6 +23,15 @@ rules([
 
 $save = function () {
     $this->validate();
+
+    // 💡 2. สั่งบันทึกข้อมูลลงฐานข้อมูล (MySQL)
+    Inquiry::create([
+        'name' => $this->name,
+        'phone' => $this->phone,
+        'brand' => $this->brand,
+        'symptom' => $this->symptom,
+        'status' => 'pending', // กำหนดสถานะเริ่มต้นว่า "รอดำเนินการ"
+    ]);
 
     $this->dispatch(
         'notify',
