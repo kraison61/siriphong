@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ศิริพงษ์ เซอร์วิส | ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม</title>
+<meta name="description" content="ซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ประสบการณ์กว่า 20 ปี รับซ่อมทุกยี่ห้อ รับประกันงาน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+@vite(['resources/css/style.css', 'resources/js/app.js'])
+
+</head>
+
+<body class="font-sans text-ink bg-white leading-relaxed overflow-x-hidden pb-[72px] md:pb-0">
+
+<!-- ============================================================ -->
+<!-- NAVBAR                                                       -->
+<!-- ============================================================ -->
+<header>
+<nav class="sticky top-0 z-[100] bg-navy border-b border-white/10 shadow-[0_2px_20px_rgba(0,0,0,.25)]" role="navigation" aria-label="เมนูหลัก">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="#" class="flex items-center gap-2.5" aria-label="ศิริพงษ์ เซอร์วิส - หน้าแรก">
+        <div class="w-10 h-10 shrink-0 bg-orange rounded-[10px] flex items-center justify-center text-xl text-white"><i class="bi bi-tools" aria-hidden="true"></i></div>
+        <div class="flex flex-col leading-tight">
+          <span class="font-display font-bold text-base text-white">ศิริพงษ์ เซอร์วิส</span>
+          <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG SERVICE</span>
+        </div>
+      </a>
+
+      <ul class="hidden md:flex list-none gap-1" role="list">
+        <li><a href="#services" data-nav data-active="true" class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">บริการ</a></li>
+        <li><a href="#portfolio" data-nav class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ผลงาน</a></li>
+        <li><a href="#why-us" data-nav class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ทำไมต้องเรา</a></li>
+        <li><a href="#contact" data-nav class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ติดต่อ</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2.5">
+        <a href="https://line.me" target="_blank" rel="noopener" class="hidden md:inline-flex items-center justify-center gap-2 min-h-[40px] px-[18px] py-2 rounded-xl text-sm font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์">
+          <i class="bi bi-chat-dots-fill" aria-hidden="true"></i> แอดไลน์
+        </a>
+        <button class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-2xl text-white transition-colors hover:bg-white/10" onclick="toggleMenu()" aria-label="เปิดเมนู" aria-expanded="false" id="hamburger">
+          <i class="bi bi-list" id="ham-icon" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="hidden flex-col bg-navy-mid px-4 pt-2 pb-4 border-t border-white/10" id="mobile-menu" role="menu">
+    <a href="#services"     onclick="closeMenu()" class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i class="bi bi-tools" aria-hidden="true"></i>บริการซ่อม</a>
+    <a href="#portfolio"    onclick="closeMenu()" class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i class="bi bi-images" aria-hidden="true"></i>ผลงาน</a>
+    <a href="#why-us"       onclick="closeMenu()" class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i class="bi bi-star" aria-hidden="true"></i>ทำไมต้องเรา</a>
+    <a href="#testimonials" onclick="closeMenu()" class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i class="bi bi-chat-quote" aria-hidden="true"></i>รีวิวลูกค้า</a>
+    <a href="#contact"      onclick="closeMenu()" class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 transition-colors hover:text-orange"><i class="bi bi-telephone" aria-hidden="true"></i>ติดต่อเรา</a>
+  </div>
+</nav>
+</header>
+
+<!-- ============================================================ -->
+<!-- HERO SECTION                                                 -->
+<!-- ============================================================ -->
+<section class="relative overflow-hidden py-14 md:py-20 md:pb-24 bg-[linear-gradient(160deg,#0f2347_0%,#1a3a6b_55%,#1e4a8a_100%)]" aria-labelledby="hero-title">
+  <!-- industrial grid overlay -->
+  <div class="pointer-events-none absolute inset-0 bg-[size:40px_40px] bg-[linear-gradient(rgba(255,255,255,.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.025)_1px,transparent_1px)]"></div>
+  <!-- orange accent bar -->
+  <div class="absolute left-0 top-0 bottom-0 w-1 bg-[linear-gradient(to_bottom,#f26522,transparent)]"></div>
+
+  <div class="relative w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div class="md:grid md:grid-cols-[1fr_auto] md:gap-12 md:items-center">
+      <div>
+        <div class="animate-fade-down inline-flex items-center gap-2 mb-5 px-3.5 py-1.5 rounded-full bg-orange/15 border border-orange/40 text-sm font-semibold tracking-wide text-[#ffa070]">
+          <i class="bi bi-patch-check-fill text-orange" aria-hidden="true"></i>
+          ประสบการณ์กว่า 20 ปี · ไว้ใจได้
+        </div>
+        <h1 class="animate-fade-up [animation-delay:.1s] font-display font-bold text-white leading-[1.1] mb-4 text-[clamp(2rem,7vw,3.8rem)]" id="hero-title">
+          ผู้เชี่ยวชาญ
+          <span class="block text-orange">ซ่อมเครื่องดูดฝุ่น<br>อุตสาหกรรม</span>
+        </h1>
+        <p class="animate-fade-up [animation-delay:.2s] max-w-[520px] mb-8 leading-[1.7] text-white/[.78] text-[clamp(1rem,2.5vw,1.15rem)]">
+          รับซ่อมทุกยี่ห้อ ทุกรุ่น ด้วยความซื่อสัตย์และตรงไปตรงมา
+          ราคายุติธรรม รับประกันงาน บริการถึงที่
+        </p>
+        <div class="animate-fade-up [animation-delay:.3s] flex flex-col sm:flex-row gap-3">
+          <a href="https://line.me" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปเครื่องและปรึกษาฟรี">
+            <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+            แอดไลน์ ส่งรูปเครื่อง
+          </a>
+          <a href="tel:0812345678" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-transparent border-2 border-white/55 transition-all hover:bg-white/10 hover:border-white" aria-label="โทรหาเรา 081-234-5678">
+            <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+            081-234-5678
+          </a>
+        </div>
+
+        <div class="animate-fade-up [animation-delay:.4s] grid grid-cols-3 gap-3 mt-12" aria-label="สถิติผลงาน">
+          <div class="text-center py-4 px-2 rounded-xl bg-white/[.07] border border-white/10 backdrop-blur-sm">
+            <span class="block font-display font-bold text-orange leading-none text-[clamp(1.5rem,5vw,2rem)]">20+</span>
+            <span class="block mt-1 text-[.72rem] text-white/60">ปีประสบการณ์</span>
+          </div>
+          <div class="text-center py-4 px-2 rounded-xl bg-white/[.07] border border-white/10 backdrop-blur-sm">
+            <span class="block font-display font-bold text-orange leading-none text-[clamp(1.5rem,5vw,2rem)]">500+</span>
+            <span class="block mt-1 text-[.72rem] text-white/60">โรงงานที่เคยบริการ</span>
+          </div>
+          <div class="text-center py-4 px-2 rounded-xl bg-white/[.07] border border-white/10 backdrop-blur-sm">
+            <span class="block font-display font-bold text-orange leading-none text-[clamp(1.5rem,5vw,2rem)]">98%</span>
+            <span class="block mt-1 text-[.72rem] text-white/60">ลูกค้าพึงพอใจ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden md:flex justify-end" aria-hidden="true">
+        <div class="relative overflow-hidden w-80 h-[380px] rounded-[20px] bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-4">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(242,101,34,.15),transparent_70%)]"></div>
+          <i class="bi bi-wind text-[5rem] text-white/20"></i>
+          <span class="font-display text-xs tracking-[.12em] uppercase text-white/35">Industrial Vacuum System</span>
+          <div class="absolute bottom-5 right-5 w-3 h-3 rounded-full bg-line animate-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TRUST STRIP                                                  -->
+<!-- ============================================================ -->
+<div class="py-4 bg-slate-100 border-y border-slate-200" role="list" aria-label="จุดเด่นของเรา">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div class="flex items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap border-r border-slate-200" role="listitem">
+        <i class="bi bi-shield-check text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">รับประกันงาน 3 เดือน</span>
+      </div>
+      <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap border-r border-slate-200" role="listitem">
+        <i class="bi bi-lightning-charge text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">ตรวจสอบภายใน 24 ชม.</span>
+      </div>
+      <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap border-r border-slate-200" role="listitem">
+        <i class="bi bi-geo-alt text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">บริการถึงโรงงาน</span>
+      </div>
+      <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap border-r border-slate-200" role="listitem">
+        <i class="bi bi-cash-coin text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">ฟรีค่าตรวจสอบเบื้องต้น</span>
+      </div>
+      <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap" role="listitem">
+        <i class="bi bi-trophy text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">รับซ่อมทุกยี่ห้อ</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SERVICES SECTION                                             -->
+<!-- ============================================================ -->
+<section class="py-18 bg-white" id="services" aria-labelledby="services-title">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div data-reveal class="mb-10 opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
+      <div class="font-display text-xs font-semibold tracking-[.14em] uppercase text-orange">
+        <i class="bi bi-tools" aria-hidden="true"></i> บริการของเรา
+      </div>
+      <h2 class="font-display font-bold leading-tight text-navy mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="services-title">
+        ซ่อมครบ ทุกประเภท<br>
+        <span class="text-orange">เครื่องดูดฝุ่นอุตสาหกรรม</span>
+      </h2>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="flex gap-2 overflow-x-auto pb-1 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="group" aria-label="กรองประเภทบริการ">
+      <button onclick="filterServices('all')" aria-pressed="true" class="filter-btn inline-flex items-center gap-1.5 min-h-[44px] px-[18px] py-2.5 rounded-full text-sm font-semibold shrink-0 whitespace-nowrap border-[1.5px] border-slate-200 bg-white text-slate-700 transition-all hover:border-navy hover:text-navy aria-pressed:bg-navy aria-pressed:border-navy aria-pressed:text-white aria-pressed:shadow">
+        <i class="bi bi-grid-fill" aria-hidden="true"></i> ทั้งหมด
+      </button>
+      <button onclick="filterServices('motor')" aria-pressed="false" class="filter-btn inline-flex items-center gap-1.5 min-h-[44px] px-[18px] py-2.5 rounded-full text-sm font-semibold shrink-0 whitespace-nowrap border-[1.5px] border-slate-200 bg-white text-slate-700 transition-all hover:border-navy hover:text-navy aria-pressed:bg-navy aria-pressed:border-navy aria-pressed:text-white aria-pressed:shadow">
+        <i class="bi bi-cpu" aria-hidden="true"></i> มอเตอร์
+      </button>
+      <button onclick="filterServices('filter')" aria-pressed="false" class="filter-btn inline-flex items-center gap-1.5 min-h-[44px] px-[18px] py-2.5 rounded-full text-sm font-semibold shrink-0 whitespace-nowrap border-[1.5px] border-slate-200 bg-white text-slate-700 transition-all hover:border-navy hover:text-navy aria-pressed:bg-navy aria-pressed:border-navy aria-pressed:text-white aria-pressed:shadow">
+        <i class="bi bi-funnel" aria-hidden="true"></i> ระบบกรอง
+      </button>
+      <button onclick="filterServices('electrical')" aria-pressed="false" class="filter-btn inline-flex items-center gap-1.5 min-h-[44px] px-[18px] py-2.5 rounded-full text-sm font-semibold shrink-0 whitespace-nowrap border-[1.5px] border-slate-200 bg-white text-slate-700 transition-all hover:border-navy hover:text-navy aria-pressed:bg-navy aria-pressed:border-navy aria-pressed:text-white aria-pressed:shadow">
+        <i class="bi bi-lightning" aria-hidden="true"></i> ไฟฟ้า
+      </button>
+      <button onclick="filterServices('pipe')" aria-pressed="false" class="filter-btn inline-flex items-center gap-1.5 min-h-[44px] px-[18px] py-2.5 rounded-full text-sm font-semibold shrink-0 whitespace-nowrap border-[1.5px] border-slate-200 bg-white text-slate-700 transition-all hover:border-navy hover:text-navy aria-pressed:bg-navy aria-pressed:border-navy aria-pressed:text-white aria-pressed:shadow">
+        <i class="bi bi-bezier2" aria-hidden="true"></i> ท่อดูด
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="services-grid">
+      <!-- Card 1 -->
+      <article data-reveal data-category="motor" class="service-card group relative overflow-hidden rounded-xl bg-white border border-slate-200 cursor-pointer transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:border-navy-light hover:shadow-md hover:-translate-y-1">
+        <div class="relative overflow-hidden aspect-video flex items-center justify-center text-[3.5rem] text-white/20 bg-[linear-gradient(135deg,#0f2347_0%,#3d5a80_100%)] after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom_right,rgba(242,101,34,.18),transparent)]">
+          <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+          <span class="absolute top-2.5 left-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-navy text-white text-[.68rem] font-bold tracking-wide uppercase">มอเตอร์</span>
+          <span class="absolute top-2.5 right-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-orange text-white text-[.68rem] font-bold tracking-wide uppercase">แนะนำ</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมมอเตอร์เครื่องดูดฝุ่น</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">รับซ่อมมอเตอร์ทุกขนาด ทั้งระบบพัดลม แม่เหล็ก และแปรงถ่าน แก้ปัญหามอเตอร์ไหม้ เสียง ดังผิดปกติ หรือไม่หมุน</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Nilfisk</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Karcher</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Roots</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>ติดต่อขอราคา</span>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 min-h-[40px] px-4 py-2 rounded-lg text-sm font-bold text-white bg-navy shadow transition-all hover:bg-navy-mid hover:-translate-y-0.5">ดูรายละเอียด <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article data-reveal data-category="filter" class="service-card group relative overflow-hidden rounded-xl bg-white border border-slate-200 cursor-pointer transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:border-navy-light hover:shadow-md hover:-translate-y-1">
+        <div class="relative overflow-hidden aspect-video flex items-center justify-center text-[3.5rem] text-white/20 bg-[linear-gradient(135deg,#1e4a8a,#0f2347)] after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom_right,rgba(242,101,34,.18),transparent)]">
+          <i class="bi bi-funnel-fill" aria-hidden="true"></i>
+          <span class="absolute top-2.5 left-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-navy text-white text-[.68rem] font-bold tracking-wide uppercase">ระบบกรอง</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมและเปลี่ยนไส้กรอง</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">เปลี่ยนไส้กรอง HEPA และกรองผ้า ทำความสะอาดระบบกรอง แก้ปัญหาประสิทธิภาพดูดฝุ่นลดลง มีกลิ่น หรือฝุ่นย้อนกลับ</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">HEPA Filter</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ผ้ากรอง</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>เริ่มต้น ฿800</span>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 min-h-[40px] px-4 py-2 rounded-lg text-sm font-bold text-white bg-navy shadow transition-all hover:bg-navy-mid hover:-translate-y-0.5">ดูรายละเอียด <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article data-reveal data-category="electrical" class="service-card group relative overflow-hidden rounded-xl bg-white border border-slate-200 cursor-pointer transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:border-navy-light hover:shadow-md hover:-translate-y-1">
+        <div class="relative overflow-hidden aspect-video flex items-center justify-center text-[3.5rem] text-white/20 bg-[linear-gradient(135deg,#1a3a6b,#0d2b5e)] after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom_right,rgba(242,101,34,.18),transparent)]">
+          <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+          <span class="absolute top-2.5 left-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-navy text-white text-[.68rem] font-bold tracking-wide uppercase">ระบบไฟฟ้า</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมระบบไฟฟ้าและวงจร</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ซ่อมสวิตช์ บอร์ดควบคุม PCB ระบบ Inverter และอุปกรณ์ไฟฟ้าทุกชนิด แก้ปัญหาเครื่องไม่ติด ไฟกระพริบ หรือ Overload</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">PCB</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Inverter</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Switch</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>ติดต่อขอราคา</span>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 min-h-[40px] px-4 py-2 rounded-lg text-sm font-bold text-white bg-navy shadow transition-all hover:bg-navy-mid hover:-translate-y-0.5">ดูรายละเอียด <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article data-reveal data-category="pipe" class="service-card group relative overflow-hidden rounded-xl bg-white border border-slate-200 cursor-pointer transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:border-navy-light hover:shadow-md hover:-translate-y-1">
+        <div class="relative overflow-hidden aspect-video flex items-center justify-center text-[3.5rem] text-white/20 bg-[linear-gradient(135deg,#2a5298,#1a3a6b)] after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom_right,rgba(242,101,34,.18),transparent)]">
+          <i class="bi bi-bezier2" aria-hidden="true"></i>
+          <span class="absolute top-2.5 left-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-navy text-white text-[.68rem] font-bold tracking-wide uppercase">ท่อดูด</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมท่อดูดและหัวดูด</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ซ่อมและเปลี่ยนท่อดูด สายยาง และหัวดูดทุกรูปแบบ แก้ปัญหาท่อรั่ว แรงดูดอ่อน หรืออุดตัน</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ท่อ PVC</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">สายยาง</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>เริ่มต้น ฿500</span>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 min-h-[40px] px-4 py-2 rounded-lg text-sm font-bold text-white bg-navy shadow transition-all hover:bg-navy-mid hover:-translate-y-0.5">ดูรายละเอียด <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article data-reveal data-category="motor" class="service-card group relative overflow-hidden rounded-xl bg-white border border-slate-200 cursor-pointer transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:border-navy-light hover:shadow-md hover:-translate-y-1">
+        <div class="relative overflow-hidden aspect-video flex items-center justify-center text-[3.5rem] text-white/20 bg-[linear-gradient(135deg,#0f2347,#1e4a8a)] after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom_right,rgba(242,101,34,.18),transparent)]">
+          <i class="bi bi-wrench-adjustable-circle-fill" aria-hidden="true"></i>
+          <span class="absolute top-2.5 left-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-navy text-white text-[.68rem] font-bold tracking-wide uppercase">Overhaul</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">Overhaul เครื่องดูดฝุ่นครบระบบ</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ถอดประกอบและบำรุงรักษาเครื่องดูดฝุ่นทั้งระบบ เปลี่ยนชิ้นส่วนสึกหรอ ทำความสะอาดภายใน และตรวจสอบทุกจุด</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ครบระบบ</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">PM Service</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>ราคาพิเศษ</span>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 min-h-[40px] px-4 py-2 rounded-lg text-sm font-bold text-white bg-navy shadow transition-all hover:bg-navy-mid hover:-translate-y-0.5">ดูรายละเอียด <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article data-reveal data-category="electrical" class="service-card group relative overflow-hidden rounded-xl bg-white border border-slate-200 cursor-pointer transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:border-navy-light hover:shadow-md hover:-translate-y-1">
+        <div class="relative overflow-hidden aspect-video flex items-center justify-center text-[3.5rem] text-white/20 bg-[linear-gradient(135deg,#1a3a6b,#2a5298)] after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_bottom_right,rgba(242,101,34,.18),transparent)]">
+          <i class="bi bi-clipboard2-pulse-fill" aria-hidden="true"></i>
+          <span class="absolute top-2.5 left-2.5 z-[1] px-2.5 py-[3px] rounded-full bg-navy text-white text-[.68rem] font-bold tracking-wide uppercase">ตรวจสอบ</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ตรวจสอบและวินิจฉัยอาการ</h3>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ตรวจวินิจฉัยอาการเสียอย่างละเอียด ระบุสาเหตุที่แท้จริง พร้อมใบเสนอราคาซ่อมก่อนดำเนินการ</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ฟรีตรวจสอบ</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">มีใบเสนอราคา</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>ฟรี!</span>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 min-h-[40px] px-4 py-2 rounded-lg text-sm font-bold text-white bg-orange shadow-[0_4px_16px_rgba(242,101,34,.35)] transition-all hover:bg-orange-dark hover:-translate-y-0.5">ติดต่อเลย <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- WHY US SECTION                                               -->
+<!-- ============================================================ -->
+<section class="relative overflow-hidden py-18 bg-navy" id="why-us" aria-labelledby="why-title">
+  <div class="absolute inset-0 bg-[size:60px_60px] bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)]"></div>
+  <div class="relative w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
+      <div class="font-display text-xs font-semibold tracking-[.14em] uppercase text-orange">ทำไมต้องเลือกเรา</div>
+      <h2 class="font-display font-bold leading-tight text-white mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="why-title">
+        ช่างที่คุณ<span class="text-orange">ไว้วางใจได้</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+      <div data-reveal class="rounded-xl p-7 px-5 bg-white/[.06] border border-white/10 transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white/10 hover:border-orange/40 hover:-translate-y-1">
+        <div class="w-13 h-13 mb-4 rounded-[14px] bg-orange/15 border border-orange/30 flex items-center justify-center text-[1.4rem] text-orange"><i class="bi bi-clock-history" aria-hidden="true"></i></div>
+        <h3 class="font-display font-bold text-white mb-2">ประสบการณ์ 20+ ปี</h3>
+        <p class="text-sm text-white/60 leading-relaxed">ผ่านงานซ่อมเครื่องดูดฝุ่นอุตสาหกรรมมากกว่า 500 โรงงาน ทุกรุ่น ทุกยี่ห้อ ไม่มีปัญหาไหนที่ไม่เคยพบ</p>
+      </div>
+      <div data-reveal class="rounded-xl p-7 px-5 bg-white/[.06] border border-white/10 transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white/10 hover:border-orange/40 hover:-translate-y-1">
+        <div class="w-13 h-13 mb-4 rounded-[14px] bg-orange/15 border border-orange/30 flex items-center justify-center text-[1.4rem] text-orange"><i class="bi bi-hand-thumbs-up" aria-hidden="true"></i></div>
+        <h3 class="font-display font-bold text-white mb-2">ซื่อสัตย์ตรงไปตรงมา</h3>
+        <p class="text-sm text-white/60 leading-relaxed">บอกตรงๆ ว่าซ่อมได้หรือไม่ได้ ราคาเท่าไหร่ ไม่บวกราคาเกินจริง มีใบเสนอราคาก่อนซ่อมทุกครั้ง</p>
+      </div>
+      <div data-reveal class="rounded-xl p-7 px-5 bg-white/[.06] border border-white/10 transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white/10 hover:border-orange/40 hover:-translate-y-1">
+        <div class="w-13 h-13 mb-4 rounded-[14px] bg-orange/15 border border-orange/30 flex items-center justify-center text-[1.4rem] text-orange"><i class="bi bi-shield-check" aria-hidden="true"></i></div>
+        <h3 class="font-display font-bold text-white mb-2">รับประกัน 3 เดือน</h3>
+        <p class="text-sm text-white/60 leading-relaxed">รับประกันงานซ่อมทุกชิ้น 3 เดือน หากมีปัญหาเดิมเกิดขึ้น กลับมาซ่อมให้ฟรีไม่มีค่าใช้จ่ายเพิ่ม</p>
+      </div>
+      <div data-reveal class="rounded-xl p-7 px-5 bg-white/[.06] border border-white/10 transition-all opacity-0 translate-y-6 duration-700 ease-out delay-300 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white/10 hover:border-orange/40 hover:-translate-y-1">
+        <div class="w-13 h-13 mb-4 rounded-[14px] bg-orange/15 border border-orange/30 flex items-center justify-center text-[1.4rem] text-orange"><i class="bi bi-truck" aria-hidden="true"></i></div>
+        <h3 class="font-display font-bold text-white mb-2">บริการถึงโรงงาน</h3>
+        <p class="text-sm text-white/60 leading-relaxed">ออกซ่อมนอกสถานที่ทั่วกรุงเทพและปริมณฑล ไม่ต้องขนเครื่องไปไหน สะดวก ประหยัดเวลา</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PORTFOLIO SECTION                                            -->
+<!-- ============================================================ -->
+<section class="py-18 bg-offwhite" id="portfolio" aria-labelledby="portfolio-title">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
+      <div class="font-display text-xs font-semibold tracking-[.14em] uppercase text-orange"><i class="bi bi-images" aria-hidden="true"></i> ผลงานที่ผ่านมา</div>
+      <h2 class="font-display font-bold leading-tight text-navy mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="portfolio-title">
+        Case Studies <span class="text-orange">จากประสบการณ์จริง</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+      <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
+        <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#0f2347,#2a5298)]">
+          <i class="bi bi-building" aria-hidden="true"></i>
+          <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
+        </div>
+        <div class="p-5">
+          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานอาหารและเครื่องดื่ม</div>
+          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมมอเตอร์ Nilfisk IVB 3 ตัว หลังไฟไหม้จากการทำงานต่อเนื่อง</h3>
+          <div class="flex gap-4 text-sm text-slate-500">
+            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Nilfisk IVB</span>
+            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2567</span>
+            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 2 วัน</span>
+          </div>
+        </div>
+      </article>
+
+      <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
+        <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#1a3a6b,#0f2347)]">
+          <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+          <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
+        </div>
+        <div class="p-5">
+          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานชิ้นส่วนยานยนต์</div>
+          <h3 class="font-display font-bold text-navy leading-snug mb-2">Overhaul เครื่อง Roots Blower ระบบกลาง ที่ไม่ได้บำรุงมา 5 ปี</h3>
+          <div class="flex gap-4 text-sm text-slate-500">
+            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Roots Blower</span>
+            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2566</span>
+            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 5 วัน</span>
+          </div>
+        </div>
+      </article>
+
+      <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
+        <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#2a5298,#1a3a6b)]">
+          <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+          <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
+        </div>
+        <div class="p-5">
+          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานพลาสติก</div>
+          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมบอร์ด Inverter และระบบควบคุม Karcher IVL ทั้งชุด</h3>
+          <div class="flex gap-4 text-sm text-slate-500">
+            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Karcher IVL</span>
+            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2567</span>
+            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TESTIMONIALS                                                 -->
+<!-- ============================================================ -->
+<section class="py-18 bg-white" id="testimonials" aria-labelledby="testimonials-title">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
+      <div class="font-display text-xs font-semibold tracking-[.14em] uppercase text-orange"><i class="bi bi-chat-quote" aria-hidden="true"></i> รีวิวลูกค้า</div>
+      <h2 class="font-display font-bold leading-tight text-navy mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="testimonials-title">
+        เสียงจาก<span class="text-orange">ลูกค้าของเรา</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+      <blockquote data-reveal class="rounded-xl p-6 bg-slate-100 border-l-4 border-orange transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white hover:shadow-md">
+        <div class="text-[#f4b400] text-sm mb-3" aria-label="คะแนน 5 ดาว">★★★★★</div>
+        <p class="text-sm text-slate-700 leading-[1.7] mb-4 italic before:content-['“'] before:text-2xl before:text-orange before:leading-none before:align-[-.4em] before:mr-0.5">
+          ช่างพี่ศิริพงษ์ซ่อมเครื่อง Nilfisk ให้มา ตรงไปตรงมาบอกว่าอะไรเสียอะไรไม่เสีย ราคายุติธรรมมาก ประทับใจมากเรียกซ้ำทุกปี
+        </p>
+        <footer class="flex items-center gap-2.5">
+          <div class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[linear-gradient(135deg,#0f2347,#2a5298)]" aria-hidden="true">ส</div>
+          <div>
+            <div class="font-bold text-sm text-navy">สมชาย ก.</div>
+            <div class="text-xs text-slate-500">ผู้จัดการโรงงาน · อยุธยา</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote data-reveal class="rounded-xl p-6 bg-slate-100 border-l-4 border-orange transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white hover:shadow-md">
+        <div class="text-[#f4b400] text-sm mb-3" aria-label="คะแนน 5 ดาว">★★★★★</div>
+        <p class="text-sm text-slate-700 leading-[1.7] mb-4 italic before:content-['“'] before:text-2xl before:text-orange before:leading-none before:align-[-.4em] before:mr-0.5">
+          โรงงานเราใช้บริการมา 8 ปีแล้ว เครื่องดูดฝุ่นกว่า 10 เครื่อง ให้ซ่อมหมด งานดีมาก ไม่เคยต้องซ่อมซ้ำในระยะรับประกัน
+        </p>
+        <footer class="flex items-center gap-2.5">
+          <div class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[linear-gradient(135deg,#0f2347,#2a5298)]" aria-hidden="true">น</div>
+          <div>
+            <div class="font-bold text-sm text-navy">นิภา ว.</div>
+            <div class="text-xs text-slate-500">ฝ่ายจัดซื้อ · โรงงานอาหาร</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote data-reveal class="rounded-xl p-6 bg-slate-100 border-l-4 border-orange transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white hover:shadow-md">
+        <div class="text-[#f4b400] text-sm mb-3" aria-label="คะแนน 5 ดาว">★★★★★</div>
+        <p class="text-sm text-slate-700 leading-[1.7] mb-4 italic before:content-['“'] before:text-2xl before:text-orange before:leading-none before:align-[-.4em] before:mr-0.5">
+          ติดต่อทาง LINE ง่ายมาก ส่งรูปไปได้เลย ช่างประเมินได้เร็ว มาถึงไม่นาน งานเสร็จเร็ว เครื่องกลับมาใช้ได้ปกติ
+        </p>
+        <footer class="flex items-center gap-2.5">
+          <div class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[linear-gradient(135deg,#0f2347,#2a5298)]" aria-hidden="true">ว</div>
+          <div>
+            <div class="font-bold text-sm text-navy">วิชัย ป.</div>
+            <div class="text-xs text-slate-500">วิศวกรซ่อมบำรุง · สมุทรปราการ</div>
+          </div>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CONTACT SECTION                                              -->
+<!-- ============================================================ -->
+<section class="relative overflow-hidden py-18 bg-[linear-gradient(160deg,#0f2347_0%,#1a3a6b_100%)]" id="contact" aria-labelledby="contact-title">
+  <div class="absolute inset-0 bg-[size:40px_40px] bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)]"></div>
+  <div class="relative w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 md:items-center gap-10">
+      <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
+        <p class="font-display text-xs font-semibold tracking-[.14em] uppercase text-[#ffa070]">
+          <i class="bi bi-telephone-fill" aria-hidden="true"></i> ติดต่อเรา
+        </p>
+        <h2 class="font-display font-bold text-white mb-3 mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="contact-title">
+          พร้อมช่วยคุณ<br>
+          <span class="text-orange">ทุกวัน 8:00–18:00</span>
+        </h2>
+        <p class="text-white/70 mb-8 leading-relaxed">
+          ส่งรูปเครื่องมาทาง LINE หรือโทรมาเลย
+          ฟรีค่าตรวจสอบ พร้อมใบเสนอราคาทันที ไม่มีค่าใช้จ่ายซ่อนเร้น
+        </p>
+
+        <ul class="list-none flex flex-col gap-4 mb-8">
+          <li class="flex items-center gap-3 text-[.95rem] text-white/85">
+            <i class="bi bi-telephone-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
+            <a href="tel:0812345678" class="text-inherit">081-234-5678</a>
+          </li>
+          <li class="flex items-center gap-3 text-[.95rem] text-white/85">
+            <i class="bi bi-chat-dots-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
+            <a href="https://line.me" target="_blank" rel="noopener" class="text-inherit">LINE: @siriphong</a>
+          </li>
+          <li class="flex items-center gap-3 text-[.95rem] text-white/85">
+            <i class="bi bi-clock w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
+            จันทร์–เสาร์ 8:00–18:00 น.
+          </li>
+          <li class="flex items-center gap-3 text-[.95rem] text-white/85">
+            <i class="bi bi-geo-alt-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
+            กรุงเทพมหานครและปริมณฑล
+          </li>
+        </ul>
+
+        <div class="flex flex-col min-[400px]:flex-row min-[400px]:flex-wrap gap-3">
+          <a href="https://line.me" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปและปรึกษาฟรี">
+            <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+            แอดไลน์ ปรึกษาฟรี
+          </a>
+          <a href="tel:0812345678" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-transparent border-2 border-white/55 transition-all hover:bg-white/10 hover:border-white" aria-label="โทรหาเรา">
+            <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+            โทรเลย
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
+        <div class="rounded-[20px] p-7 bg-white/[.07] border border-white/10 backdrop-blur-md">
+          <h3 class="font-display font-bold text-[1.1rem] text-white mb-5">
+            <i class="bi bi-send-fill text-orange mr-2" aria-hidden="true"></i>ส่งรายละเอียดเครื่อง
+          </h3>
+          <form onsubmit="handleSubmit(event)" novalidate>
+            <div class="mb-4">
+              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-name">ชื่อ-นามสกุล *</label>
+              <input type="text" id="contact-name" placeholder="ชื่อของคุณ" required class="w-full min-h-[48px] px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]">
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-phone">เบอร์โทรศัพท์ *</label>
+              <input type="tel" id="contact-phone" placeholder="0xx-xxx-xxxx" required class="w-full min-h-[48px] px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]">
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-machine">ยี่ห้อ/รุ่นเครื่อง</label>
+              <input type="text" id="contact-machine" placeholder="เช่น Nilfisk IVB 3/1" class="w-full min-h-[48px] px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]">
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-problem">อาการเสีย *</label>
+              <textarea id="contact-problem" placeholder="อธิบายอาการเสียโดยย่อ..." required class="w-full min-h-25 px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none resize-y transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]"></textarea>
+            </div>
+            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-orange shadow-[0_4px_16px_rgba(242,101,34,.35)] transition-all hover:bg-orange-dark hover:-translate-y-0.5">
+              <i class="bi bi-send-fill" aria-hidden="true"></i>
+              ส่งรายละเอียด
+            </button>
+          </form>
+          <p class="text-xs text-white/40 text-center mt-3">
+            <i class="bi bi-lock" aria-hidden="true"></i> ข้อมูลของคุณปลอดภัย 100%
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                       -->
+<!-- ============================================================ -->
+<footer class="bg-navy border-t border-white/5 pt-10 pb-6" role="contentinfo">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-2.5 mb-1">
+          <div class="w-10 h-10 shrink-0 bg-orange rounded-[10px] flex items-center justify-center text-xl text-white"><i class="bi bi-tools" aria-hidden="true"></i></div>
+          <div class="flex flex-col leading-tight">
+            <span class="font-display font-bold text-[1.1rem] text-white">ศิริพงษ์ เซอร์วิส</span>
+            <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG SERVICE</span>
+          </div>
+        </div>
+        <p class="text-sm text-white/50 leading-[1.7] mt-3">
+          ผู้เชี่ยวชาญซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ด้วยความซื่อสัตย์ ตรงไปตรงมา และประสบการณ์จริงกว่า 20 ปี
+        </p>
+      </div>
+      <div>
+        <div class="font-display text-xs font-semibold text-white/40 uppercase tracking-[.1em] mb-4">บริการ</div>
+        <ul class="list-none flex flex-col gap-2.5">
+          <li><a href="#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมมอเตอร์</a></li>
+          <li><a href="#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมระบบกรอง</a></li>
+          <li><a href="#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมระบบไฟฟ้า</a></li>
+          <li><a href="#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>Overhaul ครบระบบ</a></li>
+          <li><a href="#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ตรวจสอบฟรี</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-display text-xs font-semibold text-white/40 uppercase tracking-[.1em] mb-4">ข้อมูล</div>
+        <ul class="list-none flex flex-col gap-2.5">
+          <li><a href="#portfolio" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ผลงานของเรา</a></li>
+          <li><a href="#why-us" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ทำไมต้องเรา</a></li>
+          <li><a href="#testimonials" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>รีวิวลูกค้า</a></li>
+          <li><a href="#contact" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ติดต่อเรา</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/5 pt-5 flex flex-col md:flex-row md:justify-between items-center md:items-start gap-2 text-center md:text-left">
+      <p class="text-xs text-white/35">© 2568 ศิริพงษ์ เซอร์วิส · siriphong.com · สงวนลิขสิทธิ์</p>
+      <div class="flex gap-2">
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-shield-check" aria-hidden="true"></i> รับประกัน 3 เดือน</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-award" aria-hidden="true"></i> ประสบการณ์ 20 ปี</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- STICKY MOBILE LINE CTA (fixed bottom)                       -->
+<!-- ============================================================ -->
+<div class="md:hidden fixed bottom-0 inset-x-0 z-[200] flex gap-2.5 px-4 py-2.5 bg-navy border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,.25)]" role="complementary" aria-label="ติดต่อด่วน">
+  <a href="https://line.me" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปเครื่องและนัดซ่อม">
+    <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+    แอดไลน์ นัดซ่อมได้เลย
+  </a>
+  <a href="tel:0812345678" class="w-13 h-13 shrink-0 flex items-center justify-center rounded-xl text-xl text-white bg-white/10 border border-white/15 transition-colors hover:bg-white/[.18]" aria-label="โทรหาเรา 081-234-5678">
+    <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+  </a>
+</div>
+
+<!-- Back to top -->
+<button class="fixed right-5 bottom-22 md:bottom-6 z-[99] w-11 h-11 flex items-center justify-center rounded-full text-lg text-white bg-navy shadow-md opacity-0 pointer-events-none transition-all hover:bg-navy-mid hover:-translate-y-0.5 data-[show=true]:opacity-100 data-[show=true]:pointer-events-auto" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="กลับขึ้นด้านบน">
+  <i class="bi bi-arrow-up" aria-hidden="true"></i>
+</button>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT                                                   -->
+<!-- ============================================================ -->
+<script>
+/* ── Mobile nav ── */
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('hamburger');
+  const icon = document.getElementById('ham-icon');
+  const open = menu.classList.toggle('hidden') === false;   // toggle hidden, open = not hidden
+  menu.classList.toggle('flex', open);
+  btn.setAttribute('aria-expanded', open);
+  icon.className = open ? 'bi bi-x-lg' : 'bi bi-list';
+}
+function closeMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.add('hidden');
+  menu.classList.remove('flex');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  document.getElementById('ham-icon').className = 'bi bi-list';
+}
+
+/* ── Service filter (just toggle aria-pressed + hidden) ── */
+function filterServices(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.setAttribute('aria-pressed', b.getAttribute('onclick').includes(`'${cat}'`));
+  });
+  document.querySelectorAll('.service-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.category === cat;
+    card.classList.toggle('hidden', !show);
+    if (show) {
+      card.classList.remove('animate-fade-up');
+      void card.offsetWidth;          // force reflow to replay the animation
+      card.classList.add('animate-fade-up');
+    }
+  });
+}
+
+/* ── Scroll reveal: just flip data-show; CSS variants do the rest ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.dataset.show = 'true';
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+/* ── Back to top ── */
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  backTop.dataset.show = window.scrollY > 500;
+}, { passive: true });
+
+/* ── Smooth nav link scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ── Contact form ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  const name = document.getElementById('contact-name').value.trim();
+  const phone = document.getElementById('contact-phone').value.trim();
+  const problem = document.getElementById('contact-problem').value.trim();
+
+  if (!name || !phone || !problem) {
+    btn.textContent = '⚠ กรุณากรอกข้อมูลให้ครบ';
+    btn.classList.remove('bg-orange');
+    btn.classList.add('bg-orange-dark');
+    setTimeout(() => {
+      btn.innerHTML = '<i class="bi bi-send-fill"></i> ส่งรายละเอียด';
+      btn.classList.remove('bg-orange-dark');
+      btn.classList.add('bg-orange');
+    }, 2000);
+    return;
+  }
+
+  btn.innerHTML = '<i class="bi bi-check2-circle"></i> ส่งสำเร็จ! รอรับสายเร็วๆ นี้';
+  btn.classList.remove('bg-orange');
+  btn.classList.add('bg-line');
+  btn.disabled = true;
+}
+
+/* ── Navbar active link on scroll ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('[data-nav]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+  navLinks.forEach(a => {
+    a.dataset.active = (a.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
