@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ศิริพงษ์ เซอร์วิส | ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม</title>
-<meta name="description" content="ซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ประสบการณ์กว่า 20 ปี รับซ่อมทุกยี่ห้อ รับประกันงาน">
+<title>{{ $title ?? 'ศิริพงษ์ เซอร์วิส | ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม' }}</title>
+<meta name="description" content="{{ $descrition ?? 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ประสบการณ์กว่า 20 ปี รับซ่อมทุกยี่ห้อ รับประกันงาน' }} >
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 @vite(['resources/css/style.css', 'resources/js/app.js'])
-
+@stack('schemas')
 </head>
 
 <body class="font-sans text-ink bg-white leading-relaxed overflow-x-hidden pb-[72px] md:pb-0">

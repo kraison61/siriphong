@@ -11,13 +11,13 @@
       <blockquote data-reveal class="rounded-xl p-6 bg-slate-100 border-l-4 border-orange transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white hover:shadow-md">
         <div class="text-[#f4b400] text-sm mb-3" aria-label="คะแนน 5 ดาว">★★★★★</div>
         <p class="text-sm text-slate-700 leading-[1.7] mb-4 italic before:content-['“'] before:text-2xl before:text-orange before:leading-none before:align-[-.4em] before:mr-0.5">
-          ช่างพี่ศิริพงษ์ซ่อมเครื่อง Nilfisk ให้มา ตรงไปตรงมาบอกว่าอะไรเสียอะไรไม่เสีย ราคายุติธรรมมาก ประทับใจมากเรียกซ้ำทุกปี
+          เฮียต้อยซ่อมเครื่องให้มา ตรงไปตรงมาบอกว่าอะไรเสียอะไรไม่เสีย ราคายุติธรรมมาก ประทับใจมาก เรียกซ้ำทุกปี
         </p>
         <footer class="flex items-center gap-2.5">
           <div class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[linear-gradient(135deg,#0f2347,#2a5298)]" aria-hidden="true">ส</div>
           <div>
             <div class="font-bold text-sm text-navy">สมชาย ก.</div>
-            <div class="text-xs text-slate-500">ผู้จัดการโรงงาน · อยุธยา</div>
+            <div class="text-xs text-slate-500">เจ้าของร้านคาร์แคร์ · กรุงเทพ</div>
           </div>
         </footer>
       </blockquote>
@@ -25,13 +25,13 @@
       <blockquote data-reveal class="rounded-xl p-6 bg-slate-100 border-l-4 border-orange transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white hover:shadow-md">
         <div class="text-[#f4b400] text-sm mb-3" aria-label="คะแนน 5 ดาว">★★★★★</div>
         <p class="text-sm text-slate-700 leading-[1.7] mb-4 italic before:content-['“'] before:text-2xl before:text-orange before:leading-none before:align-[-.4em] before:mr-0.5">
-          โรงงานเราใช้บริการมา 8 ปีแล้ว เครื่องดูดฝุ่นกว่า 10 เครื่อง ให้ซ่อมหมด งานดีมาก ไม่เคยต้องซ่อมซ้ำในระยะรับประกัน
+          โรงงานเราใช้บริการมาหลายปีแล้ว เครื่องดูดฝุ่นกว่า 5 เครื่อง ให้ซ่อมหมด งานดีมาก ไม่เคยต้องซ่อมซ้ำในระยะรับประกัน ช่างมาเร็วแม้จะโทรตอนเย็น
         </p>
         <footer class="flex items-center gap-2.5">
           <div class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[linear-gradient(135deg,#0f2347,#2a5298)]" aria-hidden="true">น</div>
           <div>
             <div class="font-bold text-sm text-navy">นิภา ว.</div>
-            <div class="text-xs text-slate-500">ฝ่ายจัดซื้อ · โรงงานอาหาร</div>
+            <div class="text-xs text-slate-500">ผู้จัดการโรงงาน · อยุธยา</div>
           </div>
         </footer>
       </blockquote>
@@ -39,13 +39,13 @@
       <blockquote data-reveal class="rounded-xl p-6 bg-slate-100 border-l-4 border-orange transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:bg-white hover:shadow-md">
         <div class="text-[#f4b400] text-sm mb-3" aria-label="คะแนน 5 ดาว">★★★★★</div>
         <p class="text-sm text-slate-700 leading-[1.7] mb-4 italic before:content-['“'] before:text-2xl before:text-orange before:leading-none before:align-[-.4em] before:mr-0.5">
-          ติดต่อทาง LINE ง่ายมาก ส่งรูปไปได้เลย ช่างประเมินได้เร็ว มาถึงไม่นาน งานเสร็จเร็ว เครื่องกลับมาใช้ได้ปกติ
+          ติดต่อทาง LINE ง่ายมาก ส่งรูปและคลิปเสียงเครื่องไปได้เลย ช่างประเมินได้เร็ว มาถึงไม่นาน งานเสร็จเร็ว เครื่องกลับมาใช้ได้ปกติ ประทับใจมากค่ะ
         </p>
         <footer class="flex items-center gap-2.5">
           <div class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-white font-bold text-sm bg-[linear-gradient(135deg,#0f2347,#2a5298)]" aria-hidden="true">ว</div>
           <div>
             <div class="font-bold text-sm text-navy">วิชัย ป.</div>
-            <div class="text-xs text-slate-500">วิศวกรซ่อมบำรุง · สมุทรปราการ</div>
+            <div class="text-xs text-slate-500">เจ้าของบ้าน · สมุทรปราการ</div>
           </div>
         </footer>
       </blockquote>

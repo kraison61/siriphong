@@ -5,8 +5,8 @@
       <a href="#" class="flex items-center gap-2.5" aria-label="ศิริพงษ์ เซอร์วิส - หน้าแรก">
         <div class="w-10 h-10 shrink-0 bg-orange rounded-[10px] flex items-center justify-center text-xl text-white"><i class="bi bi-tools" aria-hidden="true"></i></div>
         <div class="flex flex-col leading-tight">
-          <span class="font-display font-bold text-base text-white">ศิริพงษ์ เซอร์วิส</span>
-          <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG SERVICE</span>
+          <span class="font-display font-bold text-base text-white">ศิริพงษ์ vacuum</span>
+          <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG VACUUM</span>
         </div>
       </a>
 
@@ -18,7 +18,7 @@
       </ul>
 
       <div class="flex items-center gap-2.5">
-        <a href="https://line.me" target="_blank" rel="noopener" class="hidden md:inline-flex items-center justify-center gap-2 min-h-[40px] px-[18px] py-2 rounded-xl text-sm font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์">
+        <a href="https://line.me/ti/p/Kqsti_kwU9" target="_blank" rel="noopener" class="hidden md:inline-flex items-center justify-center gap-2 min-h-[40px] px-[18px] py-2 rounded-xl text-sm font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์">
           <i class="bi bi-chat-dots-fill" aria-hidden="true"></i> แอดไลน์
         </a>
         <button class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-2xl text-white transition-colors hover:bg-white/10" onclick="toggleMenu()" aria-label="เปิดเมนู" aria-expanded="false" id="hamburger">

@@ -37,7 +37,7 @@
           </div>
           <div class="text-center py-4 px-2 rounded-xl bg-white/[.07] border border-white/10 backdrop-blur-sm">
             <span class="block font-display font-bold text-orange leading-none text-[clamp(1.5rem,5vw,2rem)]">500+</span>
-            <span class="block mt-1 text-[.72rem] text-white/60">โรงงานที่เคยบริการ</span>
+            <span class="block mt-1 text-[.72rem] text-white/60">ลูกค้าที่เคยบริการ</span>
           </div>
           <div class="text-center py-4 px-2 rounded-xl bg-white/[.07] border border-white/10 backdrop-blur-sm">
             <span class="block font-display font-bold text-orange leading-none text-[clamp(1.5rem,5vw,2rem)]">98%</span>

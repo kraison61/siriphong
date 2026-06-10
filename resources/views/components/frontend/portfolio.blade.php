@@ -14,12 +14,12 @@
           <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
         </div>
         <div class="p-5">
-          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานอาหารและเครื่องดื่ม</div>
-          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมมอเตอร์ Nilfisk IVB 3 ตัว หลังไฟไหม้จากการทำงานต่อเนื่อง</h3>
+          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">บุคคลทั่วไป - คอนโดมิเนียม</div>
+          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมเครื่องดูดฝุ่นแบบถังสแตนเลส น้ำเข้าตู้มอเตอร์จนช็อต เปลี่ยนมอเตอร์ใหม่ พร้อมทำความสะอาดระบบ</h3>
           <div class="flex gap-4 text-sm text-slate-500">
-            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Nilfisk IVB</span>
-            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2567</span>
-            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 2 วัน</span>
+            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i>Karcher, Nilfisk</span>
+            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2569</span>
+            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
           </div>
         </div>
       </article>
@@ -30,12 +30,12 @@
           <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
         </div>
         <div class="p-5">
-          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานชิ้นส่วนยานยนต์</div>
-          <h3 class="font-display font-bold text-navy leading-snug mb-2">Overhaul เครื่อง Roots Blower ระบบกลาง ที่ไม่ได้บำรุงมา 5 ปี</h3>
+          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">ร้านคาร์แคร์</div>
+          <h3 class="font-display font-bold text-navy leading-snug mb-2">Overhaul เครื่องดูดฝุ่นอุตสาหกรรมที่ใช้งานหนัก เปลี่ยนตลับลูกปืนและซีลกันฝุ่น แก้ปัญหาเสียงดังครืดๆ</h3>
           <div class="flex gap-4 text-sm text-slate-500">
-            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Roots Blower</span>
-            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2566</span>
-            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 5 วัน</span>
+            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i>Roots, Numatic</span>
+            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2569</span>
+            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
           </div>
         </div>
       </article>
@@ -46,11 +46,11 @@
           <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
         </div>
         <div class="p-5">
-          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานพลาสติก</div>
-          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมบอร์ด Inverter และระบบควบคุม Karcher IVL ทั้งชุด</h3>
+          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานยา</div>
+          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมระบบไฟฟ้าและบอร์ดควบคุมเครื่องดูดฝุ่นแบบ HEPA Filter แก้ปัญหาเครื่องตัดการทำงานเอง</h3>
           <div class="flex gap-4 text-sm text-slate-500">
-            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Karcher IVL</span>
-            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2567</span>
+            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Nilfisk, Cleanfix</span>
+            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2569</span>
             <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
           </div>
         </div>

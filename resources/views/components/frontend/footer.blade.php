@@ -5,8 +5,8 @@
         <div class="flex items-center gap-2.5 mb-1">
           <div class="w-10 h-10 shrink-0 bg-orange rounded-[10px] flex items-center justify-center text-xl text-white"><i class="bi bi-tools" aria-hidden="true"></i></div>
           <div class="flex flex-col leading-tight">
-            <span class="font-display font-bold text-[1.1rem] text-white">ศิริพงษ์ เซอร์วิส</span>
-            <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG SERVICE</span>
+            <span class="font-display font-bold text-[1.1rem] text-white">ศิริพงษ์ vacuum</span>
+            <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG VACUUM</span>
           </div>
         </div>
         <p class="text-sm text-white/50 leading-[1.7] mt-3">
@@ -35,7 +35,7 @@
     </div>
 
     <div class="border-t border-white/5 pt-5 flex flex-col md:flex-row md:justify-between items-center md:items-start gap-2 text-center md:text-left">
-      <p class="text-xs text-white/35">© 2568 ศิริพงษ์ เซอร์วิส · siriphong.com · สงวนลิขสิทธิ์</p>
+      <p class="text-xs text-white/35">© 2568 ศิริพงษ์ vacuum · siriphong-vacuum.com · สงวนลิขสิทธิ์</p>
       <div class="flex gap-2">
         <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-shield-check" aria-hidden="true"></i> รับประกัน 3 เดือน</span>
         <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-award" aria-hidden="true"></i> ประสบการณ์ 20 ปี</span>

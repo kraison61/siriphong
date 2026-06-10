@@ -8,10 +8,10 @@
         <i class="bi bi-lightning-charge text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">ตรวจสอบภายใน 24 ชม.</span>
       </div>
       <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap border-r border-slate-200" role="listitem">
-        <i class="bi bi-geo-alt text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">บริการถึงโรงงาน</span>
+        <i class="bi bi-geo-alt text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">บริการถึงที่ (คิดตามระยะทาง)</span>
       </div>
       <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap border-r border-slate-200" role="listitem">
-        <i class="bi bi-cash-coin text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">ฟรีค่าตรวจสอบเบื้องต้น</span>
+        <i class="bi bi-cash-coin text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">ฟรีค่าประเมินเบื้องต้น (ส่งรูป/คลิป LINE)</span>
       </div>
       <div class="flex items-center gap-2 px-5 py-2 shrink-0 whitespace-nowrap" role="listitem">
         <i class="bi bi-trophy text-orange text-lg" aria-hidden="true"></i><span class="text-sm font-semibold text-navy">รับซ่อมทุกยี่ห้อ</span>

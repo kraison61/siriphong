@@ -12,17 +12,17 @@
         </h2>
         <p class="text-white/70 mb-8 leading-relaxed">
           ส่งรูปเครื่องมาทาง LINE หรือโทรมาเลย
-          ฟรีค่าตรวจสอบ พร้อมใบเสนอราคาทันที ไม่มีค่าใช้จ่ายซ่อนเร้น
+          ฟรีค่าตรวจสอบ พร้อมใบเสนอราคาทันที ไม่มีค่าใช้จ่ายซ่อนเร้น (ถ้าด่วนมาก ๆ โทรได้ตลอดเวลา)
         </p>
 
         <ul class="list-none flex flex-col gap-4 mb-8">
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-telephone-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
-            <a href="tel:0812345678" class="text-inherit">081-234-5678</a>
+            <a href="tel:0817928148" class="text-inherit">081-792-8148</a>
           </li>
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-chat-dots-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
-            <a href="https://line.me" target="_blank" rel="noopener" class="text-inherit">LINE: @siriphong</a>
+            <a href="https://line.me/ti/p/Kqsti_kwU9" target="_blank" rel="noopener" class="text-inherit">LINE: 0817928148</a>
           </li>
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-clock w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg" aria-hidden="true"></i>
@@ -35,11 +35,11 @@
         </ul>
 
         <div class="flex flex-col min-[400px]:flex-row min-[400px]:flex-wrap gap-3">
-          <a href="https://line.me" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปและปรึกษาฟรี">
+          <a href="https://line.me/ti/p/Kqsti_kwU9" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปและปรึกษาฟรี">
             <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
             แอดไลน์ ปรึกษาฟรี
           </a>
-          <a href="tel:0812345678" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-transparent border-2 border-white/55 transition-all hover:bg-white/10 hover:border-white" aria-label="โทรหาเรา">
+          <a href="tel:0817928148" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-transparent border-2 border-white/55 transition-all hover:bg-white/10 hover:border-white" aria-label="โทรหาเรา">
             <i class="bi bi-telephone-fill" aria-hidden="true"></i>
             โทรเลย
           </a>
@@ -47,38 +47,26 @@
       </div>
 
       <!-- Contact form -->
-      <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
-        <div class="rounded-[20px] p-7 bg-white/[.07] border border-white/10 backdrop-blur-md">
-          <h3 class="font-display font-bold text-[1.1rem] text-white mb-5">
-            <i class="bi bi-send-fill text-orange mr-2" aria-hidden="true"></i>ส่งรายละเอียดเครื่อง
-          </h3>
-          <form onsubmit="handleSubmit(event)" novalidate>
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-name">ชื่อ-นามสกุล *</label>
-              <input type="text" id="contact-name" placeholder="ชื่อของคุณ" required class="w-full min-h-[48px] px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]">
+       <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 text-center">
+                <h3 class="font-display font-bold text-navy text-xl mb-2">สแกนเพิ่มเพื่อนทาง LINE</h3>
+                <p class="text-steel text-sm mb-6">ใช้กล้องมือถือสแกน เพื่อส่งรูปเครื่องและอาการเสียให้ช่างประเมินราคาได้ทันที</p>
+                
+                <!-- พื้นที่วางรูป QR Code -->
+                <!-- ⚠️ คำแนะนำ: แทนที่ div ด้านล่างนี้ด้วย tag <img> รูป QR Code จริงของคุณ -->
+                <!-- <div class="w-64 h-64 mx-auto bg-offwhite border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center mb-6 group hover:border-[#06c755] transition-colors">
+                    <i class="bi bi-qr-code-scan text-5xl text-gray-400 mb-2 group-hover:text-[#06c755] transition-colors"></i>
+                    <span class="text-sm text-gray-500 font-medium">วางรูป QR Code LINE ที่นี่</span> -->
+                    
+                    <!-- เมื่อมีรูปจริง ให้ลบ div นี้แล้วใช้โค้ดด้านล่างแทน: -->
+                     <div class="w-64 h-64 mx-auto bg-offwhite border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center mb-6 group hover:border-[#06c755] transition-colors">
+                    <img src="{{ asset('storage/line-qr.jpg') }}" alt="QR Code สำหรับเพิ่มเพื่อน LINE ศิริพงษ์ เซอร์วิส" width="256" height="256" class="rounded-lg " loading="lazy">
+                </div>
+
+                <!-- ข้อความคงเดิมจากฟอร์มต้นฉบับ -->
+                <p class="text-xs text-steel flex items-center justify-center">
+                    <i class="bi bi-shield-lock-fill text-orange mr-1.5"></i> ข้อมูลของคุณปลอดภัย 100%
+                </p>
             </div>
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-phone">เบอร์โทรศัพท์ *</label>
-              <input type="tel" id="contact-phone" placeholder="0xx-xxx-xxxx" required class="w-full min-h-[48px] px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]">
-            </div>
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-machine">ยี่ห้อ/รุ่นเครื่อง</label>
-              <input type="text" id="contact-machine" placeholder="เช่น Nilfisk IVB 3/1" class="w-full min-h-[48px] px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]">
-            </div>
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-white/75 mb-1.5" for="contact-problem">อาการเสีย *</label>
-              <textarea id="contact-problem" placeholder="อธิบายอาการเสียโดยย่อ..." required class="w-full min-h-25 px-3.5 py-3 rounded-xl bg-white/[.08] border border-white/20 text-white text-sm outline-none resize-y transition-colors placeholder:text-white/35 focus:border-orange focus:bg-white/[.12]"></textarea>
-            </div>
-            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-orange shadow-[0_4px_16px_rgba(242,101,34,.35)] transition-all hover:bg-orange-dark hover:-translate-y-0.5">
-              <i class="bi bi-send-fill" aria-hidden="true"></i>
-              ส่งรายละเอียด
-            </button>
-          </form>
-          <p class="text-xs text-white/40 text-center mt-3">
-            <i class="bi bi-lock" aria-hidden="true"></i> ข้อมูลของคุณปลอดภัย 100%
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </section>

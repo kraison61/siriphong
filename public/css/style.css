@@ -1,6 +1,4 @@
  @import "tailwindcss";
-
-
  @theme {
     /* Brand colors → become utilities like bg-navy, text-orange, border-line ... */
     --color-navy:        #0f2347;

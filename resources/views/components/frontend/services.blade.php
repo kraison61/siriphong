@@ -39,11 +39,13 @@
         </div>
         <div class="p-5">
           <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมมอเตอร์เครื่องดูดฝุ่น</h3>
-          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">รับซ่อมมอเตอร์ทุกขนาด ทั้งระบบพัดลม แม่เหล็ก และแปรงถ่าน แก้ปัญหามอเตอร์ไหม้ เสียง ดังผิดปกติ หรือไม่หมุน</p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">รับซ่อม/เปลี่ยน มอเตอร์ทุกขนาด แก้ปัญหามอเตอร์ไหม้ ได้กลิ่นเหม็นไหม้ เครื่องตัดการทำงาน หรือไม่หมุน พร้อมรับประกัน 3 เดือน</p>
           <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Nilfisk</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Karcher</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Roots</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Numatic</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Cleanfix</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-slate-100">
             <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>ติดต่อขอราคา</span>
@@ -60,7 +62,7 @@
         </div>
         <div class="p-5">
           <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมและเปลี่ยนไส้กรอง</h3>
-          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">เปลี่ยนไส้กรอง HEPA และกรองผ้า ทำความสะอาดระบบกรอง แก้ปัญหาประสิทธิภาพดูดฝุ่นลดลง มีกลิ่น หรือฝุ่นย้อนกลับ</p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">เปลี่ยนไส้กรอง HEPA และกรองผ้า ทำความสะอาดระบบกรอง แก้ปัญหาประสิทธิภาพดูดฝุ่นลดลง ฝุ่นย้อนกลับ หรือมีกลิ่น</p>
           <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">HEPA Filter</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ผ้ากรอง</span>
@@ -80,11 +82,12 @@
         </div>
         <div class="p-5">
           <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมระบบไฟฟ้าและวงจร</h3>
-          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ซ่อมสวิตช์ บอร์ดควบคุม PCB ระบบ Inverter และอุปกรณ์ไฟฟ้าทุกชนิด แก้ปัญหาเครื่องไม่ติด ไฟกระพริบ หรือ Overload</p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ซ่อมสวิตช์ บอร์ดควบคุม PCB ระบบ Inverter และอุปกรณ์ไฟฟ้าทุกชนิด แก้ปัญหาเครื่องไม่ติด ไฟกระพริบ Overload หรือน้ำเข้าตู้มอเตอร์จนช็อต</p>
           <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">PCB</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Inverter</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Switch</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">Control Board</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-slate-100">
             <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>ติดต่อขอราคา</span>
@@ -101,10 +104,11 @@
         </div>
         <div class="p-5">
           <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ซ่อมท่อดูดและหัวดูด</h3>
-          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ซ่อมและเปลี่ยนท่อดูด สายยาง และหัวดูดทุกรูปแบบ แก้ปัญหาท่อรั่ว แรงดูดอ่อน หรืออุดตัน</p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ซ่อมและเปลี่ยนท่อดูด สายยาง และหัวดูดทุกรูปแบบ แก้ปัญหาท่อรั่ว แรงดูดอ่อน ดูดไม่เข้าถัง หรืออุดตัน</p>
           <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ท่อ PVC</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">สายยาง</span>
+            <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">หัวดูด</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-slate-100">
             <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>เริ่มต้น ฿500</span>
@@ -121,7 +125,7 @@
         </div>
         <div class="p-5">
           <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">Overhaul เครื่องดูดฝุ่นครบระบบ</h3>
-          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ถอดประกอบและบำรุงรักษาเครื่องดูดฝุ่นทั้งระบบ เปลี่ยนชิ้นส่วนสึกหรอ ทำความสะอาดภายใน และตรวจสอบทุกจุด</p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ถอดประกอบและบำรุงรักษาเครื่องดูดฝุ่นทั้งระบบ เปลี่ยนชิ้นส่วนสึกหรอ ทำความสะอาดภายใน ตรวจสอบตลับลูกปืน และทดสอบการทำงานทุกจุด</p>
           <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ครบระบบ</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">PM Service</span>
@@ -141,7 +145,7 @@
         </div>
         <div class="p-5">
           <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">ตรวจสอบและวินิจฉัยอาการ</h3>
-          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ตรวจวินิจฉัยอาการเสียอย่างละเอียด ระบุสาเหตุที่แท้จริง พร้อมใบเสนอราคาซ่อมก่อนดำเนินการ</p>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4 line-clamp-3">ตรวจวินิจฉัยอาการเสียอย่างละเอียด ระบุสาเหตุที่แท้จริง เช่น เสียงดังครืดๆ วี้ดๆ เครื่องตัดเอง หรือแรงดูดตก พร้อมประเมินราคาก่อนซ่อม</p>
           <div class="flex flex-wrap gap-1.5 mb-4">
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">ฟรีตรวจสอบ</span>
             <span class="px-2.5 py-[3px] rounded bg-slate-100 text-navy-mid text-[.72rem] font-semibold">มีใบเสนอราคา</span>
