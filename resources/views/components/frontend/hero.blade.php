@@ -20,7 +20,7 @@
           ราคายุติธรรม รับประกันงาน บริการถึงที่
         </p>
         <div class="animate-fade-up [animation-delay:.3s] flex flex-col sm:flex-row gap-3">
-          <a href="https://line.me" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปเครื่องและปรึกษาฟรี">
+          <a href="https://line.me/ti/p/Kqsti_kwU9" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5" aria-label="แอดไลน์เพื่อส่งรูปเครื่องและปรึกษาฟรี">
             <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
             แอดไลน์ ส่งรูปเครื่อง
           </a>
@@ -49,8 +49,10 @@
       <div class="hidden md:flex justify-end" aria-hidden="true">
         <div class="relative overflow-hidden w-80 h-[380px] rounded-[20px] bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-4">
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(242,101,34,.15),transparent_70%)]"></div>
-          <i class="bi bi-wind text-[5rem] text-white/20"></i>
-          <span class="font-display text-xs tracking-[.12em] uppercase text-white/35">Industrial Vacuum System</span>
+          <!-- <i class="bi bi-wind text-[5rem] text-white/20"></i>
+          <span class="font-display text-xs tracking-[.12em] uppercase text-white/35">Industrial Vacuum System</span> -->
+          <img src="{{ asset('storage/siriphong.jpg') }}" alt="Hero" class="w-full h-full object-cover" >
+          <div class="absolute inset-0 bg-navy/50 mix-blend-multiply"></div>
           <div class="absolute bottom-5 right-5 w-3 h-3 rounded-full bg-line animate-status"></div>
         </div>
       </div>

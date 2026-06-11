@@ -10,7 +10,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
       <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
         <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#0f2347,#2a5298)]">
-          <i class="bi bi-building" aria-hidden="true"></i>
+          <!-- <i class="bi bi-building" aria-hidden="true"></i> -->
+          <img src="{{ asset('storage/portfolio/1.jpg') }}" alt="" class="h-full object-cover">
           <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
         </div>
         <div class="p-5">
@@ -26,7 +27,8 @@
 
       <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
         <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#1a3a6b,#0f2347)]">
-          <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+          <!-- <i class="bi bi-gear-wide-connected" aria-hidden="true"></i> -->
+           <img src="{{ asset('storage/portfolio/2.jpg') }}" alt="" class="h-full object-cover">
           <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
         </div>
         <div class="p-5">
@@ -42,7 +44,8 @@
 
       <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
         <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#2a5298,#1a3a6b)]">
-          <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+          <!-- <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> -->
+           <img src="{{ asset('storage/portfolio/3.jpg') }}" alt="" class="h-full object-cover">
           <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
         </div>
         <div class="p-5">
