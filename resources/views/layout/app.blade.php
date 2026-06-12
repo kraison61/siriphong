@@ -10,7 +10,7 @@
 <link rel="icon" href="{{ asset('storage/favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-@vite(['resources/css/style.css', 'resources/js/app.js'])
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @stack('jsonld')
 </head>
 
@@ -75,6 +75,6 @@
 <!-- JAVASCRIPT                                                   -->
 <!-- ============================================================ -->
 
-@vite(['resources/js/app.js', 'resources/js/main.js'])
+@vite(['resources/js/app.js'])
 </body>
 </html>

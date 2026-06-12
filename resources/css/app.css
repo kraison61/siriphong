@@ -5,6 +5,8 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@import './style.css';
+
 @theme {
     /* 💡 เปลี่ยนฟอนต์หลักทั้งเว็บ (เนื้อหาทั่วไป) ให้เป็น Sarabun */
     --font-sans: 'Sarabun', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -12,5 +14,5 @@
 
     /* 💡 สร้างตัวแปรใหม่สำหรับหัวข้อ ให้เป็น Kanit */
     --font-display: 'Kanit', ui-sans-serif, system-ui, sans-serif;
-    
+
 }
