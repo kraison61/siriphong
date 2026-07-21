@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Portfolio;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $mapReference = Portfolio::query()
+            ->whereNotNull('map_coordinates')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->first();
+
+        [$latitude, $longitude] = $this->extractCoordinates(
+            (string) ($mapReference?->map_coordinates ?? '13.754198, 100.501705')
+        );
+
         $schemaData = [
             '@context' => 'https://schema.org',
             '@type' => ['LocalBusiness', 'RepairService'],
@@ -29,8 +39,8 @@ class HomeController extends Controller
             ],
             'geo' => [
                 '@type' => 'GeoCoordinates',
-                'latitude' => '13.6772923', // ⚠️ แก้เป็นพิกัดจริง (ค้นหาได้จาก Google Maps)
-                'longitude' => '100.4852382'
+                'latitude' => $latitude, // อ้างอิงจากพิกัดที่กรอกใน admin portfolio
+                'longitude' => (string) $longitude,
             ],
             'areaServed' => [
                 [
@@ -153,5 +163,16 @@ class HomeController extends Controller
         ];
 
         return view('index', compact('schemaData'));
+    }
+
+    private function extractCoordinates(string $coordinates): array
+    {
+        $parts = array_map('trim', explode(',', $coordinates, 2));
+
+        if (count($parts) !== 2 || ! is_numeric($parts[0]) || ! is_numeric($parts[1])) {
+            return ['13.754198', '100.501705'];
+        }
+
+        return [(string) $parts[0], (string) $parts[1]];
     }
 }

@@ -28,7 +28,8 @@
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-chat-dots-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg"
               aria-hidden="true"></i>
-            <a href="{{ config('data.line') }}" target="_blank" rel="noopener" class="text-inherit">LINE: 0817928148</a>
+            <a href="{{ config('data.line') }}" target="_blank" rel="noopener" class="text-inherit">LINE:
+              {{ config('data.phone_formatted') }}</a>
           </li>
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-clock w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg"

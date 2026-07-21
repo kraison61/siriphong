@@ -65,7 +65,7 @@
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="font-display font-bold text-navy text-[1.05rem]">ค่าตรวจเช็คเครื่อง</span>
                             <span
-                                class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-orange/10 border border-orange/30 text-orange text-xs font-semibold">500
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-orange/10 border border-orange/30 text-orange text-xs font-semibold">250
                                 บาท</span>
                         </div>
                         <div class="text-xs text-slate-400 mt-0.5">Physical Inspection Fee —
@@ -77,7 +77,7 @@
                         <i class="bi bi-check-circle-fill text-line mt-0.5 shrink-0" aria-hidden="true"></i>
                         <div>
                             <div class="text-sm font-semibold text-navy mb-1">ตัดสินใจซ่อม</div>
-                            <p class="text-xs text-slate-600 leading-relaxed">หัก <strong class="text-navy">500
+                            <p class="text-xs text-slate-600 leading-relaxed">หัก <strong class="text-navy">250
                                     บาทออกจากค่าซ่อมทันที</strong> — ค่าตรวจฟรีโดยปริยาย</p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div>
                             <div class="text-sm font-semibold text-navy mb-1">ไม่ซ่อม</div>
                             <p class="text-xs text-slate-600 leading-relaxed">ชำระเฉพาะ<strong class="text-navy">ค่าตรวจ
-                                    500 บาท</strong>เท่านั้น ไม่มีค่าใช้จ่ายอื่น</p>
+                                    250 บาท</strong>เท่านั้น ไม่มีค่าใช้จ่ายอื่น</p>
                         </div>
                     </div>
                 </div>

@@ -17,8 +17,8 @@ with(fn() => [
 <div>
     {{-- ส่วนหัวข้อ --}}
     <div class="mb-8">
-        <flux:heading level="1" class="text-3xl font-display font-bold">ใบรับงานซ่อม</flux:heading>
-        <flux:subheading class="text-zinc-500">รายการแจ้งซ่อมทั้งหมดจากลูกค้า</flux:subheading>
+        <h1 class="text-3xl font-bold">ใบรับงานซ่อม</h1>
+        <p class="text-zinc-500">รายการแจ้งซ่อมทั้งหมดจากลูกค้า</p>
     </div>
 
     {{-- ส่วนตารางแสดงข้อมูล --}}
@@ -85,7 +85,12 @@ with(fn() => [
                         {{-- กรณีที่ยังไม่มีลูกค้าส่งข้อมูลมาเลย --}}
                         <tr>
                             <td colspan="6" class="px-6 py-12 text-center text-zinc-500">
-                                <flux:icon.inbox class="w-12 h-12 mx-auto text-zinc-300 dark:text-zinc-700 mb-3" />
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="mx-auto mb-3 h-12 w-12 text-zinc-300 dark:text-zinc-700" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M20.25 13.5v3.75A2.25 2.25 0 0 1 18 19.5H6a2.25 2.25 0 0 1-2.25-2.25V13.5m16.5 0-2.636-7.03A2.25 2.25 0 0 0 15.507 5H8.493a2.25 2.25 0 0 0-2.107 1.47L3.75 13.5m16.5 0h-4.34a.75.75 0 0 0-.53.22l-1.16 1.159a.75.75 0 0 1-.53.221h-3.38a.75.75 0 0 1-.53-.22l-1.16-1.16a.75.75 0 0 0-.53-.22H3.75" />
+                                </svg>
                                 ยังไม่มีข้อมูลใบรับงานซ่อมครับ
                             </td>
                         </tr>

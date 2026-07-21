@@ -23,7 +23,7 @@
             กม.</span>
         </label>
 
-        <input type="range" id="calc-km" min="0" max="50" value="15"
+        <input type="range" id="calc-km" min="0" max="50" value="10"
           class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500">
 
         <div class="flex justify-between text-xs text-slate-400 mt-3 px-1">
@@ -80,12 +80,7 @@
             <div class="text-sm font-bold text-slate-900 mt-2 sm:mt-1">ขึ้นอยู่กับบริษัทขนส่ง</div>
           </div>
         </div>
-
-
-
-
       </div>
-
     </div>
   </div>
 </section>
@@ -101,11 +96,11 @@
     function calculateSingleTripCost(km) {
       let cost = 50; // ค่าบริการเริ่มต้น
       if (km <= 10) {
-        cost += km * 18;
+        cost += km * 5;
       } else if (km <= 20) {
-        cost += (10 * 18) + ((km - 10) * 20);
+        cost += (10 * 18) + ((km - 10) * 7);
       } else {
-        cost += (10 * 18) + (10 * 20) + ((km - 20) * 25);
+        cost += (10 * 18) + (10 * 20) + ((km - 20) * 9);
       }
       return Math.round(cost);
     }
@@ -114,7 +109,7 @@
       const km = parseInt(kmInput.value, 10);
 
       // 1. คำนวณค่าบริการช่างไปรับ-ส่ง (คิดแบบไป-กลับ จึงคูณ 2)
-      const totalTravelCost = calculateSingleTripCost(km) * 2;
+      const totalTravelCost = calculateSingleTripCost(km);
 
       // 2. อัปเดตการแสดงผลตัวเลขบนหน้าจอ
       kmVal.textContent = km + ' กม.';

@@ -1,3 +1,16 @@
+@php
+  $portfolios = $portfolios ?? \App\Models\Portfolio::query()
+    ->where('is_active', true)
+    ->orderBy('sort_order')
+    ->orderBy('id')
+    ->get();
+  $gradients = $gradients ?? [
+    'bg-[linear-gradient(135deg,#0f2347,#2a5298)]',
+    'bg-[linear-gradient(135deg,#1a3a6b,#0f2347)]',
+    'bg-[linear-gradient(135deg,#2a5298,#1a3a6b)]',
+  ];
+@endphp
+
 <section class="py-18 bg-offwhite" id="portfolio" aria-labelledby="portfolio-title">
   <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
     <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
@@ -8,56 +21,46 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-      <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
-        <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#0f2347,#2a5298)]">
-          <!-- <i class="bi bi-building" aria-hidden="true"></i> -->
-          <img src="{{ asset('storage/portfolio/1.jpg') }}" alt="" class="h-full object-cover">
-          <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
-        </div>
-        <div class="p-5">
-          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">บุคคลทั่วไป - คอนโดมิเนียม</div>
-          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมเครื่องดูดฝุ่นแบบถังสแตนเลส น้ำเข้าตู้มอเตอร์จนช็อต เปลี่ยนมอเตอร์ใหม่ พร้อมทำความสะอาดระบบ</h3>
-          <div class="flex gap-4 text-sm text-slate-500">
-            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i>Karcher, Nilfisk</span>
-            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2569</span>
-            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
+      @forelse ($portfolios as $index => $item)
+        @php
+          $delay = match ($index % 3) {
+            1 => 'delay-100',
+            2 => 'delay-200',
+            default => '',
+          };
+          $gradient = $gradients[$index % count($gradients)];
+        @endphp
+        <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out {{ $delay }} data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
+          <div class="relative h-45 flex items-center justify-center px-4 text-[4rem] text-white/15 {{ $gradient }} after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_top,rgba(15,35,71,.45),transparent_60%)] after:pointer-events-none after:z-[1]">
+            @if ($item->imageUrl())
+              <img
+                src="{{ asset($item->imageUrl()) }}"
+                alt="{{ $item->title }}"
+                class="absolute inset-y-0 inset-x-4 z-0 w-[calc(100%-2rem)] h-full object-contain object-center"
+                loading="lazy"
+              >
+            @endif
+            <span class="absolute bottom-2.5 right-2.5 z-[2] px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ {{ $item->status_label }}</span>
           </div>
-        </div>
-      </article>
-
-      <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out delay-100 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
-        <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#1a3a6b,#0f2347)]">
-          <!-- <i class="bi bi-gear-wide-connected" aria-hidden="true"></i> -->
-           <img src="{{ asset('storage/portfolio/2.jpg') }}" alt="" class="h-full object-cover">
-          <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
-        </div>
-        <div class="p-5">
-          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">ร้านคาร์แคร์</div>
-          <h3 class="font-display font-bold text-navy leading-snug mb-2">Overhaul เครื่องดูดฝุ่นอุตสาหกรรมที่ใช้งานหนัก เปลี่ยนตลับลูกปืนและซีลกันฝุ่น แก้ปัญหาเสียงดังครืดๆ</h3>
-          <div class="flex gap-4 text-sm text-slate-500">
-            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i>Roots, Numatic</span>
-            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2569</span>
-            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
+          <div class="p-5">
+            <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">{{ $item->category_label }}</div>
+            <h3 class="font-display font-bold text-navy leading-snug mb-2">{{ $item->title }}</h3>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-500">
+              @if ($item->brands)
+                <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i>{{ $item->brands }}</span>
+              @endif
+              @if ($item->year)
+                <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> {{ $item->year }}</span>
+              @endif
+              @if ($item->duration)
+                <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> {{ $item->duration }}</span>
+              @endif
+            </div>
           </div>
-        </div>
-      </article>
-
-      <article data-reveal class="overflow-hidden rounded-[20px] bg-white shadow-sm transition-all opacity-0 translate-y-6 duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 hover:shadow-lg hover:-translate-y-1.5">
-        <div class="relative h-45 flex items-center justify-center text-[4rem] text-white/15 bg-[linear-gradient(135deg,#2a5298,#1a3a6b)]">
-          <!-- <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> -->
-           <img src="{{ asset('storage/portfolio/3.jpg') }}" alt="" class="h-full object-cover">
-          <span class="absolute bottom-2.5 right-2.5 px-2.5 py-[3px] rounded-full bg-line/90 text-white text-[.68rem] font-bold tracking-wide">✓ สำเร็จ</span>
-        </div>
-        <div class="p-5">
-          <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">โรงงานยา</div>
-          <h3 class="font-display font-bold text-navy leading-snug mb-2">ซ่อมระบบไฟฟ้าและบอร์ดควบคุมเครื่องดูดฝุ่นแบบ HEPA Filter แก้ปัญหาเครื่องตัดการทำงานเอง</h3>
-          <div class="flex gap-4 text-sm text-slate-500">
-            <span class="flex items-center gap-1"><i class="bi bi-tools" aria-hidden="true"></i> Nilfisk, Cleanfix</span>
-            <span class="flex items-center gap-1"><i class="bi bi-calendar3" aria-hidden="true"></i> 2569</span>
-            <span class="flex items-center gap-1"><i class="bi bi-clock" aria-hidden="true"></i> 1 วัน</span>
-          </div>
-        </div>
-      </article>
+        </article>
+      @empty
+        <p class="col-span-full text-center text-slate-500 py-10">ยังไม่มีผลงานในระบบ</p>
+      @endforelse
     </div>
   </div>
 </section>
