@@ -3,14 +3,14 @@
     role="navigation" aria-label="เมนูหลัก">
     <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="#" class="flex items-center gap-2.5" aria-label="ศิริพงษ์ เซอร์วิส - หน้าแรก">
-          <div class="w-10 h-10 shrink-0 bg-orange rounded-[10px] flex items-center justify-center text-xl text-white">
-            <i class="bi bi-tools" aria-hidden="true"></i>
-          </div>
-          <div class="flex flex-col leading-tight">
-            <span class="font-display font-bold text-base text-white">ศิริพงษ์ vacuum</span>
-            <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG VACUUM</span>
-          </div>
+        <a href="#" class="flex items-center shrink-0" aria-label="ศิริพงษ์ เซอร์วิส - หน้าแรก">
+          <img
+            src="{{ config('data.logo') }}"
+            alt="SIRIPHONG-VACUUM"
+            class="h-10 md:h-11 w-auto max-w-[200px] object-contain"
+            width="200"
+            height="44"
+          >
         </a>
 
         <ul class="hidden md:flex list-none gap-1" role="list">

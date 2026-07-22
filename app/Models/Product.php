@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\MediaUrl;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -68,23 +69,7 @@ class Product extends Model
             return null;
         }
 
-        $path = trim($this->image);
-
-        if (filter_var($path, FILTER_VALIDATE_URL)) {
-            return $path;
-        }
-
-        $path = ltrim($path, '/');
-
-        if (str_starts_with($path, 'storage/')) {
-            return '/'.$path;
-        }
-
-        if (str_starts_with($path, 'assets/') || str_starts_with($path, 'images/')) {
-            return '/'.$path;
-        }
-
-        return '/storage/'.$path;
+        return MediaUrl::resolve($this->image);
     }
 
     public function iconClass(): string

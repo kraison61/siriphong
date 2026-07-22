@@ -27,14 +27,16 @@
                 <div class="flex flex-wrap gap-4">
                     {{-- ปุ่ม Add Line: ลบ size="lg" ออก แล้วเสริมความใหญ่ด้วยคลาสของ Tailwind (px-6 py-3 text-base)
                     --}}
-                    <flux:button href="#contact"
+                    <flux:button href="{{ config('data.line') }}"
                         class="!bg-[#06c755] !border-[#06c755] hover:!bg-[#05a847] text-white px-6 py-3 text-base"
-                        icon="chat-bubble-left-ellipsis">
+                        icon="chat-bubble-left-ellipsis"
+                        target="_blank"
+                        rel="noopener">
                         Add Line ประเมินฟรี
                     </flux:button>
 
                     {{-- ปุ่มโทรหาช่าง: ลบ size="lg" ออกเช่นกัน --}}
-                    <flux:button href="tel:+66612345678" variant="ghost"
+                    <flux:button href="tel:{{ config('data.phone') }}" variant="ghost"
                         class="text-white border-white/20 hover:bg-white/10 px-6 py-3 text-base" icon="phone">
                         โทรหาช่าง
                     </flux:button>

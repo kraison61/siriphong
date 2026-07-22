@@ -80,7 +80,7 @@ $save = function () {
                             </div>
                             <div>
                                 <div class="text-sm text-zinc-400 font-medium">โทรศัพท์</div>
-                                <div class="text-lg font-bold text-white tracking-wider">061-234-5678</div>
+                                <a href="tel:{{ config('data.phone') }}" class="text-lg font-bold text-white tracking-wider">{{ config('data.phone_formatted') }}</a>
                             </div>
                         </div>
 
@@ -91,8 +91,8 @@ $save = function () {
                                 <flux:icon.chat-bubble-left-ellipsis class="w-6 h-6" />
                             </div>
                             <div>
-                                <div class="text-sm text-zinc-400 font-medium">Line ID</div>
-                                <div class="text-lg font-bold text-white">@siripong.service</div>
+                                <div class="text-sm text-zinc-400 font-medium">Line</div>
+                                <a href="{{ config('data.line') }}" target="_blank" rel="noopener" class="text-lg font-bold text-white">แอดไลน์ติดต่อ</a>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ $save = function () {
                     <div class="inline-block p-3 bg-white rounded-xl shadow-lg">
                         {{-- 💡 ใช้ API สร้าง QR Code จำลองชั่วคราว คุณสามารถนำรูป QR Code จริงของร้านมาใส่แทนลิงก์ src
                         นี้ได้เลยครับ --}}
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://line.me/R/ti/p/@siripong.service"
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ urlencode(config('data.line')) }}"
                             alt="Line QR Code" class="w-32 h-32">
                     </div>
                 </div>

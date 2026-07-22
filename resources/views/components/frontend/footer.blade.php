@@ -2,12 +2,14 @@
   <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
     <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-8">
       <div>
-        <div class="flex items-center gap-2.5 mb-1">
-          <div class="w-10 h-10 shrink-0 bg-orange rounded-[10px] flex items-center justify-center text-xl text-white"><i class="bi bi-tools" aria-hidden="true"></i></div>
-          <div class="flex flex-col leading-tight">
-            <span class="font-display font-bold text-[1.1rem] text-white">ศิริพงษ์ vacuum</span>
-            <span class="text-[.68rem] tracking-wide text-white/55">SIRIPHONG VACUUM</span>
-          </div>
+        <div class="mb-1">
+          <img
+            src="{{ config('data.logo') }}"
+            alt="SIRIPHONG-VACUUM"
+            class="h-12 w-auto max-w-[240px] object-contain"
+            width="240"
+            height="48"
+          >
         </div>
         <p class="text-sm text-white/50 leading-[1.7] mt-3">
           ผู้เชี่ยวชาญซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ด้วยความซื่อสัตย์ ตรงไปตรงมา และประสบการณ์จริงกว่า 20 ปี

@@ -55,7 +55,7 @@
           <div class="relative overflow-hidden aspect-video flex items-center justify-center px-4 text-[3.5rem] text-white/15 {{ $gradient }} after:content-[''] after:absolute after:inset-0 after:bg-[linear-gradient(to_top,rgba(15,35,71,.55),transparent_60%)] after:pointer-events-none after:z-[1]">
             @if ($service->imageUrl())
               <img
-                src="{{ asset($service->imageUrl()) }}"
+                src="{{ $service->imageUrl() }}"
                 alt="{{ $service->name }}"
                 class="absolute inset-y-0 inset-x-4 z-0 w-[calc(100%-2rem)] h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"

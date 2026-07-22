@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\MediaUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class Portfolio extends Model
@@ -30,22 +31,6 @@ class Portfolio extends Model
 
     public function imageUrl(): ?string
     {
-        if (! filled($this->image)) {
-            return null;
-        }
-
-        $path = trim($this->image);
-
-        if (filter_var($path, FILTER_VALIDATE_URL)) {
-            return $path;
-        }
-
-        $path = ltrim($path, '/');
-
-        if (str_starts_with($path, 'storage/')) {
-            return '/'.$path;
-        }
-
-        return '/storage/'.$path;
+        return MediaUrl::resolve($this->image);
     }
 }

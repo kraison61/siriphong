@@ -25,10 +25,10 @@ class HomeController extends Controller
             'alternateName' => 'Siriphong Industrial Vacuum Repair',
             'description' => 'ผู้เชี่ยวชาญด้านการซ่อมและบริการรักษาเครื่องดูดฝุ่นอุตสาหกรรมทุกยี่ห้อ ให้บริการแบบ C2B รวดเร็ว ตรวจสอบอาการฟรี พร้อมใบรับประกันงานซ่อม เพิ่มอายุการใช้งานเครื่องจักรและลดต้นทุนให้ธุรกิจของคุณ',
             'url' => 'https://www.siriphong-vacuum.com', // ⚠️ แก้เป็น URL จริงของคุณ
-            'telephone' => '+66-81-792-8148', // ⚠️ แก้เป็นเบอร์โทรจริง
-            'email' => 'oun.cav@gmail.com', // ⚠️ แก้เป็นอีเมลจริง
+            'telephone' => config('data.phone'),
+            'email' => config('data.email'),
             'priceRange' => 'เริ่มต้น 300-5,000 บาท',
-            'image' => 'https://www.siriphong-vacuum.com/images/logo.jpg', // ⚠️ แก้เป็น URL รูปจริง
+            'image' => config('data.logo'),
             'address' => [
                 '@type' => 'PostalAddress',
                 'streetAddress' => '69 ซอยสุขสวัสดิ์ 26 แยก 10-5` ', // ⚠️ แก้เป็นที่อยู่จริง
@@ -143,7 +143,7 @@ class HomeController extends Controller
                     '@type' => 'ContactAction',
                     'target' => [
                         '@type' => 'EntryPoint',
-                        'urlTemplate' => 'https://line.me/ti/p/Kqsti_kwU9', // ⚠️ แก้เป็น Line ID จริง
+                        'urlTemplate' => config('data.line'),
                         'actionPlatform' => [
                             'http://schema.org/DesktopWebPlatform',
                             'http://schema.org/MobileWebPlatform'
@@ -157,7 +157,7 @@ class HomeController extends Controller
             ],
             'sameAs' => [
                 // 'https://www.facebook.com/siriphongvacuum', // ⚠️ แก้เป็นเพจจริง
-                'https://line.me/ti/p/Kqsti_kwU9', // ⚠️ แก้เป็น Line ID จริง
+                config('data.line'),
                 // 'https://www.youtube.com/@siriphongvacuum' // ⚠️ แก้เป็น Channel จริง (ถ้ามี)
             ]
         ];

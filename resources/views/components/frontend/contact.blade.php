@@ -28,8 +28,7 @@
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-chat-dots-fill w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg"
               aria-hidden="true"></i>
-            <a href="{{ config('data.line') }}" target="_blank" rel="noopener" class="text-inherit">LINE:
-              {{ config('data.phone_formatted') }}</a>
+            <a href="{{ config('data.line') }}" target="_blank" rel="noopener" class="text-inherit">LINE: แอดไลน์ติดต่อ</a>
           </li>
           <li class="flex items-center gap-3 text-[.95rem] text-white/85">
             <i class="bi bi-clock w-10 h-10 shrink-0 rounded-[10px] bg-white/10 flex items-center justify-center text-orange text-lg"
@@ -46,7 +45,7 @@
         <div class="flex flex-col min-[400px]:flex-row min-[400px]:flex-wrap gap-3">
           <a href="{{ config('data.line') }}" target="_blank" rel="noopener"
             class="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 py-3 rounded-xl font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5"
-            aria-label="แอดไลน์เพื่อส่งรูปและปรึกษาฟรี">
+            aria-label="แอดไลน์ ปรึกษาฟรี">
             <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
             แอดไลน์ ปรึกษาฟรี
           </a>
@@ -74,7 +73,7 @@
         <!-- เมื่อมีรูปจริง ให้ลบ div นี้แล้วใช้โค้ดด้านล่างแทน: -->
         <div
           class="w-64 h-64 mx-auto bg-offwhite border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center mb-6 group hover:border-[#06c755] transition-colors">
-          <img src="{{ asset('storage/line-qr.jpg') }}" alt="QR Code สำหรับเพิ่มเพื่อน LINE ศิริพงษ์ เซอร์วิส"
+          <img src="{{ media_url(config('data.line_qr')) }}" alt="QR Code สำหรับเพิ่มเพื่อน LINE ศิริพงษ์ เซอร์วิส"
             width="256" height="256" class="rounded-lg " loading="lazy">
         </div>
 
