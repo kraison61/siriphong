@@ -5,14 +5,55 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@import './style.css';
-
 @theme {
-    /* 💡 เปลี่ยนฟอนต์หลักทั้งเว็บ (เนื้อหาทั่วไป) ให้เป็น Sarabun */
+    --color-navy: #0f2347;
+    --color-navy-mid: #1a3a6b;
+    --color-navy-light: #2a5298;
+    --color-steel: #3d5a80;
+    --color-orange: #f26522;
+    --color-orange-dark: #d4521a;
+    --color-line: #06c755;
+    --color-line-dark: #05a847;
+    --color-offwhite: #f5f6fa;
+    --color-ink: #1a2234;
+
     --font-sans: 'Sarabun', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
 
-    /* 💡 สร้างตัวแปรใหม่สำหรับหัวข้อ ให้เป็น Kanit */
-    --font-display: 'Kanit', ui-sans-serif, system-ui, sans-serif;
+    --animate-fade-up: fadeInUp 0.7s ease both;
+    --animate-fade-down: fadeInDown 0.6s ease both;
+    --animate-status: statusPulse 2s infinite;
 
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes statusPulse {
+        0%,
+        100% {
+            box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 0 8px rgba(6, 199, 85, 0);
+        }
+    }
 }

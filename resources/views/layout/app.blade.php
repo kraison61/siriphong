@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ $title ?? 'ศิริพงษ์ เซอร์วิส | ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม' }}</title>
   <meta name="description"
-    content="{{ $descrition ?? 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ประสบการณ์กว่า 20 ปี รับซ่อมทุกยี่ห้อ รับประกันงาน' }}">
+    content="{{ $description ?? 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ประสบการณ์กว่า 20 ปี รับซ่อมทุกยี่ห้อ รับประกันงาน' }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Chakra+Petch:wght@500;600;700&display=swap"
@@ -89,11 +89,6 @@
     <i class="bi bi-arrow-up" aria-hidden="true"></i>
   </button>
 
-  <!-- ============================================================ -->
-  <!-- JAVASCRIPT                                                   -->
-  <!-- ============================================================ -->
-
-  @vite(['resources/js/app.js'])
 </body>
 
 </html>

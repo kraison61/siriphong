@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Panel</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
 </head>
 
 <body class="min-h-screen bg-zinc-50 text-zinc-900">
@@ -15,6 +14,7 @@
             <div class="mb-6">
                 <p class="text-xs uppercase tracking-wider text-zinc-500">Admin</p>
                 <h1 class="text-xl font-bold">Siriphong</h1>
+                <p class="mt-1 text-xs text-zinc-500">{{ auth()->user()?->email }}</p>
             </div>
 
             <nav class="space-y-2">
@@ -26,23 +26,29 @@
                     class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.inquiries') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     Inquiries
                 </a>
-                <a href="{{ route('admin.users') }}"
-                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.users') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                <a href="{{ route('admin.users.index') }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.users.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     Users
                 </a>
-                <a href="{{ route('admin.portfolios') }}"
-                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.portfolios') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                <a href="{{ route('admin.portfolios.index') }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.portfolios.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     Portfolios
                 </a>
             </nav>
+
+            <form action="{{ route('logout') }}" method="post" class="mt-6">
+                @csrf
+                <button type="submit"
+                    class="inline-flex min-h-10 w-full items-center justify-center rounded-lg border border-zinc-300 px-4 py-2 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100">
+                    ออกจากระบบ
+                </button>
+            </form>
         </aside>
 
         <main class="flex-1 p-6 md:p-10">
             {{ $slot }}
         </main>
     </div>
-
-    @livewireScripts
 </body>
 
 </html>
