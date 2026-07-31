@@ -30,12 +30,20 @@ function closeMenu() {
 
 /* ── Service filter ── */
 function filterServices(cat) {
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    const onclick = b.getAttribute('onclick') || ''; // ✅ กัน null
+  filterSection('services', cat);
+}
+
+/* ── Section-scoped catalog filter ── */
+function filterSection(sectionId, cat) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  section.querySelectorAll('.filter-btn').forEach(b => {
+    const onclick = b.getAttribute('onclick') || '';
     b.setAttribute('aria-pressed', String(onclick.includes(`'${cat}'`)));
   });
 
-  document.querySelectorAll('.service-card').forEach(card => {
+  section.querySelectorAll('.catalog-card, .service-card').forEach(card => {
     const show = cat === 'all' || card.dataset.category === cat;
     card.classList.toggle('hidden', !show);
     if (show) {
@@ -81,6 +89,7 @@ function handleSubmit(e) {
 window.toggleMenu     = toggleMenu;
 window.closeMenu      = closeMenu;
 window.filterServices = filterServices;
+window.filterSection  = filterSection;
 window.handleSubmit   = handleSubmit;
 
 /* ═══════════════════════════════════════════════════
