@@ -22,10 +22,16 @@
       <div class="font-display text-xs font-semibold tracking-[.14em] uppercase text-orange">
         <i class="bi bi-tools" aria-hidden="true"></i> บริการของเรา
       </div>
-      <h2 class="font-display font-bold leading-tight text-navy mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="services-title">
-        ซ่อมครบ ทุกประเภท<br>
-        <span class="text-orange">เครื่องดูดฝุ่นอุตสาหกรรม</span>
-      </h2>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <h2 class="font-display font-bold leading-tight text-navy mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="services-title">
+          ซ่อมครบ ทุกประเภท<br>
+          <span class="text-orange">เครื่องดูดฝุ่นอุตสาหกรรม</span>
+        </h2>
+        <a href="{{ route('products.index') }}"
+          class="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2.5 rounded-xl text-sm font-bold text-navy bg-white border-[1.5px] border-navy/10 shadow-sm transition-all hover:border-navy hover:-translate-y-0.5 shrink-0">
+          ดูสินค้าและบริการทั้งหมด <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
 
     <!-- Filter bar -->

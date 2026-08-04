@@ -3,7 +3,7 @@
     role="navigation" aria-label="เมนูหลัก">
     <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="#" class="flex items-center shrink-0" aria-label="ศิริพงษ์ เซอร์วิส - หน้าแรก">
+        <a href="{{ route('home') }}" class="flex items-center shrink-0" aria-label="ศิริพงษ์ เซอร์วิส - หน้าแรก">
           <img
             src="{{ config('data.logo') }}"
             alt="SIRIPHONG-VACUUM"
@@ -14,16 +14,17 @@
         </a>
 
         <ul class="hidden md:flex list-none gap-1" role="list">
-          <li><a href="#services" data-nav data-active="true"
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">บริการ</a>
+          <li><a href="{{ route('products.index') }}"
+              @if (request()->routeIs('products.index')) data-active="true" @endif
+              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">สินค้าและบริการ</a>
           </li>
-          <li><a href="#portfolio" data-nav
+          <li><a href="{{ route('home') }}#portfolio" data-nav
               class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ผลงาน</a>
           </li>
-          <li><a href="#why-us" data-nav
+          <li><a href="{{ route('home') }}#why-us" data-nav
               class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ทำไมต้องเรา</a>
           </li>
-          <li><a href="#contact" data-nav
+          <li><a href="{{ route('home') }}#contact" data-nav
               class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ติดต่อ</a>
           </li>
         </ul>
@@ -45,19 +46,19 @@
 
     <!-- Mobile menu -->
     <div class="hidden flex-col bg-navy-mid px-4 pt-2 pb-4 border-t border-white/10" id="mobile-menu" role="menu">
-      <a href="#services" onclick="closeMenu()"
+      <a href="{{ route('products.index') }}" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-tools" aria-hidden="true"></i>บริการซ่อม</a>
-      <a href="#portfolio" onclick="closeMenu()"
+          class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>สินค้าและบริการ</a>
+      <a href="{{ route('home') }}#portfolio" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
           class="bi bi-images" aria-hidden="true"></i>ผลงาน</a>
-      <a href="#why-us" onclick="closeMenu()"
+      <a href="{{ route('home') }}#why-us" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
           class="bi bi-star" aria-hidden="true"></i>ทำไมต้องเรา</a>
-      <a href="#testimonials" onclick="closeMenu()"
+      <a href="{{ route('home') }}#testimonials" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
           class="bi bi-chat-quote" aria-hidden="true"></i>รีวิวลูกค้า</a>
-      <a href="#contact" onclick="closeMenu()"
+      <a href="{{ route('home') }}#contact" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 transition-colors hover:text-orange"><i
           class="bi bi-telephone" aria-hidden="true"></i>ติดต่อเรา</a>
     </div>

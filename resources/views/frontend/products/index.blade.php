@@ -112,7 +112,9 @@
               @endif
             </div>
             <div class="p-5">
-              <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">{{ $product->name }}</h3>
+              <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">
+                <a href="{{ route('products.show', $product->slug) }}" class="hover:text-orange">{{ $product->name }}</a>
+              </h3>
               <p class="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-3">{{ $product->short_description }}</p>
               <div class="flex items-center justify-between pt-4 border-t border-navy/5">
                 <div class="text-sm font-bold text-orange">
@@ -197,7 +199,9 @@
               @endif
             </div>
             <div class="p-5">
-              <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">{{ $service->name }}</h3>
+              <h3 class="font-display font-bold text-[1.05rem] text-navy leading-snug mb-2">
+                <a href="{{ route('services.show', $service->slug) }}" class="hover:text-orange">{{ $service->name }}</a>
+              </h3>
               <p class="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-3">{{ $service->short_description }}</p>
               <div class="flex items-center justify-between pt-4 border-t border-navy/5">
                 <span class="text-sm font-bold text-orange"><i class="bi bi-tag-fill mr-1" aria-hidden="true"></i>{{ $service->priceLabel() }}</span>
@@ -245,3 +249,7 @@
   </section>
 
 @endsection
+
+@push('jsonld')
+  <x-schema-jsonld :graph="$schemaGraph" />
+@endpush

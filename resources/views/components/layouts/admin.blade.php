@@ -34,6 +34,14 @@
                     class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.portfolios.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     Portfolios
                 </a>
+                <a href="{{ route('admin.products.index', ['type' => 'product']) }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.products.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                    สินค้าและบริการ
+                </a>
+                <a href="{{ route('admin.categories.index', ['type' => 'product']) }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.categories.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                    หมวดหมู่
+                </a>
             </nav>
 
             <form action="{{ route('logout') }}" method="post" class="mt-6">

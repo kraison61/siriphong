@@ -3,17 +3,23 @@
 namespace App\Models;
 
 use App\Support\MediaUrl;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'category_id',
         'type',
         'name',
         'slug',
+        'sku',
+        'brand',
+        'mpn',
+        'gtin13',
         'short_description',
         'description',
         'image',
@@ -23,6 +29,7 @@ class Product extends Model
         'is_featured',
         'meta_title',
         'meta_description',
+        'specs',
     ];
 
     protected function casts(): array
@@ -32,6 +39,7 @@ class Product extends Model
             'sale_price' => 'decimal:2',
             'is_active' => 'boolean',
             'is_featured' => 'boolean',
+            'specs' => 'array',
         ];
     }
 
@@ -43,6 +51,16 @@ class Product extends Model
     public function images(): HasMany
     {
         return $this->hasMany(ProductImage::class)->orderBy('sort_order');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function approvedReviews(): HasMany
+    {
+        return $this->reviews()->approved();
     }
 
     public function priceLabel(): string

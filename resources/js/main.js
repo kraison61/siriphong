@@ -120,15 +120,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Smooth nav link scroll ── */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
+  document.querySelectorAll('a[href*="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
+      const href = a.getAttribute('href');
+      if (!href || !href.includes('#')) return;
+
+      const hash = '#' + href.split('#').slice(1).join('#');
+      const target = document.querySelector(hash);
+      const isSamePage = href.startsWith('#') || a.pathname === window.location.pathname;
+      if (target && isSamePage) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', hash);
       }
     });
   });
+
+  /* ── Scroll to hash on load (cross-page anchors) ── */
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
 
   /* ── Navbar active link on scroll ── */
   const sections = document.querySelectorAll('section[id]');
@@ -140,7 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.scrollY >= s.offsetTop - 100) current = s.id;
       });
       navLinks.forEach(a => {
-        a.dataset.active = (a.getAttribute('href') === '#' + current);
+        const href = a.getAttribute('href') || '';
+        const hash = href.includes('#') ? href.split('#')[1] : '';
+        a.dataset.active = hash === current;
       });
     }, { passive: true });
   }
