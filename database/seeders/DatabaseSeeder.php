@@ -23,5 +23,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // $this->call(VacuumSeeder::class);
+        $this->call(SettingSeeder::class);
+        $this->call(PageSeeder::class);
+        $this->call(SeoVacuumCaseSeeder::class);
+        $this->call(SeoPortfolioCasesSeeder::class);
+        $this->call(PortfolioCategorySeeder::class);
     }
 }

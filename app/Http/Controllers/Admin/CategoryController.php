@@ -82,7 +82,7 @@ class CategoryController extends Controller
     {
         $type = $request->query('type', $fallback);
 
-        return in_array($type, ['product', 'service'], true) ? $type : 'product';
+        return in_array($type, ['product', 'service', 'portfolio'], true) ? $type : 'product';
     }
 
     private function resolveSlug(?string $slug, string $name, ?Category $existing = null): string

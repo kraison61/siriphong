@@ -14,17 +14,28 @@
         </a>
 
         <ul class="hidden md:flex list-none gap-1" role="list">
-          <li><a href="{{ route('products.index') }}"
-              @if (request()->routeIs('products.index')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">สินค้าและบริการ</a>
+          <li><a href="{{ route('pages.show', 'vacuum-repair') }}"
+              @if (request()->is('vacuum-repair', 'vacuum-repair/*')) data-active="true" @endif
+              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">บริการซ่อม</a>
           </li>
-          <li><a href="{{ route('home') }}#portfolio" data-nav
+          <li><a href="{{ route('pages.show', 'service-rates') }}"
+              @if (request()->is('service-rates')) data-active="true" @endif
+              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ราคาซ่อม</a>
+          </li>
+          <li><a href="{{ route('pages.show', 'portfolio') }}"
+              @if (request()->is('portfolio', 'portfolio/*')) data-active="true" @endif
               class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ผลงาน</a>
           </li>
-          <li><a href="{{ route('home') }}#why-us" data-nav
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ทำไมต้องเรา</a>
+          <li><a href="{{ route('blogs.index') }}"
+              @if (request()->routeIs('blogs.*')) data-active="true" @endif
+              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">บทความ</a>
           </li>
-          <li><a href="{{ route('home') }}#contact" data-nav
+          <li><a href="{{ route('products.index') }}"
+              @if (request()->routeIs('products.*') || request()->routeIs('services.*')) data-active="true" @endif
+              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">สินค้า</a>
+          </li>
+          <li><a href="{{ route('pages.show', 'contact-us') }}"
+              @if (request()->is('contact-us', 'about-us')) data-active="true" @endif
               class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ติดต่อ</a>
           </li>
         </ul>
@@ -44,21 +55,29 @@
       </div>
     </div>
 
-    <!-- Mobile menu -->
     <div class="hidden flex-col bg-navy-mid px-4 pt-2 pb-4 border-t border-white/10" id="mobile-menu" role="menu">
-      <a href="{{ route('products.index') }}" onclick="closeMenu()"
+      <a href="{{ route('pages.show', 'vacuum-repair') }}" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>สินค้าและบริการ</a>
-      <a href="{{ route('home') }}#portfolio" onclick="closeMenu()"
+          class="bi bi-tools" aria-hidden="true"></i>บริการซ่อม</a>
+      <a href="{{ route('pages.show.child', ['slug' => 'vacuum-repair', 'childSlug' => 'car-care']) }}" onclick="closeMenu()"
+        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
+          class="bi bi-droplet-half" aria-hidden="true"></i>ซ่อมคาร์แคร์</a>
+      <a href="{{ route('pages.show.child', ['slug' => 'vacuum-repair', 'childSlug' => 'burnt-motor']) }}" onclick="closeMenu()"
+        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
+          class="bi bi-lightning-charge" aria-hidden="true"></i>ซ่อมมอเตอร์ไหม้</a>
+      <a href="{{ route('pages.show', 'service-rates') }}" onclick="closeMenu()"
+        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
+          class="bi bi-tags-fill" aria-hidden="true"></i>ราคาซ่อม</a>
+      <a href="{{ route('pages.show', 'portfolio') }}" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
           class="bi bi-images" aria-hidden="true"></i>ผลงาน</a>
-      <a href="{{ route('home') }}#why-us" onclick="closeMenu()"
+      <a href="{{ route('blogs.index') }}" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-star" aria-hidden="true"></i>ทำไมต้องเรา</a>
-      <a href="{{ route('home') }}#testimonials" onclick="closeMenu()"
+          class="bi bi-journal-text" aria-hidden="true"></i>บทความ</a>
+      <a href="{{ route('pages.show', 'about-us') }}" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-chat-quote" aria-hidden="true"></i>รีวิวลูกค้า</a>
-      <a href="{{ route('home') }}#contact" onclick="closeMenu()"
+          class="bi bi-building" aria-hidden="true"></i>เกี่ยวกับเรา</a>
+      <a href="{{ route('pages.show', 'contact-us') }}" onclick="closeMenu()"
         class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 transition-colors hover:text-orange"><i
           class="bi bi-telephone" aria-hidden="true"></i>ติดต่อเรา</a>
     </div>

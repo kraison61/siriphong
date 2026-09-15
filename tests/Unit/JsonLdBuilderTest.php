@@ -112,4 +112,39 @@ class JsonLdBuilderTest extends TestCase
         $this->assertStringNotContainsString('฿', $productNode['offers']['price']);
         $this->assertStringNotContainsString(',', $productNode['offers']['price']);
     }
+
+    public function test_blog_schema_has_article_person_and_faq_without_howto(): void
+    {
+        $blog = \App\Models\Blog::query()->create([
+            'title' => 'เครื่องดูดฝุ่นไม่มีแรงดูด เกิดจากอะไร?',
+            'slug' => 'vacuum-no-suction-fix',
+            'excerpt' => 'เช็คเอง 3 จุด',
+            'body' => '<p>เนื้อหา</p>',
+            'author_name' => 'ช่างเอ',
+            'author_job_title' => 'ช่างซ่อมเครื่องใช้ไฟฟ้า',
+            'faqs' => [
+                ['question' => 'ราคาเท่าไหร่', 'answer' => 'เริ่ม 300 บาท'],
+            ],
+            'is_published' => true,
+            'published_at' => now()->subDays(2),
+            'content_updated_at' => now()->subDay(),
+            'sort_order' => 1,
+        ]);
+
+        $schema = $this->builder->buildBlogSchema($blog);
+        $graph = collect($schema['@graph']);
+
+        $this->assertNotNull($graph->firstWhere('@type', 'Article'));
+        $this->assertNotNull($graph->firstWhere('@type', 'Person'));
+        $this->assertNotNull($graph->firstWhere('@type', 'LocalBusiness'));
+        $this->assertNotNull($graph->firstWhere('@type', 'FAQPage'));
+        $this->assertNotNull($graph->firstWhere('@type', 'BreadcrumbList'));
+        $this->assertNull($graph->firstWhere('@type', 'HowTo'));
+
+        $article = $graph->firstWhere('@type', 'Article');
+        $this->assertSame($blog->title, $article['headline']);
+        $this->assertArrayHasKey('datePublished', $article);
+        $this->assertArrayHasKey('dateModified', $article);
+        $this->assertSame(['@id' => $this->builder->authorId()], $article['author']);
+    }
 }

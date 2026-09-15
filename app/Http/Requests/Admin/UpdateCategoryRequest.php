@@ -22,7 +22,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('categories', 'slug')->ignore($categoryId)],
-            'type' => ['required', Rule::in(['product', 'service'])],
+            'type' => ['required', Rule::in(['product', 'service', 'portfolio'])],
             'sort_order' => ['required', 'integer'],
         ];
     }

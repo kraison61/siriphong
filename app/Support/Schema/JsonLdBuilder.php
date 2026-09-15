@@ -2,7 +2,10 @@
 
 namespace App\Support\Schema;
 
+use App\Models\Blog;
 use App\Models\Faq;
+use App\Models\Page;
+use App\Models\Portfolio;
 use App\Models\Product;
 use App\Models\Review;
 use App\Support\MediaUrl;
@@ -29,6 +32,11 @@ class JsonLdBuilder
     public function localBusinessId(): string
     {
         return $this->baseUrl().'/#localbusiness';
+    }
+
+    public function authorId(): string
+    {
+        return $this->baseUrl().'/#author-technician';
     }
 
     /**
@@ -312,6 +320,297 @@ class JsonLdBuilder
         }
 
         return $this->wrapGraph($nodes);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function buildPageSchema(Page $page, ?array $geoOverride = null): array
+    {
+        $pageUrl = $this->pageUrl($page);
+        $faqs = $page->faqItems();
+
+        $serviceNode = [
+            '@type' => 'Service',
+            '@id' => $pageUrl.'/#service',
+            'name' => $page->title,
+            'serviceType' => $page->primary_keyword ?: 'บริการซ่อมเครื่องดูดฝุ่น',
+            'description' => strip_tags((string) ($page->intro ?: $page->title)),
+            'provider' => ['@id' => $this->localBusinessId()],
+            'areaServed' => array_map(
+                fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
+                config('schema.local_business.area_served')
+            ),
+            'availableChannel' => [
+                '@type' => 'ServiceChannel',
+                'servicePhone' => [
+                    '@type' => 'ContactPoint',
+                    'telephone' => config('schema.local_business.telephone'),
+                ],
+                'serviceUrl' => $pageUrl,
+            ],
+        ];
+
+        $nodes = [
+            $this->organizationNode(),
+            $this->websiteNode(),
+            $this->localBusinessNode($geoOverride),
+            $this->breadcrumbNode($pageUrl, $this->pageBreadcrumb($page)),
+            $serviceNode,
+        ];
+
+        if ($faqs->isNotEmpty()) {
+            $nodes[] = [
+                '@type' => 'FAQPage',
+                '@id' => rtrim($pageUrl, '/').'/#faq',
+                'mainEntity' => $faqs->map(fn ($faq) => [
+                    '@type' => 'Question',
+                    'name' => $faq->question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq->answer,
+                    ],
+                ])->values()->all(),
+            ];
+        }
+
+        return $this->wrapGraph($nodes);
+    }
+
+    /**
+     * @param  Collection<int, Blog>  $blogs
+     * @return array<string, mixed>
+     */
+    public function buildBlogIndexSchema(Collection $blogs): array
+    {
+        $pageUrl = $this->baseUrl().'/blog';
+
+        $nodes = [
+            $this->organizationNode(),
+            $this->websiteNode(),
+            $this->localBusinessWithArea(),
+            $this->breadcrumbNode($pageUrl, [
+                ['name' => 'หน้าแรก', 'url' => $this->baseUrl().'/'],
+                ['name' => 'บทความ', 'url' => null],
+            ]),
+            [
+                '@type' => 'ItemList',
+                '@id' => rtrim($pageUrl, '/').'/#itemlist',
+                'name' => 'บทความซ่อมเครื่องดูดฝุ่น',
+                'itemListElement' => $blogs->values()->map(fn (Blog $blog, int $index) => [
+                    '@type' => 'ListItem',
+                    'position' => $index + 1,
+                    'url' => $this->blogUrl($blog),
+                    'name' => $blog->title,
+                ])->all(),
+            ],
+        ];
+
+        return $this->wrapGraph($nodes);
+    }
+
+    /**
+     * Article + Person + LocalBusiness + BreadcrumbList + optional FAQPage.
+     * No HowTo, no aggregateRating on articles (SEO package rules).
+     *
+     * @return array<string, mixed>
+     */
+    public function buildBlogSchema(Blog $blog): array
+    {
+        $pageUrl = $this->blogUrl($blog);
+        $faqs = $blog->faqItems();
+
+        $article = [
+            '@type' => 'Article',
+            '@id' => rtrim($pageUrl, '/').'/#article',
+            'headline' => $blog->title,
+            'description' => $blog->seoDescription(),
+            'image' => $this->blogImageObject($blog),
+            'author' => ['@id' => $this->authorId()],
+            'publisher' => ['@id' => $this->organizationId()],
+            'inLanguage' => 'th-TH',
+            'mainEntityOfPage' => [
+                '@type' => 'WebPage',
+                '@id' => $pageUrl,
+            ],
+        ];
+
+        if ($published = $blog->datePublished()) {
+            $article['datePublished'] = $published;
+        }
+
+        if ($modified = $blog->dateModified()) {
+            $article['dateModified'] = $modified;
+        }
+
+        $nodes = [
+            $this->localBusinessWithArea(),
+            $this->personNode($blog),
+            $this->organizationNode(),
+            $this->websiteNode(),
+            $article,
+            $this->breadcrumbNode($pageUrl, [
+                ['name' => 'หน้าแรก', 'url' => $this->baseUrl().'/'],
+                ['name' => 'บทความ', 'url' => $this->baseUrl().'/blog'],
+                ['name' => $blog->title, 'url' => null],
+            ]),
+        ];
+
+        if ($faqs->isNotEmpty()) {
+            $nodes[] = [
+                '@type' => 'FAQPage',
+                '@id' => rtrim($pageUrl, '/').'/#faq',
+                'mainEntity' => $faqs->map(fn ($faq) => [
+                    '@type' => 'Question',
+                    'name' => $faq->question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq->answer,
+                    ],
+                ])->values()->all(),
+            ];
+        }
+
+        return $this->wrapGraph($nodes);
+    }
+
+    /**
+     * Short case page: WebPage + LocalBusiness (geo) + BreadcrumbList.
+     * Primary keyword differs from related blog to avoid cannibalization.
+     *
+     * @return array<string, mixed>
+     */
+    public function buildPortfolioCaseSchema(Portfolio $portfolio): array
+    {
+        $pageUrl = $this->portfolioCaseUrl($portfolio);
+        $geo = $portfolio->geoCoordinates();
+
+        $webPage = [
+            '@type' => 'WebPage',
+            '@id' => $pageUrl,
+            'name' => $portfolio->title,
+            'description' => $portfolio->seoDescription(),
+            'isPartOf' => ['@id' => $this->websiteId()],
+            'about' => ['@id' => $this->localBusinessId()],
+            'inLanguage' => 'th-TH',
+        ];
+
+        if ($image = $portfolio->imageUrl()) {
+            $webPage['primaryImageOfPage'] = $image;
+            $images = array_values(array_unique(array_filter([
+                $portfolio->beforeImageUrl(),
+                $portfolio->afterImageUrl(),
+                MediaUrl::resolve($portfolio->image),
+            ])));
+            if ($images !== []) {
+                $webPage['image'] = count($images) === 1 ? $images[0] : $images;
+            }
+        }
+
+        if ($portfolio->relatedBlog) {
+            $webPage['relatedLink'] = $this->blogUrl($portfolio->relatedBlog);
+        }
+
+        $nodes = [
+            $this->organizationNode(),
+            $this->websiteNode(),
+            $this->localBusinessWithArea($geo),
+            $this->breadcrumbNode($pageUrl, [
+                ['name' => 'หน้าแรก', 'url' => $this->baseUrl().'/'],
+                ['name' => 'ผลงาน', 'url' => $this->baseUrl().'/portfolio'],
+                ['name' => $portfolio->title, 'url' => null],
+            ]),
+            $webPage,
+        ];
+
+        return $this->wrapGraph($nodes);
+    }
+
+    public function blogUrl(Blog $blog): string
+    {
+        return rtrim($this->baseUrl(), '/').$blog->urlPath();
+    }
+
+    public function portfolioCaseUrl(Portfolio $portfolio): string
+    {
+        $path = $portfolio->urlPath() ?? '/portfolio';
+
+        return rtrim($this->baseUrl(), '/').$path;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function personNode(?Blog $blog = null): array
+    {
+        $name = $blog?->authorName() ?? (string) config('schema.author.name');
+        $jobTitle = $blog?->authorJobTitle() ?? (string) config('schema.author.job_title');
+        $description = $blog?->authorDescription() ?? (string) config('schema.author.description');
+        $aboutPath = (string) config('schema.author.about_path', '/about-us');
+
+        return [
+            '@type' => 'Person',
+            '@id' => $this->authorId(),
+            'name' => $name,
+            'jobTitle' => $jobTitle,
+            'description' => $description,
+            'worksFor' => ['@id' => $this->organizationId()],
+            'url' => rtrim($this->baseUrl(), '/').$aboutPath,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function localBusinessWithArea(?array $geoOverride = null): array
+    {
+        $business = config('schema.local_business');
+
+        return array_merge($this->localBusinessNode($geoOverride), [
+            'description' => 'รับซ่อมและถอดล้างเครื่องดูดฝุ่นทุกยี่ห้อ มีบริการรับ-ส่งถึงที่ในกรุงเทพฯ',
+            'areaServed' => array_map(
+                fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
+                $business['area_served'] ?? []
+            ),
+        ]);
+    }
+
+    /**
+     * @return array<string, mixed>|string
+     */
+    private function blogImageObject(Blog $blog): array|string
+    {
+        $url = $blog->imageUrl() ?: (string) config('schema.organization.logo');
+        $width = (int) ($blog->image_width ?: config('schema.organization.logo_width') ?: 0);
+        $height = (int) ($blog->image_height ?: config('schema.organization.logo_height') ?: 0);
+
+        return $this->imageObject($url, $width, $height);
+    }
+
+    public function pageUrl(Page $page): string
+    {
+        return rtrim($this->baseUrl(), '/').$page->urlPath();
+    }
+
+    /**
+     * @return list<array{name: string, url?: string|null}>
+     */
+    private function pageBreadcrumb(Page $page): array
+    {
+        $items = [
+            ['name' => 'หน้าแรก', 'url' => $this->baseUrl().'/'],
+        ];
+
+        if ($page->parent) {
+            $items[] = [
+                'name' => $page->parent->title,
+                'url' => $this->pageUrl($page->parent),
+            ];
+        }
+
+        $items[] = ['name' => $page->title, 'url' => null];
+
+        return $items;
     }
 
     /**

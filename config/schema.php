@@ -16,6 +16,13 @@ return [
         'name' => config('data.name'),
     ],
 
+    'author' => [
+        'name' => 'ทีมช่างศิริพงษ์',
+        'job_title' => 'ช่างซ่อมเครื่องใช้ไฟฟ้า',
+        'description' => 'ช่างซ่อมเครื่องดูดฝุ่นและเครื่องใช้ไฟฟ้าในบ้าน ประสบการณ์กว่า 20 ปี',
+        'about_path' => '/about-us',
+    ],
+
     'local_business' => [
         'name' => config('data.name'),
         'image' => config('data.logo'),

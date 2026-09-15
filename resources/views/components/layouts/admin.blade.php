@@ -30,9 +30,17 @@
                     class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.users.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     Users
                 </a>
+                <a href="{{ route('admin.pages.index') }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.pages.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                    หน้าเนื้อหา
+                </a>
                 <a href="{{ route('admin.portfolios.index') }}"
                     class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.portfolios.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     Portfolios
+                </a>
+                <a href="{{ route('admin.blogs.index') }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.blogs.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                    Blog
                 </a>
                 <a href="{{ route('admin.products.index', ['type' => 'product']) }}"
                     class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.products.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
@@ -41,6 +49,10 @@
                 <a href="{{ route('admin.categories.index', ['type' => 'product']) }}"
                     class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.categories.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
                     หมวดหมู่
+                </a>
+                <a href="{{ route('admin.settings.edit') }}"
+                    class="block rounded-lg px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.settings.*') ? 'bg-zinc-900 text-white' : 'text-zinc-700 hover:bg-zinc-100' }}">
+                    ตั้งค่า
                 </a>
             </nav>
 

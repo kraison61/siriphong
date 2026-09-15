@@ -29,7 +29,7 @@
         <div class="font-display text-xs font-semibold text-white/40 uppercase tracking-[.1em] mb-4">ข้อมูล</div>
         <ul class="list-none flex flex-col gap-2.5">
           <li><a href="{{ route('products.index') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>สินค้าและบริการ</a></li>
-          <li><a href="{{ route('home') }}#portfolio" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ผลงานของเรา</a></li>
+          <li><a href="{{ route('pages.show', 'portfolio') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ผลงานของเรา</a></li>
           <li><a href="{{ route('home') }}#why-us" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ทำไมต้องเรา</a></li>
           <li><a href="{{ route('home') }}#testimonials" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>รีวิวลูกค้า</a></li>
           <li><a href="{{ route('home') }}#contact" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ติดต่อเรา</a></li>

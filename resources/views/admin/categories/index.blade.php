@@ -2,7 +2,7 @@
     <div class="space-y-8">
         <div>
             <h1 class="text-3xl font-bold">จัดการหมวดหมู่</h1>
-            <p class="text-zinc-500">หมวดหมู่สินค้าและบริการ</p>
+            <p class="text-zinc-500">หมวดหมู่สินค้า บริการ และผลงาน</p>
         </div>
 
         @if (session('success'))
@@ -11,7 +11,7 @@
             </div>
         @endif
 
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
             <a href="{{ route('admin.categories.index', ['type' => 'product']) }}"
                 class="rounded-lg px-4 py-2 text-sm font-semibold transition {{ $type === 'product' ? 'bg-zinc-900 text-white' : 'border border-zinc-300 text-zinc-700 hover:bg-zinc-50' }}">
                 หมวดหมู่สินค้า
@@ -19,6 +19,10 @@
             <a href="{{ route('admin.categories.index', ['type' => 'service']) }}"
                 class="rounded-lg px-4 py-2 text-sm font-semibold transition {{ $type === 'service' ? 'bg-zinc-900 text-white' : 'border border-zinc-300 text-zinc-700 hover:bg-zinc-50' }}">
                 หมวดหมู่บริการ
+            </a>
+            <a href="{{ route('admin.categories.index', ['type' => 'portfolio']) }}"
+                class="rounded-lg px-4 py-2 text-sm font-semibold transition {{ $type === 'portfolio' ? 'bg-zinc-900 text-white' : 'border border-zinc-300 text-zinc-700 hover:bg-zinc-50' }}">
+                หมวดหมู่ผลงาน
             </a>
         </div>
 

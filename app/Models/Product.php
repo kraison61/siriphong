@@ -76,6 +76,60 @@ class Product extends Model
         return 'เริ่มต้น ฿'.number_format((float) $this->price, 0);
     }
 
+    public function priceTableLabel(): string
+    {
+        if ((float) $this->price <= 0 && (float) ($this->sale_price ?? 0) <= 0) {
+            return $this->slug === 'diagnosis' ? 'ฟรี' : 'ติดต่อขอราคา';
+        }
+
+        if ($this->sale_price !== null && (float) $this->sale_price > 0) {
+            return '฿'.number_format((float) $this->sale_price, 0);
+        }
+
+        if ((float) $this->price > 0) {
+            return 'เริ่มต้น ฿'.number_format((float) $this->price, 0);
+        }
+
+        return 'ติดต่อขอราคา';
+    }
+
+    /**
+     * @return array{symptom: string, action: string, price: string, duration: string}
+     */
+    public function toPriceRow(): array
+    {
+        return [
+            'symptom' => $this->name,
+            'action' => $this->short_description ?: '-',
+            'price' => $this->priceTableLabel(),
+            'duration' => $this->specValue('ระยะเวลา') ?? '-',
+        ];
+    }
+
+    public function specValue(string $name): ?string
+    {
+        if (! is_array($this->specs)) {
+            return null;
+        }
+
+        foreach ($this->specs as $spec) {
+            if (($spec['name'] ?? '') !== $name) {
+                continue;
+            }
+
+            $value = trim((string) ($spec['value'] ?? ''));
+            if ($value === '') {
+                return null;
+            }
+
+            $unit = trim((string) ($spec['unitText'] ?? ''));
+
+            return $unit !== '' ? "{$value} {$unit}" : $value;
+        }
+
+        return null;
+    }
+
     public function hasImage(): bool
     {
         return filled($this->image) && ! str_starts_with($this->image, 'bi ');

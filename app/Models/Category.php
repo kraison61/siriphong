@@ -27,4 +27,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function portfolios(): HasMany
+    {
+        return $this->hasMany(Portfolio::class);
+    }
 }

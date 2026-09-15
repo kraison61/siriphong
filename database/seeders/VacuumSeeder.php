@@ -41,25 +41,59 @@ class VacuumSeeder extends Seeder
 
         $categories = DB::table('categories')->pluck('id', 'slug');
 
-        foreach ([
-            ['question' => 'รับซ่อมเครื่องดูดฝุ่นยี่ห้ออะไรบ้าง?',         'answer' => 'รับซ่อมทุกยี่ห้อ เช่น Nilfisk, Karcher, Makita, Bosch, Hitachi และยี่ห้ออื่น ๆ ทั้งรุ่นอุตสาหกรรมและรุ่นทั่วไป',                                                                             'category' => 'repair', 'sort_order' => 1],
-            ['question' => 'ซ่อมหน้างานได้ไหม? มีค่าใช้จ่ายพิเศษไหม?',      'answer' => 'รับซ่อมหน้างานในเขตกรุงเทพฯ และปริมณฑล มีค่าเดินทางตามระยะทาง สอบถามล่วงหน้าได้ที่ LINE หรือโทรหาเราได้เลย',                                                                        'category' => 'repair', 'sort_order' => 2],
-            ['question' => 'ระยะเวลาซ่อมนานแค่ไหน?',                        'answer' => 'อาการทั่วไป 1–3 วันทำการ อาการซับซ้อนหรือต้องสั่งอะไหล่นำเข้า 5–10 วันทำการ ทีมงานแจ้งก่อนลงมือซ่อมทุกครั้ง',                                                                         'category' => 'repair', 'sort_order' => 3],
-            ['question' => 'มีการรับประกันงานซ่อมไหม?',                      'answer' => 'รับประกันงานซ่อม 90 วัน หากเกิดปัญหาจากการซ่อมซ้ำในระยะประกัน ซ่อมให้ฟรีโดยไม่มีค่าใช้จ่าย',                                                                                           'category' => 'repair', 'sort_order' => 4],
-            ['question' => 'สินค้ามีการรับประกันหรือเปล่า?',                 'answer' => 'สินค้าทุกชิ้นมีรับประกันตามเงื่อนไขของผู้ผลิต โดยทั่วไป 1 ปี สอบถามรายละเอียดที่หน้าสินค้าหรือติดต่อทีมงาน',                                                                            'category' => 'sale',   'sort_order' => 1],
-            ['question' => 'ส่งสินค้าได้ทั่วประเทศไหม?',                    'answer' => 'จัดส่งทั่วประเทศผ่าน Kerry และ Flash Express ค่าจัดส่งคิดตามน้ำหนักและระยะทาง กรุงเทพฯ ปริมณฑล มีบริการส่งด่วนภายในวัน',                                                                 'category' => 'sale',   'sort_order' => 2],
-        ] as $row) {
-            $exists = DB::table('faqs')
-                ->where('question', $row['question'])
-                ->exists();
+        $faqs = [
+            [
+                'question'   => 'รับซ่อมเครื่องแบบไหนบ้าง?',
+                'answer'     => 'รับเฉพาะเครื่องงานหนักที่ใช้ในเชิงพาณิชย์ ได้แก่ เครื่องดูดฝุ่นอุตสาหกรรมและเครื่องดูดน้ำที่ใช้ในคาร์แคร์ อาคาร โรงแรม โรงงาน และบริษัททำความสะอาด ถังโลหะหรือถังพลาสติกงานหนักตั้งแต่ประมาณ 30 ลิตรขึ้นไป เราไม่รับเครื่องดูดฝุ่นในบ้าน เครื่องไร้สาย และหุ่นยนต์ดูดฝุ่น ไม่ใช่เพราะซ่อมไม่ได้ แต่ค่าซ่อมมักใกล้เคียงราคาเครื่องใหม่ ซึ่งเราคงแนะนำให้ซื้อใหม่อยู่ดี',
+                'category'   => 'repair',
+                'sort_order' => 1,
+            ],
+            [
+                'question'   => 'รับซ่อมยี่ห้ออะไรบ้าง?',
+                'answer'     => 'รับทุกยี่ห้อ ทั้งแบรนด์นำเข้าอย่าง Nilfisk, Kärcher, Makita, Numatic และเครื่องจีนหรือเครื่องที่ร้านสั่งประกอบมาซึ่งไม่มีชื่อรุ่นติดอยู่ ถ้าไม่รู้ว่าเครื่องยี่ห้ออะไรก็ไม่เป็นไร ส่งรูปเครื่องมาทางไลน์ได้เลย เราเป็นร้านซ่อมอิสระ ไม่ได้เป็นศูนย์บริการแต่งตั้งของแบรนด์ใด อะไหล่ที่ใช้จะแจ้งให้ทราบก่อนทุกครั้งว่าเป็นของยี่ห้อเดิมหรือของเทียบเท่า',
+                'category'   => 'repair',
+                'sort_order' => 2,
+            ],
+            [
+                'question'   => 'ซ่อมหน้างานได้ไหม คิดค่าเดินทางอย่างไร?',
+                'answer'     => 'ช่างไปหน้างานได้ในกรุงเทพฯ และปริมณฑล คิดค่าซ่อมตามอาการบวกค่าเดินทางตามระยะ นอกพื้นที่แนะนำส่งเข้าร้านผ่านขนส่ง ประหยัดกว่าและตรวจได้ละเอียดกว่า สอบถามค่าเดินทางล่วงหน้าทางไลน์พร้อมที่อยู่ได้เลย',
+                'category'   => 'repair',
+                'sort_order' => 3,
+            ],
+            [
+                'question'   => 'ใช้เวลาซ่อมนานแค่ไหน?',
+                'answer'     => 'อาการทั่วไป 1–3 วันทำการ งานมอเตอร์ 2–5 วัน ถ้าต้องสั่งอะไหล่นำเข้าจะนานขึ้นเป็น 5–10 วันทำการ และเราจะแจ้งก่อนตกลงซ่อมทุกครั้ง ไม่ปล่อยให้รอโดยไม่รู้กำหนด',
+                'category'   => 'repair',
+                'sort_order' => 4,
+            ],
+            [
+                'question'   => 'รับประกันงานซ่อมไหม?',
+                'answer'     => 'รับประกันงานซ่อม 90 วัน หากอาการเดิมกลับมาจากงานที่เราทำ ซ่อมให้โดยไม่คิดค่าใช้จ่าย ส่วนที่ไม่อยู่ในประกันคือความเสียหายใหม่จากการใช้งาน เช่น น้ำเข้าตู้มอเตอร์ซ้ำ หรือใช้ต่อเนื่องเกินพิกัด ซึ่งเราจะอธิบายให้ฟังตอนส่งมอบเครื่อง',
+                'category'   => 'repair',
+                'sort_order' => 5,
+            ],
+            [
+                'question'   => 'ประเมินราคาก่อนได้ไหม?',
+                'answer'     => 'ได้ ส่งรูปมาทางไลน์ 3 รูป คือตัวเครื่องเต็มตัว ป้ายสเปกข้างเครื่อง และใต้ฝาที่เห็นมอเตอร์ เราประเมินช่วงราคาเบื้องต้นให้ก่อนโดยไม่มีค่าใช้จ่ายและไม่ผูกมัด หากต้องถอดตรวจละเอียด จะแจ้งให้ทราบก่อนลงมือทุกครั้ง',
+                'category'   => 'repair',
+                'sort_order' => 6,
+            ],
+            [
+                'question'   => 'จำหน่ายเครื่องและจัดส่งอย่างไร?',
+                'answer'     => 'จำหน่ายเครื่องและอะไหล่ จัดส่งทั่วประเทศผ่านขนส่ง ค่าส่งตามน้ำหนักและระยะทาง ในกรุงเทพฯ และปริมณฑลมีบริการส่งด่วนภายในวัน การรับประกันสินค้าเป็นไปตามเงื่อนไขของผู้ผลิตแต่ละรุ่น สอบถามได้ที่หน้าสินค้าแต่ละตัว',
+                'category'   => 'sale',
+                'sort_order' => 1,
+            ],
+        ];
 
-            if (! $exists) {
-                DB::table('faqs')->insert(array_merge($row, [
-                    'is_active'  => true,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ]));
-            }
+        DB::table('faqs')->delete();
+
+        foreach ($faqs as $row) {
+            DB::table('faqs')->insert(array_merge($row, [
+                'is_active'  => true,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]));
         }
 
         $services = [
@@ -77,6 +111,7 @@ class VacuumSeeder extends Seeder
                 'is_featured'       => true,
                 'meta_title'        => null,
                 'meta_description'  => null,
+                'specs'             => json_encode([['name' => 'ระยะเวลา', 'value' => '2–5', 'unitText' => 'วัน']]),
             ],
             [
                 'category_id'       => $categories['filter'],
@@ -92,6 +127,7 @@ class VacuumSeeder extends Seeder
                 'is_featured'       => false,
                 'meta_title'        => null,
                 'meta_description'  => null,
+                'specs'             => json_encode([['name' => 'ระยะเวลา', 'value' => '1', 'unitText' => 'วัน']]),
             ],
             [
                 'category_id'       => $categories['electrical'],
@@ -107,6 +143,7 @@ class VacuumSeeder extends Seeder
                 'is_featured'       => false,
                 'meta_title'        => null,
                 'meta_description'  => null,
+                'specs'             => json_encode([['name' => 'ระยะเวลา', 'value' => '1–3', 'unitText' => 'วัน']]),
             ],
             [
                 'category_id'       => $categories['pipe'],
@@ -122,6 +159,7 @@ class VacuumSeeder extends Seeder
                 'is_featured'       => false,
                 'meta_title'        => null,
                 'meta_description'  => null,
+                'specs'             => json_encode([['name' => 'ระยะเวลา', 'value' => '1', 'unitText' => 'วัน']]),
             ],
             [
                 'category_id'       => $categories['motor'],
@@ -137,6 +175,7 @@ class VacuumSeeder extends Seeder
                 'is_featured'       => false,
                 'meta_title'        => null,
                 'meta_description'  => null,
+                'specs'             => json_encode([['name' => 'ระยะเวลา', 'value' => '3–5', 'unitText' => 'วัน']]),
             ],
             [
                 'category_id'       => $categories['electrical'],
@@ -152,6 +191,7 @@ class VacuumSeeder extends Seeder
                 'is_featured'       => false,
                 'meta_title'        => null,
                 'meta_description'  => null,
+                'specs'             => json_encode([['name' => 'ระยะเวลา', 'value' => '½', 'unitText' => 'วัน']]),
             ],
         ];
 
@@ -175,40 +215,115 @@ class VacuumSeeder extends Seeder
             ->delete();
 
         foreach ([
+            ['name' => 'บุคคลทั่วไป', 'slug' => 'personal', 'sort_order' => 1],
+            ['name' => 'คาร์แคร์', 'slug' => 'carcare', 'sort_order' => 2],
+            ['name' => 'โรงงาน', 'slug' => 'factory', 'sort_order' => 3],
+            ['name' => 'บริษัท', 'slug' => 'company', 'sort_order' => 4],
+            ['name' => 'คาเฟ่', 'slug' => 'cafe', 'sort_order' => 5],
+        ] as $portfolioCategory) {
+            DB::table('categories')->updateOrInsert(
+                ['slug' => $portfolioCategory['slug']],
+                array_merge($portfolioCategory, [
+                    'type' => 'portfolio',
+                    'updated_at' => $now,
+                    'created_at' => $now,
+                ])
+            );
+        }
+
+        $portfolioCategories = DB::table('categories')
+            ->where('type', 'portfolio')
+            ->pluck('id', 'slug');
+
+        foreach ([
             [
-                'category_label' => 'บุคคลทั่วไป - คอนโดมิเนียม',
+                'category_id'    => $portfolioCategories['personal'],
+                'category_label' => 'คอนโดมิเนียม',
                 'title'          => 'ซ่อมเครื่องดูดฝุ่นแบบถังสแตนเลส น้ำเข้าตู้มอเตอร์จนช็อต เปลี่ยนมอเตอร์ใหม่ พร้อมทำความสะอาดระบบ',
                 'description'    => null,
+                'fault'          => 'มอเตอร์ช็อตจากน้ำเข้า',
+                'symptom'        => 'ลูกค้าแจ้งว่าเครื่องดับและมีอาการช็อตหลังใช้งานดูดน้ำ',
+                'found'          => 'น้ำเข้าตู้มอเตอร์ คอยล์เสีย ไม่สามารถใช้ต่อได้',
+                'fixed'          => 'เปลี่ยนมอเตอร์ใหม่ พร้อมทำความสะอาดระบบทั้งชุด',
                 'brands'         => 'Karcher, Nilfisk',
                 'image'          => 'portfolio/1.JPG',
                 'year'           => '2569',
                 'duration'       => '1 วัน',
+                'price'          => 'ประมาณ 4,500 บาท',
                 'status_label'   => 'สำเร็จ',
                 'sort_order'     => 1,
                 'is_active'      => true,
             ],
             [
-                'category_label' => 'ร้านคาร์แคร์',
+                'category_id'    => $portfolioCategories['carcare'],
+                'category_label' => null,
                 'title'          => 'Overhaul เครื่องดูดฝุ่นอุตสาหกรรมที่ใช้งานหนัก เปลี่ยนตลับลูกปืนและซีลกันฝุ่น แก้ปัญหาเสียงดังครืดๆ',
                 'description'    => null,
+                'fault'          => 'แบริ่งเสื่อม / เสียงดังผิดปกติ',
+                'symptom'        => 'ใช้งานหนักแล้วมีเสียงดังครืดๆ แรงดูดเริ่มไม่นิ่ง',
+                'found'          => 'ตลับลูกปืนและซีลกันฝุ่นเสื่อมจากการใช้งานต่อเนื่อง',
+                'fixed'          => 'Overhaul เปลี่ยนแบริ่งและซีลกันฝุ่น ทดสอบโหลดหลังซ่อม',
                 'brands'         => 'Roots, Numatic',
                 'image'          => 'portfolio/2.JPG',
                 'year'           => '2569',
-                'duration'       => '1 วัน',
+                'duration'       => '2 วัน',
+                'price'          => 'ประมาณ 6,200 บาท',
                 'status_label'   => 'สำเร็จ',
                 'sort_order'     => 2,
                 'is_active'      => true,
             ],
             [
-                'category_label' => 'โรงงานยา',
+                'category_id'    => $portfolioCategories['factory'],
+                'category_label' => null,
                 'title'          => 'ซ่อมระบบไฟฟ้าและบอร์ดควบคุมเครื่องดูดฝุ่นแบบ HEPA Filter แก้ปัญหาเครื่องตัดการทำงานเอง',
                 'description'    => null,
+                'fault'          => 'บอร์ดควบคุมผิดปกติ / ตัดเอง',
+                'symptom'        => 'เครื่องตัดการทำงานเองเป็นระยะ โดยเฉพาะตอนใช้งานต่อเนื่อง',
+                'found'          => 'บอร์ดควบคุมและจุดต่อระบบไฟฟ้าผิดปกติ',
+                'fixed'          => 'ซ่อม/เปลี่ยนบอร์ดควบคุม ตรวจระบบกรอง HEPA และทดสอบการทำงาน',
                 'brands'         => 'Nilfisk, Cleanfix',
                 'image'          => 'portfolio/3.JPG',
                 'year'           => '2569',
-                'duration'       => '1 วัน',
+                'duration'       => '2 วัน',
+                'price'          => 'ประมาณ 5,800 บาท',
                 'status_label'   => 'สำเร็จ',
                 'sort_order'     => 3,
+                'is_active'      => true,
+            ],
+            [
+                'category_id'    => $portfolioCategories['company'],
+                'category_label' => 'Midori Anzen (Thailand)',
+                'title'          => 'ลูกค้าแจ้งมีไฟแลบจากตัวเครื่อง เบื้องต้นสันนิษฐานว่ามอเตอร์ช็อต เมื่อเข้าตรวจสอบหน้างานพบว่าสายไฟช็อต จึงดำเนินการเปลี่ยนสายไฟและทดสอบการทำงานจนเป็นปกติ',
+                'description'    => 'เคสหน้างาน — สายไฟช็อต ไม่ใช่มอเตอร์',
+                'fault'          => 'สายไฟช็อต / มีไฟแลบ',
+                'symptom'        => 'มีไฟแลบจากตัวเครื่อง ลูกค้ากังวลว่ามอเตอร์ช็อต',
+                'found'          => 'สายไฟช็อต — มอเตอร์ยังใช้งานได้',
+                'fixed'          => 'เปลี่ยนสายไฟและทดสอบการทำงานจนเป็นปกติ',
+                'brands'         => 'Karcher',
+                'image'          => 'portfolio/kacher-midori-anzen-co-ltd.webp',
+                'year'           => '2569',
+                'duration'       => '1 วัน',
+                'price'          => 'ประมาณ 2,500 บาท',
+                'status_label'   => 'สำเร็จ',
+                'sort_order'     => 4,
+                'is_active'      => true,
+            ],
+            [
+                'category_id'    => $portfolioCategories['carcare'],
+                'category_label' => 'iCarWash',
+                'title'          => 'ลูกค้าแจ้งเครื่องมีเสียงผิดปกติแล้วดับเอง ไม่มีกลิ่นไหม้ ตรวจสอบพบแปรงถ่านสึกหรอจนหมด ส่งผลให้มอเตอร์สูญเสียกำลังและหยุดทำงาน ดำเนินการเปลี่ยนแปรงถ่านใหม่ เครื่องกลับมาทำงานเป็นปกติ',
+                'description'    => 'เคสคาร์แคร์ — แปรงถ่านหมด',
+                'fault'          => 'แปรงถ่านหมด / มอเตอร์ดับ',
+                'symptom'        => 'มีเสียงผิดปกติแล้วดับเอง ไม่มีกลิ่นไหม้',
+                'found'          => 'แปรงถ่านสึกหรอจนหมด มอเตอร์สูญเสียกำลัง',
+                'fixed'          => 'เปลี่ยนแปรงถ่านใหม่ ทดสอบจนเครื่องกลับมาทำงานปกติ',
+                'brands'         => null,
+                'image'          => 'portfolio/brush-icarwash-20260721.webp',
+                'year'           => '2569',
+                'duration'       => '1 วัน',
+                'price'          => 'ประมาณ 1,800 บาท',
+                'status_label'   => 'สำเร็จ',
+                'sort_order'     => 5,
                 'is_active'      => true,
             ],
         ] as $portfolio) {
