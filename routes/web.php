@@ -15,9 +15,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortfolioCaseController;
 use App\Http\Controllers\ProductController as FrontendProductController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('/products', [FrontendProductController::class, 'index'])->name('products.index');
 Route::get('/products/category/{slug}', [FrontendProductController::class, 'category'])->name('products.category');
 Route::get('/products/{slug}', [FrontendProductController::class, 'show'])->name('products.show');
@@ -30,6 +32,7 @@ Route::get('/blog/{slug}', [FrontendBlogController::class, 'show'])
 Route::get('/portfolio/{slug}', [PortfolioCaseController::class, 'show'])
     ->where('slug', '[a-z0-9\-]+')
     ->name('portfolio.cases.show');
+
 
 Route::redirect('/admin', '/admin/dashboard');
 
