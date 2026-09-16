@@ -1,3 +1,44 @@
+@php
+  $items = [
+      [
+          'label' => 'บริการซ่อม',
+          'url' => route('pages.show', 'vacuum-repair'),
+          'active' => request()->is('vacuum-repair', 'vacuum-repair/*'),
+          'icon' => 'bi-tools',
+      ],
+      [
+          'label' => 'ราคาซ่อม',
+          'url' => route('pages.show', 'service-rates'),
+          'active' => request()->is('service-rates'),
+          'icon' => 'bi-tags-fill',
+      ],
+      [
+          'label' => 'ผลงาน',
+          'url' => route('pages.show', 'portfolio'),
+          'active' => request()->is('portfolio', 'portfolio/*'),
+          'icon' => 'bi-images',
+      ],
+      [
+          'label' => 'บทความ',
+          'url' => route('blogs.index'),
+          'active' => request()->routeIs('blogs.*'),
+          'icon' => 'bi-journal-text',
+      ],
+      [
+          'label' => 'สินค้า',
+          'url' => route('products.index'),
+          'active' => request()->routeIs('products.*') || request()->routeIs('services.*'),
+          'icon' => 'bi-box-seam',
+      ],
+      [
+          'label' => 'ติดต่อ',
+          'url' => route('pages.show', 'contact-us'),
+          'active' => request()->is('contact-us', 'about-us'),
+          'icon' => 'bi-telephone',
+      ],
+  ];
+@endphp
+
 <header>
   <nav class="sticky top-0 z-[100] bg-navy border-b border-white/10 shadow-[0_2px_20px_rgba(0,0,0,.25)]"
     role="navigation" aria-label="เมนูหลัก">
@@ -14,30 +55,13 @@
         </a>
 
         <ul class="hidden md:flex list-none gap-1" role="list">
-          <li><a href="{{ route('pages.show', 'vacuum-repair') }}"
-              @if (request()->is('vacuum-repair', 'vacuum-repair/*')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">บริการซ่อม</a>
-          </li>
-          <li><a href="{{ route('pages.show', 'service-rates') }}"
-              @if (request()->is('service-rates')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ราคาซ่อม</a>
-          </li>
-          <li><a href="{{ route('pages.show', 'portfolio') }}"
-              @if (request()->is('portfolio', 'portfolio/*')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ผลงาน</a>
-          </li>
-          <li><a href="{{ route('blogs.index') }}"
-              @if (request()->routeIs('blogs.*')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">บทความ</a>
-          </li>
-          <li><a href="{{ route('products.index') }}"
-              @if (request()->routeIs('products.*') || request()->routeIs('services.*')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">สินค้า</a>
-          </li>
-          <li><a href="{{ route('pages.show', 'contact-us') }}"
-              @if (request()->is('contact-us', 'about-us')) data-active="true" @endif
-              class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">ติดต่อ</a>
-          </li>
+          @foreach ($items as $item)
+            <li>
+              <a href="{{ $item['url'] }}"
+                @if ($item['active']) data-active="true" @endif
+                class="flex items-center min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-white/75 transition-colors hover:text-white hover:bg-white/10 data-[active=true]:text-orange data-[active=true]:bg-white/10">{{ $item['label'] }}</a>
+            </li>
+          @endforeach
         </ul>
 
         <div class="flex items-center gap-2.5">
@@ -56,30 +80,13 @@
     </div>
 
     <div class="hidden flex-col bg-navy-mid px-4 pt-2 pb-4 border-t border-white/10" id="mobile-menu" role="menu">
-      <a href="{{ route('pages.show', 'vacuum-repair') }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-tools" aria-hidden="true"></i>บริการซ่อม</a>
-      <a href="{{ route('pages.show.child', ['slug' => 'vacuum-repair', 'childSlug' => 'car-care']) }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-droplet-half" aria-hidden="true"></i>ซ่อมคาร์แคร์</a>
-      <a href="{{ route('pages.show.child', ['slug' => 'vacuum-repair', 'childSlug' => 'burnt-motor']) }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-lightning-charge" aria-hidden="true"></i>ซ่อมมอเตอร์ไหม้</a>
-      <a href="{{ route('pages.show', 'service-rates') }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-tags-fill" aria-hidden="true"></i>ราคาซ่อม</a>
-      <a href="{{ route('pages.show', 'portfolio') }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-images" aria-hidden="true"></i>ผลงาน</a>
-      <a href="{{ route('blogs.index') }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-journal-text" aria-hidden="true"></i>บทความ</a>
-      <a href="{{ route('pages.show', 'about-us') }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 transition-colors hover:text-orange"><i
-          class="bi bi-building" aria-hidden="true"></i>เกี่ยวกับเรา</a>
-      <a href="{{ route('pages.show', 'contact-us') }}" onclick="closeMenu()"
-        class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 transition-colors hover:text-orange"><i
-          class="bi bi-telephone" aria-hidden="true"></i>ติดต่อเรา</a>
+      @foreach ($items as $item)
+        <a href="{{ $item['url'] }}" onclick="closeMenu()"
+          @if ($item['active']) data-active="true" @endif
+          class="flex items-center gap-2.5 py-3.5 text-base font-medium text-white/85 border-b border-white/5 last:border-b-0 transition-colors hover:text-orange data-[active=true]:text-orange">
+          <i class="bi {{ $item['icon'] }}" aria-hidden="true"></i>{{ $item['label'] }}
+        </a>
+      @endforeach
     </div>
   </nav>
 </header>

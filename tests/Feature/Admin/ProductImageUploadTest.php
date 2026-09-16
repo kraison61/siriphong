@@ -118,4 +118,43 @@ class ProductImageUploadTest extends TestCase
         Storage::disk('r2')->assertMissing($oldPath);
         Storage::disk('r2')->assertExists($product->image);
     }
+
+    public function test_admin_can_save_product_specs(): void
+    {
+        $user = User::factory()->create();
+        $category = Category::create([
+            'name' => 'เครื่องดูดฝุ่น',
+            'slug' => 'industrial-vacuum',
+            'type' => 'product',
+            'sort_order' => 1,
+        ]);
+
+        $response = $this->actingAs($user)->post(route('admin.products.store'), [
+            'type' => 'product',
+            'category_id' => $category->id,
+            'name' => 'WP-BF-575-30',
+            'brand' => 'WP-WELLPUMP',
+            'sku' => 'WP-BF-575-30',
+            'price' => 0,
+            'is_active' => 1,
+            'is_featured' => 0,
+            'specs' => [
+                ['name' => 'ความจุถัง', 'value' => '30', 'unitText' => 'L'],
+                ['name' => '', 'value' => '', 'unitText' => ''],
+                ['name' => 'จำนวนมอเตอร์', 'value' => '1', 'unitText' => 'ตัว'],
+                ['name' => '', 'value' => '', 'unitText' => ''],
+            ],
+        ]);
+
+        $response->assertRedirect(route('admin.products.index', ['type' => 'product']));
+
+        $product = Product::query()->first();
+        $this->assertNotNull($product);
+        $this->assertSame('WP-WELLPUMP', $product->brand);
+        $this->assertSame('WP-BF-575-30', $product->sku);
+        $this->assertSame([
+            ['name' => 'ความจุถัง', 'value' => '30', 'unitText' => 'L'],
+            ['name' => 'จำนวนมอเตอร์', 'value' => '1', 'unitText' => 'ตัว'],
+        ], $product->specs);
+    }
 }

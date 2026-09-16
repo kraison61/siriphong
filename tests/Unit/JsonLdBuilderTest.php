@@ -82,6 +82,10 @@ class JsonLdBuilderTest extends TestCase
         $serviceNode = collect($decoded['@graph'])->firstWhere('@type', 'Service');
         $this->assertNotNull($serviceNode);
         $this->assertSame($service->name, $serviceNode['name']);
+
+        $localBusiness = collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness');
+        $this->assertSame('13.676007308176997', $localBusiness['geo']['latitude']);
+        $this->assertSame('100.48644460886901', $localBusiness['geo']['longitude']);
     }
 
     public function test_home_schema_has_single_graph_without_duplicate_product_nodes(): void
@@ -93,7 +97,10 @@ class JsonLdBuilderTest extends TestCase
         $this->assertCount(0, $productNodes);
         $this->assertNotNull(collect($decoded['@graph'])->firstWhere('@type', 'Organization'));
         $this->assertNotNull(collect($decoded['@graph'])->firstWhere('@type', 'WebSite'));
-        $this->assertNotNull(collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness'));
+        $localBusiness = collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness');
+        $this->assertNotNull($localBusiness);
+        $this->assertSame('13.676007308176997', $localBusiness['geo']['latitude']);
+        $this->assertSame('100.48644460886901', $localBusiness['geo']['longitude']);
     }
 
     public function test_price_format_has_no_currency_symbol_or_commas(): void
@@ -140,6 +147,10 @@ class JsonLdBuilderTest extends TestCase
         $this->assertNotNull($graph->firstWhere('@type', 'FAQPage'));
         $this->assertNotNull($graph->firstWhere('@type', 'BreadcrumbList'));
         $this->assertNull($graph->firstWhere('@type', 'HowTo'));
+
+        $localBusiness = $graph->firstWhere('@type', 'LocalBusiness');
+        $this->assertSame('13.676007308176997', $localBusiness['geo']['latitude']);
+        $this->assertSame('100.48644460886901', $localBusiness['geo']['longitude']);
 
         $article = $graph->firstWhere('@type', 'Article');
         $this->assertSame($blog->title, $article['headline']);

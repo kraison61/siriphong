@@ -100,6 +100,24 @@
     </div>
 
     <div>
+        <label class="mb-1.5 block text-sm font-medium text-zinc-700">ยี่ห้อ</label>
+        <input name="brand" type="text" value="{{ old('brand', $product->brand) }}" placeholder="เช่น WP-WELLPUMP"
+            class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-900 placeholder:text-zinc-600 focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" />
+        @error('brand')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
+        <label class="mb-1.5 block text-sm font-medium text-zinc-700">SKU / รหัสรุ่น</label>
+        <input name="sku" type="text" value="{{ old('sku', $product->sku) }}" placeholder="เช่น WP-BF-575-30"
+            class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-900 placeholder:text-zinc-600 focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" />
+        @error('sku')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
         <label class="mb-1.5 block text-sm font-medium text-zinc-700">ราคา (บาท)</label>
         <input name="price" type="number" step="0.01" min="0" value="{{ old('price', $product->price ?? 0) }}" placeholder="0 = ติดต่อขอราคา"
             class="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-900 placeholder:text-zinc-600 focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10" />
@@ -140,6 +158,78 @@
             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
         @enderror
     </div>
+
+    @php
+        $specRows = old('specs', $product->specs ?? []);
+        if (! is_array($specRows)) {
+            $specRows = [];
+        }
+        $emptySpec = ['name' => '', 'value' => '', 'unitText' => ''];
+        $minSpecRows = max(count($specRows) + 3, 8);
+        $specRows = array_pad($specRows, $minSpecRows, $emptySpec);
+        $specInputClass = 'w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-900 placeholder:text-zinc-600 focus:border-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10';
+    @endphp
+    <div class="md:col-span-2">
+        <label class="mb-1.5 block text-sm font-medium text-zinc-700">สเปกเครื่อง</label>
+        <p class="mb-2 text-xs text-zinc-500">แสดงบนหน้าสินค้าเป็นตาราง เช่น รุ่น / กำลังมอเตอร์ / ความจุถัง — แถวว่างจะไม่ถูกบันทึก กด “เพิ่มแถวสเปค” ได้ไม่จำกัด</p>
+        <div id="product-specs-rows" class="space-y-2" data-next-index="{{ count($specRows) }}">
+            @foreach ($specRows as $index => $spec)
+                <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 product-spec-row">
+                    <input name="specs[{{ $index }}][name]" type="text" value="{{ $spec['name'] ?? '' }}"
+                        placeholder="ชื่อ เช่น ความจุถัง"
+                        class="{{ $specInputClass }}" />
+                    <input name="specs[{{ $index }}][value]" type="text" value="{{ $spec['value'] ?? '' }}"
+                        placeholder="ค่า เช่น 30"
+                        class="{{ $specInputClass }}" />
+                    <input name="specs[{{ $index }}][unitText]" type="text" value="{{ $spec['unitText'] ?? '' }}"
+                        placeholder="หน่วย เช่น ลิตร (ไม่บังคับ)"
+                        class="{{ $specInputClass }}" />
+                </div>
+            @endforeach
+        </div>
+        <button type="button" id="product-specs-add"
+            class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm font-semibold text-zinc-800 hover:bg-zinc-50">
+            + เพิ่มแถวสเปค
+        </button>
+        @error('specs')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+        @error('specs.*.name')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+        @error('specs.*.value')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <template id="product-spec-row-template">
+        <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 product-spec-row">
+            <input name="specs[__INDEX__][name]" type="text" value="" placeholder="ชื่อ เช่น ความจุถัง"
+                class="{{ $specInputClass }}" />
+            <input name="specs[__INDEX__][value]" type="text" value="" placeholder="ค่า เช่น 30"
+                class="{{ $specInputClass }}" />
+            <input name="specs[__INDEX__][unitText]" type="text" value="" placeholder="หน่วย เช่น ลิตร (ไม่บังคับ)"
+                class="{{ $specInputClass }}" />
+        </div>
+    </template>
+
+    <script>
+        (() => {
+            const list = document.getElementById('product-specs-rows');
+            const addBtn = document.getElementById('product-specs-add');
+            const template = document.getElementById('product-spec-row-template');
+            if (!list || !addBtn || !template) return;
+
+            addBtn.addEventListener('click', () => {
+                const index = Number(list.dataset.nextIndex || list.querySelectorAll('.product-spec-row').length);
+                const html = template.innerHTML.replaceAll('__INDEX__', String(index));
+                list.insertAdjacentHTML('beforeend', html);
+                list.dataset.nextIndex = String(index + 1);
+                const inputs = list.querySelectorAll('.product-spec-row:last-child input');
+                inputs[0]?.focus();
+            });
+        })();
+    </script>
 
     <div>
         <label class="mb-1.5 block text-sm font-medium text-zinc-700">Meta Title</label>

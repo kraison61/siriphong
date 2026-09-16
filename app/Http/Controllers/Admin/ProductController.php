@@ -120,6 +120,9 @@ class ProductController extends Controller
         $data['slug'] = $this->resolveSlug($data['slug'] ?? null, $data['name'], $existing);
         $data['category_id'] = filled($data['category_id'] ?? null) ? $data['category_id'] : null;
         $data['sale_price'] = filled($data['sale_price'] ?? null) ? $data['sale_price'] : null;
+        $data['brand'] = filled($data['brand'] ?? null) ? $data['brand'] : null;
+        $data['sku'] = filled($data['sku'] ?? null) ? $data['sku'] : null;
+        $data['specs'] = $this->normalizeSpecs($data['specs'] ?? []);
 
         if ($request->hasFile('image_file')) {
             if ($existing) {
@@ -184,6 +187,46 @@ class ProductController extends Controller
             $this->deleteStoredImage($image->path);
             $image->delete();
         }
+    }
+
+    /**
+     * @param  array<int, array{name?: string|null, value?: string|null, unitText?: string|null}>|null  $specs
+     * @return list<array{name: string, value: string, unitText?: string}>|null
+     */
+    private function normalizeSpecs(?array $specs): ?array
+    {
+        if ($specs === null || $specs === []) {
+            return null;
+        }
+
+        $normalized = [];
+
+        foreach ($specs as $spec) {
+            if (! is_array($spec)) {
+                continue;
+            }
+
+            $name = trim((string) ($spec['name'] ?? ''));
+            $value = trim((string) ($spec['value'] ?? ''));
+
+            if ($name === '' || $value === '') {
+                continue;
+            }
+
+            $row = [
+                'name' => $name,
+                'value' => $value,
+            ];
+
+            $unit = trim((string) ($spec['unitText'] ?? ''));
+            if ($unit !== '') {
+                $row['unitText'] = $unit;
+            }
+
+            $normalized[] = $row;
+        }
+
+        return $normalized === [] ? null : array_values($normalized);
     }
 
     private function storeImage(UploadedFile $file, string $name, string $type, string $folder = 'main'): string

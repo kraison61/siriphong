@@ -47,7 +47,6 @@ class StorePortfolioRequest extends FormRequest
             'status_label' => ['required', 'string', 'max:255'],
             'sort_order' => ['required', 'integer'],
             'is_active' => ['required', 'boolean'],
-            'map_coordinates' => ['nullable', 'regex:/^\s*-?\d{1,2}(?:\.\d+)?,\s*-?\d{1,3}(?:\.\d+)?\s*$/'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],
             'related_blog_id' => ['nullable', 'integer', 'exists:blogs,id'],

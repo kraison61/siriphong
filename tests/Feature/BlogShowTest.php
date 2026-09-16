@@ -21,7 +21,6 @@ class BlogShowTest extends TestCase
             'status_label' => 'สำเร็จ',
             'sort_order' => 0,
             'is_active' => true,
-            'map_coordinates' => '13.7265, 100.5230',
             'meta_title' => 'เคสจริง: ซ่อมเครื่องดูดฝุ่นคาเฟ่แมวย่านสีลม',
             'meta_description' => 'เคสจริงจากหน้างาน สีลม',
         ]);

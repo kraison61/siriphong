@@ -32,8 +32,8 @@ return [
         'price_range' => '฿฿',
         'address' => config('data.address_structured'),
         'geo' => [
-            'latitude' => '13.754198',
-            'longitude' => '100.501705',
+            'latitude' => '13.676007308176997',
+            'longitude' => '100.48644460886901',
         ],
         'opening_hours' => [
             [

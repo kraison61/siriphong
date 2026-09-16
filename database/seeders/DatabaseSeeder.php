@@ -25,8 +25,11 @@ class DatabaseSeeder extends Seeder
         // $this->call(VacuumSeeder::class);
         $this->call(SettingSeeder::class);
         $this->call(PageSeeder::class);
+        $this->call(WpBfProductSeeder::class);
         $this->call(SeoVacuumCaseSeeder::class);
         $this->call(SeoPortfolioCasesSeeder::class);
+        $this->call(SaraburiCarwashPortfolioSeeder::class);
+        $this->call(MotorRepairBlogSeeder::class);
         $this->call(PortfolioCategorySeeder::class);
     }
 }

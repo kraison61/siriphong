@@ -313,10 +313,10 @@
     <section class="space-y-4">
         <div>
             <h3 class="text-sm font-semibold text-zinc-900">การแสดงผล</h3>
-            <p class="mt-0.5 text-xs text-zinc-500">ลำดับน้อยกว่าแสดงก่อน · พิกัดใช้กับ JSON-LD schema</p>
+            <p class="mt-0.5 text-xs text-zinc-500">ลำดับน้อยกว่าแสดงก่อน</p>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <div>
                 <label class="mb-1.5 block text-sm font-medium text-zinc-700">สถานะงาน <span class="text-red-500">*</span></label>
                 <input name="status_label" type="text" value="{{ old('status_label', $portfolio->status_label ?: 'สำเร็จ') }}"
@@ -345,16 +345,6 @@
                 </select>
                 @error('is_active')
                     <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="sm:col-span-2 lg:col-span-1">
-                <label class="mb-1.5 block text-sm font-medium text-zinc-700">พิกัดแผนที่</label>
-                <input name="map_coordinates" type="text" value="{{ old('map_coordinates', $portfolio->map_coordinates) }}"
-                    placeholder="13.754198, 100.501705"
-                    class="{{ $input }}">
-                @error('map_coordinates')
-                    <p class="mt-1 text-xs text-red-600">กรุณากรอกในรูปแบบ 13.754198, 100.501705</p>
                 @enderror
             </div>
         </div>

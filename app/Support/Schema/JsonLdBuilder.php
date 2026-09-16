@@ -90,10 +90,10 @@ class JsonLdBuilder
     /**
      * @return array<string, mixed>
      */
-    public function localBusinessNode(?array $geoOverride = null): array
+    public function localBusinessNode(): array
     {
         $business = config('schema.local_business');
-        $geo = $geoOverride ?? $business['geo'];
+        $geo = $business['geo'];
 
         return [
             '@type' => 'LocalBusiness',
@@ -279,7 +279,7 @@ class JsonLdBuilder
      * @param  Collection<int, Faq>  $faqs
      * @return array<string, mixed>
      */
-    public function buildServiceSchema(Product $service, Collection $serviceOffers, Collection $faqs, ?array $geoOverride = null): array
+    public function buildServiceSchema(Product $service, Collection $serviceOffers, Collection $faqs): array
     {
         $pageUrl = $this->serviceUrl($service);
         $breadcrumb = $this->serviceBreadcrumb($service);
@@ -309,7 +309,7 @@ class JsonLdBuilder
         $nodes = [
             $this->organizationNode(),
             $this->websiteNode(),
-            $this->localBusinessNode($geoOverride),
+            $this->localBusinessNode(),
             $this->breadcrumbNode($pageUrl, $breadcrumb),
             $serviceNode,
         ];
@@ -325,7 +325,7 @@ class JsonLdBuilder
     /**
      * @return array<string, mixed>
      */
-    public function buildPageSchema(Page $page, ?array $geoOverride = null): array
+    public function buildPageSchema(Page $page): array
     {
         $pageUrl = $this->pageUrl($page);
         $faqs = $page->faqItems();
@@ -354,7 +354,7 @@ class JsonLdBuilder
         $nodes = [
             $this->organizationNode(),
             $this->websiteNode(),
-            $this->localBusinessNode($geoOverride),
+            $this->localBusinessNode(),
             $this->breadcrumbNode($pageUrl, $this->pageBreadcrumb($page)),
             $serviceNode,
         ];
@@ -483,7 +483,6 @@ class JsonLdBuilder
     public function buildPortfolioCaseSchema(Portfolio $portfolio): array
     {
         $pageUrl = $this->portfolioCaseUrl($portfolio);
-        $geo = $portfolio->geoCoordinates();
 
         $webPage = [
             '@type' => 'WebPage',
@@ -514,7 +513,7 @@ class JsonLdBuilder
         $nodes = [
             $this->organizationNode(),
             $this->websiteNode(),
-            $this->localBusinessWithArea($geo),
+            $this->localBusinessWithArea(),
             $this->breadcrumbNode($pageUrl, [
                 ['name' => 'หน้าแรก', 'url' => $this->baseUrl().'/'],
                 ['name' => 'ผลงาน', 'url' => $this->baseUrl().'/portfolio'],
@@ -562,11 +561,11 @@ class JsonLdBuilder
     /**
      * @return array<string, mixed>
      */
-    private function localBusinessWithArea(?array $geoOverride = null): array
+    private function localBusinessWithArea(): array
     {
         $business = config('schema.local_business');
 
-        return array_merge($this->localBusinessNode($geoOverride), [
+        return array_merge($this->localBusinessNode(), [
             'description' => 'รับซ่อมและถอดล้างเครื่องดูดฝุ่นทุกยี่ห้อ มีบริการรับ-ส่งถึงที่ในกรุงเทพฯ',
             'areaServed' => array_map(
                 fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
@@ -617,12 +616,12 @@ class JsonLdBuilder
      * @param  Collection<int, Product>  $services
      * @return array<string, mixed>
      */
-    public function buildHomeSchema(Collection $services, ?array $geoOverride = null): array
+    public function buildHomeSchema(Collection $services): array
     {
         $pageUrl = $this->baseUrl().'/';
         $business = config('schema.local_business');
 
-        $localBusiness = array_merge($this->localBusinessNode($geoOverride), [
+        $localBusiness = array_merge($this->localBusinessNode(), [
             'areaServed' => array_map(
                 fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
                 $business['area_served']

@@ -31,7 +31,6 @@ class Portfolio extends Model
         'status_label',
         'sort_order',
         'is_active',
-        'map_coordinates',
         'meta_title',
         'meta_description',
         'related_blog_id',
@@ -107,26 +106,6 @@ class Portfolio extends Model
         }
 
         return '/portfolio/'.$this->slug;
-    }
-
-    /**
-     * @return array{latitude: string, longitude: string}|null
-     */
-    public function geoCoordinates(): ?array
-    {
-        if (! filled($this->map_coordinates)) {
-            return null;
-        }
-
-        $parts = preg_split('/\s*,\s*/', trim($this->map_coordinates)) ?: [];
-        if (count($parts) < 2) {
-            return null;
-        }
-
-        return [
-            'latitude' => (string) $parts[0],
-            'longitude' => (string) $parts[1],
-        ];
     }
 
     /**
