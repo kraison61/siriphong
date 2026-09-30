@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SeoPortfolioCasesSeeder::class);
         $this->call(SaraburiCarwashPortfolioSeeder::class);
         $this->call(MotorRepairBlogSeeder::class);
+        $this->call(RepairSubmergedIndustrialVacuumBlogSeeder::class);
         $this->call(PortfolioCategorySeeder::class);
     }
 }
