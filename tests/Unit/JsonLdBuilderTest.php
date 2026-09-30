@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Blog;
 use App\Models\Faq;
 use App\Models\Product;
 use App\Support\Schema\JsonLdBuilder;
@@ -122,7 +123,7 @@ class JsonLdBuilderTest extends TestCase
 
     public function test_blog_schema_has_article_person_and_faq_without_howto(): void
     {
-        $blog = \App\Models\Blog::query()->create([
+        $blog = Blog::query()->create([
             'title' => 'เครื่องดูดฝุ่นไม่มีแรงดูด เกิดจากอะไร?',
             'slug' => 'vacuum-no-suction-fix',
             'excerpt' => 'เช็คเอง 3 จุด',

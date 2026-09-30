@@ -2,7 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Page;
+use App\Models\Portfolio;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -129,7 +132,7 @@ class PageShowTest extends TestCase
             ],
         ]);
 
-        \App\Models\Product::query()->create([
+        Product::query()->create([
             'type' => 'service',
             'name' => 'ซ่อมมอเตอร์เครื่องดูดฝุ่น',
             'slug' => 'motor-repair-test',
@@ -169,20 +172,20 @@ class PageShowTest extends TestCase
             ],
         ]);
 
-        $factory = \App\Models\Category::query()->create([
+        $factory = Category::query()->create([
             'name' => 'โรงงาน',
             'slug' => 'factory',
             'type' => 'portfolio',
             'sort_order' => 1,
         ]);
-        $carcare = \App\Models\Category::query()->create([
+        $carcare = Category::query()->create([
             'name' => 'คาร์แคร์',
             'slug' => 'carcare',
             'type' => 'portfolio',
             'sort_order' => 2,
         ]);
 
-        \App\Models\Portfolio::query()->create([
+        Portfolio::query()->create([
             'category_id' => $factory->id,
             'category_label' => 'อาหารและเครื่องดื่ม',
             'title' => 'ซ่อมมอเตอร์ Nilfisk IVB 3 ตัว หลังไฟไหม้จากการทำงานต่อเนื่อง',
@@ -200,7 +203,7 @@ class PageShowTest extends TestCase
             'is_active' => true,
         ]);
 
-        \App\Models\Portfolio::query()->create([
+        Portfolio::query()->create([
             'category_id' => $carcare->id,
             'category_label' => null,
             'title' => 'เปลี่ยนแปรงถ่านเครื่องดูดน้ำ',

@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBlogRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Blog;
+use App\Support\R2Media;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class BlogController extends Controller
@@ -38,7 +36,7 @@ class BlogController extends Controller
         $data = $this->payload($request->safe()->except(['image_file', 'faqs_json']));
 
         if ($request->hasFile('image_file')) {
-            $data['image'] = $this->storeImage($request->file('image_file'), $request->string('title')->toString());
+            $data['image'] = R2Media::store($request->file('image_file'), 'blog', $request->string('title')->toString());
         }
 
         Blog::create($data);
@@ -53,8 +51,8 @@ class BlogController extends Controller
         $data = $this->payload($request->safe()->except(['image_file', 'faqs_json']));
 
         if ($request->hasFile('image_file')) {
-            $this->deleteStoredImage($blog->image);
-            $data['image'] = $this->storeImage($request->file('image_file'), $request->string('title')->toString());
+            R2Media::delete($blog->image);
+            $data['image'] = R2Media::store($request->file('image_file'), 'blog', $request->string('title')->toString());
         }
 
         $blog->update($data);
@@ -66,7 +64,7 @@ class BlogController extends Controller
 
     public function destroy(Blog $blog): RedirectResponse
     {
-        $this->deleteStoredImage($blog->image);
+        R2Media::delete($blog->image);
         $blog->delete();
 
         return redirect()
@@ -101,28 +99,5 @@ class BlogController extends Controller
         unset($data['faqs_json']);
 
         return $data;
-    }
-
-    private function storeImage(UploadedFile $file, string $title): string
-    {
-        $slug = Str::slug($title) ?: 'blog';
-        $filename = sprintf(
-            '%s-%s-%s.%s',
-            $slug,
-            Str::uuid(),
-            now()->timestamp,
-            strtolower($file->getClientOriginalExtension())
-        );
-
-        return $file->storeAs('blog', $filename, 'r2');
-    }
-
-    private function deleteStoredImage(?string $path): void
-    {
-        if (! filled($path) || filter_var($path, FILTER_VALIDATE_URL)) {
-            return;
-        }
-
-        Storage::disk('r2')->delete(ltrim($path, '/'));
     }
 }

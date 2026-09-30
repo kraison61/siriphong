@@ -8,12 +8,11 @@ use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Support\R2Media;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -92,10 +91,10 @@ class ProductController extends Controller
         $type = $product->type;
         $product->load('images');
 
-        $this->deleteStoredImage($product->image);
+        R2Media::delete($product->image);
 
         foreach ($product->images as $image) {
-            $this->deleteStoredImage($image->path);
+            R2Media::delete($image->path);
         }
 
         $product->delete();
@@ -126,12 +125,18 @@ class ProductController extends Controller
 
         if ($request->hasFile('image_file')) {
             if ($existing) {
-                $this->deleteStoredImage($existing->image);
+                R2Media::delete($existing->image);
             }
-            $data['image'] = $this->storeImage($request->file('image_file'), $data['name'], $data['type']);
+            $prefix = $data['type'] === 'service' ? 'service' : 'product';
+            $data['image'] = R2Media::store(
+                $request->file('image_file'),
+                $prefix.'/main',
+                $data['name'],
+                input: 'image_file',
+            );
         } elseif (filled($request->input('image_icon'))) {
             if ($existing) {
-                $this->deleteStoredImage($existing->image);
+                R2Media::delete($existing->image);
             }
             $data['image'] = $request->string('image_icon')->toString();
         } elseif (! $existing) {
@@ -154,6 +159,7 @@ class ProductController extends Controller
 
         $files = is_array($files) ? $files : [$files];
         $sortOrder = (int) $product->images()->max('sort_order');
+        $prefix = $product->type === 'service' ? 'service' : 'product';
 
         foreach ($files as $file) {
             if (! $file instanceof UploadedFile) {
@@ -161,7 +167,7 @@ class ProductController extends Controller
             }
 
             $sortOrder++;
-            $path = $this->storeImage($file, $product->name, $product->type, 'gallery');
+            $path = R2Media::store($file, $prefix.'/gallery', $product->name, input: 'gallery_files');
 
             ProductImage::create([
                 'product_id' => $product->id,
@@ -184,7 +190,7 @@ class ProductController extends Controller
         $images = $product->images()->whereIn('id', $ids)->get();
 
         foreach ($images as $image) {
-            $this->deleteStoredImage($image->path);
+            R2Media::delete($image->path);
             $image->delete();
         }
     }
@@ -227,38 +233,6 @@ class ProductController extends Controller
         }
 
         return $normalized === [] ? null : array_values($normalized);
-    }
-
-    private function storeImage(UploadedFile $file, string $name, string $type, string $folder = 'main'): string
-    {
-        $slug = Str::slug($name) ?: $type;
-        $prefix = $type === 'service' ? 'service' : 'product';
-        $filename = sprintf(
-            '%s-%s-%s.%s',
-            $slug,
-            Str::uuid(),
-            now()->timestamp,
-            strtolower($file->getClientOriginalExtension())
-        );
-
-        $path = $file->storeAs($prefix.'/'.$folder, $filename, 'r2');
-
-        if ($path === false) {
-            throw ValidationException::withMessages([
-                $folder === 'main' ? 'image_file' : 'gallery_files' => 'ไม่สามารถอัปโหลดรูปภาพได้ กรุณาตรวจสอบการตั้งค่า Cloudflare R2',
-            ]);
-        }
-
-        return $path;
-    }
-
-    private function deleteStoredImage(?string $path): void
-    {
-        if (! filled($path) || filter_var($path, FILTER_VALIDATE_URL) || str_starts_with($path, 'bi ')) {
-            return;
-        }
-
-        Storage::disk('r2')->delete(ltrim($path, '/'));
     }
 
     private function resolveType(Request $request, ?string $fallback = 'product'): string

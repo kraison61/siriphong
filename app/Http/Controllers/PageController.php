@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Support\Schema\JsonLdBuilder;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PageController extends Controller
 {
     public function __construct(private JsonLdBuilder $schema) {}
 
-    public function show(Request $request, string $slug): View
+    public function show(string $slug): View
     {
         $page = Page::query()
             ->with('parent')
@@ -23,7 +22,7 @@ class PageController extends Controller
         return $this->render($page);
     }
 
-    public function showChild(Request $request, string $parentSlug, string $slug): View
+    public function showChild(string $parentSlug, string $slug): View
     {
         $parent = Page::query()
             ->published()

@@ -7,10 +7,9 @@ use App\Http\Requests\Admin\StorePortfolioRequest;
 use App\Http\Requests\Admin\UpdatePortfolioRequest;
 use App\Models\Category;
 use App\Models\Portfolio;
+use App\Support\R2Media;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class PortfolioController extends Controller
@@ -48,15 +47,15 @@ class PortfolioController extends Controller
         $title = $request->string('title')->toString();
 
         if ($request->hasFile('image_file')) {
-            $data['image'] = $this->storeImage($request->file('image_file'), $title, 'cover');
+            $data['image'] = R2Media::store($request->file('image_file'), 'portfolio', $title, 'cover');
         }
 
         if ($request->hasFile('before_image_file')) {
-            $data['before_image'] = $this->storeImage($request->file('before_image_file'), $title, 'before');
+            $data['before_image'] = R2Media::store($request->file('before_image_file'), 'portfolio', $title, 'before');
         }
 
         if ($request->hasFile('after_image_file')) {
-            $data['after_image'] = $this->storeImage($request->file('after_image_file'), $title, 'after');
+            $data['after_image'] = R2Media::store($request->file('after_image_file'), 'portfolio', $title, 'after');
         }
 
         Portfolio::create($data);
@@ -77,18 +76,18 @@ class PortfolioController extends Controller
         $title = $request->string('title')->toString();
 
         if ($request->hasFile('image_file')) {
-            $this->deleteStoredImage($portfolio->image);
-            $data['image'] = $this->storeImage($request->file('image_file'), $title, 'cover');
+            R2Media::delete($portfolio->image);
+            $data['image'] = R2Media::store($request->file('image_file'), 'portfolio', $title, 'cover');
         }
 
         if ($request->hasFile('before_image_file')) {
-            $this->deleteStoredImage($portfolio->before_image);
-            $data['before_image'] = $this->storeImage($request->file('before_image_file'), $title, 'before');
+            R2Media::delete($portfolio->before_image);
+            $data['before_image'] = R2Media::store($request->file('before_image_file'), 'portfolio', $title, 'before');
         }
 
         if ($request->hasFile('after_image_file')) {
-            $this->deleteStoredImage($portfolio->after_image);
-            $data['after_image'] = $this->storeImage($request->file('after_image_file'), $title, 'after');
+            R2Media::delete($portfolio->after_image);
+            $data['after_image'] = R2Media::store($request->file('after_image_file'), 'portfolio', $title, 'after');
         }
 
         $portfolio->update($data);
@@ -100,9 +99,9 @@ class PortfolioController extends Controller
 
     public function destroy(Portfolio $portfolio): RedirectResponse
     {
-        $this->deleteStoredImage($portfolio->image);
-        $this->deleteStoredImage($portfolio->before_image);
-        $this->deleteStoredImage($portfolio->after_image);
+        R2Media::delete($portfolio->image);
+        R2Media::delete($portfolio->before_image);
+        R2Media::delete($portfolio->after_image);
         $portfolio->delete();
 
         return redirect()
@@ -110,34 +109,10 @@ class PortfolioController extends Controller
             ->with('success', 'ลบผลงานเรียบร้อยแล้ว');
     }
 
-    private function storeImage(UploadedFile $file, string $title, string $suffix = 'cover'): string
-    {
-        $slug = Str::slug($title) ?: 'portfolio';
-        $filename = sprintf(
-            '%s-%s-%s-%s.%s',
-            $slug,
-            $suffix,
-            Str::uuid(),
-            now()->timestamp,
-            strtolower($file->getClientOriginalExtension())
-        );
-
-        return $file->storeAs('portfolio', $filename, 'r2');
-    }
-
-    private function deleteStoredImage(?string $path): void
-    {
-        if (! filled($path) || filter_var($path, FILTER_VALIDATE_URL)) {
-            return;
-        }
-
-        Storage::disk('r2')->delete(ltrim($path, '/'));
-    }
-
     /**
-     * @return \Illuminate\Support\Collection<int, \App\Models\Category>
+     * @return Collection<int, Category>
      */
-    private function portfolioCategories()
+    private function portfolioCategories(): Collection
     {
         return Category::query()
             ->where('type', 'portfolio')

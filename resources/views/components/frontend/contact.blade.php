@@ -58,28 +58,19 @@
         </div>
       </div>
 
-      <!-- Contact form -->
       <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 text-center">
         <h3 class="font-display font-bold text-navy text-xl mb-2">สแกนเพิ่มเพื่อนทาง LINE</h3>
         <p class="text-steel text-sm mb-6">ใช้กล้องมือถือสแกน เพื่อส่งรูปเครื่องและอาการเสียให้ช่างประเมินราคาได้ทันที
         </p>
 
-        <!-- พื้นที่วางรูป QR Code -->
-        <!-- ⚠️ คำแนะนำ: แทนที่ div ด้านล่างนี้ด้วย tag <img> รูป QR Code จริงของคุณ -->
-        <!-- <div class="w-64 h-64 mx-auto bg-offwhite border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center mb-6 group hover:border-[#06c755] transition-colors">
-                    <i class="bi bi-qr-code-scan text-5xl text-gray-400 mb-2 group-hover:text-[#06c755] transition-colors"></i>
-                    <span class="text-sm text-gray-500 font-medium">วางรูป QR Code LINE ที่นี่</span> -->
-
-        <!-- เมื่อมีรูปจริง ให้ลบ div นี้แล้วใช้โค้ดด้านล่างแทน: -->
         <div
           class="w-64 h-64 mx-auto bg-offwhite border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center mb-6 group hover:border-[#06c755] transition-colors">
           <img src="{{ media_url(config('data.line_qr')) }}" alt="QR Code สำหรับเพิ่มเพื่อน LINE ศิริพงษ์ เซอร์วิส"
-            width="256" height="256" class="rounded-lg " loading="lazy">
+            width="256" height="256" class="rounded-lg" loading="lazy">
         </div>
 
-        <!-- ข้อความคงเดิมจากฟอร์มต้นฉบับ -->
         <p class="text-xs text-steel flex items-center justify-center">
-          <i class="bi bi-shield-lock-fill text-orange mr-1.5"></i> ข้อมูลของคุณปลอดภัย 100%
+          <i class="bi bi-shield-lock-fill text-orange mr-1.5" aria-hidden="true"></i> ข้อมูลของคุณปลอดภัย 100%
         </p>
       </div>
     </div>

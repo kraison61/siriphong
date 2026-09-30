@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Page extends Model
 {
@@ -116,6 +117,6 @@ class Page extends Model
     public function seoDescription(): string
     {
         return $this->meta_description
-            ?: \Illuminate\Support\Str::limit(strip_tags((string) $this->intro), 160);
+            ?: Str::limit(strip_tags((string) $this->intro), 160);
     }
 }

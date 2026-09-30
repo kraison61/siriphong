@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
         ]);
 
-        // $this->call(VacuumSeeder::class);
         $this->call(SettingSeeder::class);
         $this->call(PageSeeder::class);
         $this->call(WpBfProductSeeder::class);

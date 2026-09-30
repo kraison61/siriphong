@@ -33,7 +33,6 @@ Route::get('/portfolio/{slug}', [PortfolioCaseController::class, 'show'])
     ->where('slug', '[a-z0-9\-]+')
     ->name('portfolio.cases.show');
 
-
 Route::redirect('/admin', '/admin/dashboard');
 
 Route::middleware('guest')->group(function (): void {
