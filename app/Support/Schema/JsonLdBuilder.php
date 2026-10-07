@@ -153,7 +153,7 @@ class JsonLdBuilder
     }
 
     /**
-     * @param  Collection<int, Faq>  $faqs
+     * @param  Collection<int, Faq|object|array{question: string, answer: string}>  $faqs
      * @return array<string, mixed>|null
      */
     public function faqPageNode(string $pageUrl, Collection $faqs): ?array
@@ -165,14 +165,19 @@ class JsonLdBuilder
         return [
             '@type' => 'FAQPage',
             '@id' => rtrim($pageUrl, '/').'/#faq',
-            'mainEntity' => $faqs->map(fn (Faq $faq) => [
-                '@type' => 'Question',
-                'name' => $faq->question,
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => $faq->answer,
-                ],
-            ])->values()->all(),
+            'mainEntity' => $faqs->map(function ($faq) {
+                $question = is_array($faq) ? (string) ($faq['question'] ?? '') : (string) $faq->question;
+                $answer = is_array($faq) ? (string) ($faq['answer'] ?? '') : (string) $faq->answer;
+
+                return [
+                    '@type' => 'Question',
+                    'name' => $question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $answer,
+                    ],
+                ];
+            })->values()->all(),
         ];
     }
 
@@ -198,6 +203,106 @@ class JsonLdBuilder
                 ])->all(),
             ],
         ];
+
+        return $this->wrapGraph($nodes);
+    }
+
+    /**
+     * Schema for the products/services hub (industrial vacuum sales pillar).
+     *
+     * @param  Collection<int, Product>  $items
+     * @param  Collection<int, array{question: string, answer: string}>  $faqs
+     * @param  list<array{name: string, url?: string|null}>  $breadcrumb
+     * @return array<string, mixed>
+     */
+    public function buildProductsHubSchema(
+        Collection $items,
+        string $pageUrl,
+        string $listName,
+        array $breadcrumb,
+        Collection $faqs,
+        string $serviceName,
+        string $serviceDescription,
+    ): array {
+        $business = config('schema.local_business');
+
+        $nodes = [
+            $this->organizationNode(),
+            $this->websiteNode(),
+            $this->localBusinessNode(),
+            $this->breadcrumbNode($pageUrl, $breadcrumb),
+            [
+                '@type' => 'WebPage',
+                '@id' => rtrim($pageUrl, '/'),
+                'name' => $listName,
+                'url' => $pageUrl,
+                'dateModified' => '2026-10-07',
+                'author' => ['@id' => $this->organizationId()],
+                'isPartOf' => ['@id' => $this->websiteId()],
+            ],
+            [
+                '@type' => 'Service',
+                '@id' => rtrim($pageUrl, '/').'/#service',
+                'serviceType' => 'จำหน่ายและซ่อมเครื่องดูดฝุ่นโรงงานอุตสาหกรรม',
+                'name' => $serviceName,
+                'description' => $serviceDescription,
+                'provider' => ['@id' => $this->localBusinessId()],
+                'areaServed' => array_map(
+                    fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
+                    $business['area_served'] ?? []
+                ),
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name' => 'เครื่องดูดฝุ่นโรงงานอุตสาหกรรม',
+                    'itemListElement' => [
+                        [
+                            '@type' => 'Offer',
+                            'itemOffered' => [
+                                '@type' => 'Product',
+                                'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม ขนาดเล็ก',
+                            ],
+                        ],
+                        [
+                            '@type' => 'Offer',
+                            'itemOffered' => [
+                                '@type' => 'Product',
+                                'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม ขนาดใหญ่',
+                            ],
+                        ],
+                        [
+                            '@type' => 'Offer',
+                            'itemOffered' => [
+                                '@type' => 'Product',
+                                'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม ไร้สาย',
+                            ],
+                        ],
+                        [
+                            '@type' => 'Offer',
+                            'itemOffered' => [
+                                '@type' => 'Service',
+                                'name' => 'ซ่อมและอะไหล่เครื่องดูดฝุ่นอุตสาหกรรม',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                '@type' => 'ItemList',
+                '@id' => rtrim($pageUrl, '/').'/#itemlist',
+                'name' => $listName,
+                'itemListElement' => $items->values()->map(fn (Product $item, int $index) => [
+                    '@type' => 'ListItem',
+                    'position' => $index + 1,
+                    'url' => $this->itemUrl($item),
+                    'name' => $item->name,
+                ])->all(),
+            ],
+        ];
+
+        $faqNode = $this->faqPageNode($pageUrl, $faqs);
+        if ($faqNode !== null) {
+            $nodes[] = $faqNode;
+        }
 
         return $this->wrapGraph($nodes);
     }
