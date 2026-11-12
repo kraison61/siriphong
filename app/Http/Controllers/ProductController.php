@@ -56,6 +56,10 @@ class ProductController extends Controller
         $priceRows = $this->industrialVacuumPriceRows($products);
         $faqs = $this->industrialVacuumFaqs();
 
+        // Shared with visible "อัปเดตล่าสุด" label and WebPage.dateModified.
+        $pageUpdatedAt = '2026-10-07';
+        $pageUpdatedLabel = '7 ตุลาคม 2569';
+
         $pageUrl = route('products.index');
         $title = 'เครื่องดูดฝุ่นโรงงานอุตสาหกรรม แรงดูดสูง ขนาดเล็ก-ใหญ่ พร้อมราคา';
         $description = 'จำหน่ายเครื่องดูดฝุ่นโรงงานอุตสาหกรรม ขนาดเล็กถึงขนาดใหญ่ แรงดูดสูง ดูดแห้ง-เปียก มีรุ่นไร้สาย พร้อมบริการซ่อมและอะไหล่ ขอใบเสนอราคาฟรี โทร '.$phone;
@@ -63,7 +67,8 @@ class ProductController extends Controller
         $serviceDescription = 'เครื่องดูดฝุ่นโรงงานอุตสาหกรรม ขนาดเล็ก 15 ลิตร ถึงขนาดใหญ่ 100 ลิตรขึ้นไป ทั้งรุ่นดูดแห้ง-เปียก รุ่นแรงดูดสูง และรุ่นไร้สาย พร้อมบริการซ่อมและอะไหล่หลังการขาย';
 
         $schemaGraph = $this->schema->buildProductsHubSchema(
-            $products->concat($services),
+            $products,
+            $services,
             $pageUrl,
             $title,
             [
@@ -73,6 +78,7 @@ class ProductController extends Controller
             collect($faqs),
             $serviceName,
             $serviceDescription,
+            $pageUpdatedAt,
         );
 
         return view('frontend.products.index', compact(
@@ -90,6 +96,7 @@ class ProductController extends Controller
             'priceRows',
             'faqs',
             'serviceName',
+            'pageUpdatedLabel',
         ));
     }
 

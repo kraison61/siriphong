@@ -38,7 +38,6 @@ class RepairSubmergedIndustrialVacuumBlogSeeder extends Seeder
      */
     private function blogPayload($publishedAt): array
     {
-        $base = rtrim((string) config('app.url'), '/');
         $shop = (string) config('data.name');
         $phone = (string) config('data.phone');
         $phoneDisplay = (string) config('data.phone_formatted');
@@ -50,14 +49,16 @@ class RepairSubmergedIndustrialVacuumBlogSeeder extends Seeder
             'สมุทรปราการ',
         ]));
 
-        $home = $base.'/';
-        $contact = $base.'/contact-us';
-        $motorBlog = $base.'/blog/vacuum-motor-repair-symptoms';
-        $suctionBlog = $base.'/blog/vacuum-no-suction-fix';
-        $services = $base.'/products#services';
-        $portfolio = $base.'/portfolio';
-        $serviceRates = $base.'/service-rates';
-        $vacuumRepair = $base.'/vacuum-repair';
+        // Internal links stay root-relative so they are not flagged as external
+        // when APP_URL host/scheme differs from the live site (www/https).
+        $home = '/';
+        $contact = '/contact-us';
+        $motorBlog = '/blog/vacuum-motor-repair-symptoms';
+        $suctionBlog = '/blog/vacuum-no-suction-fix';
+        $services = '/products#services';
+        $portfolio = '/portfolio';
+        $serviceRates = '/service-rates';
+        $vacuumRepair = '/vacuum-repair';
 
         $title = 'ซ่อมเครื่องดูดฝุ่นจมน้ำ: คู่มือกู้เครื่องดูดฝุ่นอุตสาหกรรมที่โดนน้ำ';
 

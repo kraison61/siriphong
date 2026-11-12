@@ -56,8 +56,10 @@ class JsonLdBuilder
     public function organizationNode(): array
     {
         $org = config('schema.organization');
+        $address = config('schema.local_business.address', []);
+        $businessImage = $this->businessImageUrl();
 
-        return [
+        $node = [
             '@type' => 'Organization',
             '@id' => $this->organizationId(),
             'name' => $org['name'],
@@ -70,6 +72,16 @@ class JsonLdBuilder
             'telephone' => $org['telephone'],
             'sameAs' => config('schema.same_as'),
         ];
+
+        if (is_array($address) && $address !== []) {
+            $node['address'] = array_merge(['@type' => 'PostalAddress'], $address);
+        }
+
+        if (filled($businessImage)) {
+            $node['image'] = $businessImage;
+        }
+
+        return $node;
     }
 
     /**
@@ -93,31 +105,41 @@ class JsonLdBuilder
     public function localBusinessNode(): array
     {
         $business = config('schema.local_business');
-        $geo = $business['geo'];
+        $imageUrl = $this->businessImageUrl();
 
-        return [
+        $node = [
             '@type' => 'LocalBusiness',
             '@id' => $this->localBusinessId(),
             'name' => $business['name'],
-            'image' => $this->imageObject(
-                $business['image'],
-                (int) ($business['image_width'] ?? 0),
-                (int) ($business['image_height'] ?? 0),
-            ),
             'url' => $this->baseUrl().'/',
             'telephone' => $business['telephone'],
             'priceRange' => $business['price_range'],
-            'address' => array_merge(['@type' => 'PostalAddress'], $business['address']),
-            'geo' => [
-                '@type' => 'GeoCoordinates',
-                'latitude' => (string) $geo['latitude'],
-                'longitude' => (string) $geo['longitude'],
-            ],
+            'address' => array_merge(['@type' => 'PostalAddress'], $business['address'] ?? []),
             'openingHoursSpecification' => array_map(
                 fn (array $hours) => array_merge(['@type' => 'OpeningHoursSpecification'], $hours),
-                $business['opening_hours']
+                $business['opening_hours'] ?? []
             ),
+            'areaServed' => array_map(
+                fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
+                $business['area_served'] ?? []
+            ),
+            'parentOrganization' => ['@id' => $this->organizationId()],
         ];
+
+        if (filled($imageUrl)) {
+            $node['image'] = $this->imageObject(
+                $imageUrl,
+                (int) ($business['image_width'] ?? 0),
+                (int) ($business['image_height'] ?? 0),
+            );
+        }
+
+        $geo = $this->geoCoordinates($business['geo'] ?? null);
+        if ($geo !== null) {
+            $node['geo'] = $geo;
+        }
+
+        return $node;
     }
 
     /**
@@ -210,21 +232,32 @@ class JsonLdBuilder
     /**
      * Schema for the products/services hub (industrial vacuum sales pillar).
      *
-     * @param  Collection<int, Product>  $items
+     * Product nodes are built only for catalog items that have a sellable price
+     * (same collection that renders the "สินค้าที่จำหน่าย" cards). Category-style
+     * fake Products must not appear in hasOfferCatalog.
+     *
+     * @param  Collection<int, Product>  $products  Active product-type items shown on the hub
+     * @param  Collection<int, Product>  $services  Active service-type items for OfferCatalog
      * @param  Collection<int, array{question: string, answer: string}>  $faqs
      * @param  list<array{name: string, url?: string|null}>  $breadcrumb
      * @return array<string, mixed>
      */
     public function buildProductsHubSchema(
-        Collection $items,
+        Collection $products,
+        Collection $services,
         string $pageUrl,
         string $listName,
         array $breadcrumb,
         Collection $faqs,
         string $serviceName,
         string $serviceDescription,
+        string $dateModified,
     ): array {
         $business = config('schema.local_business');
+
+        $pricedProducts = $products
+            ->filter(fn (Product $product) => $this->effectivePrice($product) !== null)
+            ->values();
 
         $nodes = [
             $this->organizationNode(),
@@ -236,8 +269,9 @@ class JsonLdBuilder
                 '@id' => rtrim($pageUrl, '/'),
                 'name' => $listName,
                 'url' => $pageUrl,
-                'dateModified' => '2026-10-07',
+                'dateModified' => $dateModified,
                 'author' => ['@id' => $this->organizationId()],
+                'publisher' => ['@id' => $this->organizationId()],
                 'isPartOf' => ['@id' => $this->websiteId()],
             ],
             [
@@ -253,51 +287,33 @@ class JsonLdBuilder
                 ),
                 'hasOfferCatalog' => [
                     '@type' => 'OfferCatalog',
-                    'name' => 'เครื่องดูดฝุ่นโรงงานอุตสาหกรรม',
-                    'itemListElement' => [
-                        [
-                            '@type' => 'Offer',
-                            'itemOffered' => [
-                                '@type' => 'Product',
-                                'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม ขนาดเล็ก',
-                            ],
+                    'name' => 'บริการซ่อมเครื่องดูดฝุ่นอุตสาหกรรม',
+                    'itemListElement' => $services->values()->map(fn (Product $service) => [
+                        '@type' => 'Offer',
+                        'itemOffered' => [
+                            '@type' => 'Service',
+                            'name' => $service->name,
+                            'url' => $this->serviceUrl($service),
                         ],
-                        [
-                            '@type' => 'Offer',
-                            'itemOffered' => [
-                                '@type' => 'Product',
-                                'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม ขนาดใหญ่',
-                            ],
-                        ],
-                        [
-                            '@type' => 'Offer',
-                            'itemOffered' => [
-                                '@type' => 'Product',
-                                'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม ไร้สาย',
-                            ],
-                        ],
-                        [
-                            '@type' => 'Offer',
-                            'itemOffered' => [
-                                '@type' => 'Service',
-                                'name' => 'ซ่อมและอะไหล่เครื่องดูดฝุ่นอุตสาหกรรม',
-                            ],
-                        ],
-                    ],
+                    ])->all(),
                 ],
             ],
             [
                 '@type' => 'ItemList',
                 '@id' => rtrim($pageUrl, '/').'/#itemlist',
                 'name' => $listName,
-                'itemListElement' => $items->values()->map(fn (Product $item, int $index) => [
+                'itemListElement' => $pricedProducts->map(fn (Product $product, int $index) => [
                     '@type' => 'ListItem',
                     'position' => $index + 1,
-                    'url' => $this->itemUrl($item),
-                    'name' => $item->name,
+                    'url' => $this->productUrl($product),
+                    'name' => $product->name,
                 ])->all(),
             ],
         ];
+
+        foreach ($pricedProducts as $product) {
+            $nodes[] = $this->hubProductNode($product);
+        }
 
         $faqNode = $this->faqPageNode($pageUrl, $faqs);
         if ($faqNode !== null) {
@@ -305,6 +321,42 @@ class JsonLdBuilder
         }
 
         return $this->wrapGraph($nodes);
+    }
+
+    /**
+     * Compact Product node for the products hub (offers required; no fake ratings).
+     *
+     * @return array<string, mixed>
+     */
+    private function hubProductNode(Product $product): array
+    {
+        $pageUrl = $this->productUrl($product);
+        $price = $this->effectivePrice($product);
+
+        $mainImage = $product->imageUrl();
+
+        return [
+            '@type' => 'Product',
+            '@id' => $pageUrl.'#product',
+            'name' => $product->name,
+            'description' => $this->description($product),
+            'image' => $mainImage ?: $this->productImages($product),
+            'url' => $pageUrl,
+            'sku' => $product->sku ?: $product->slug,
+            'brand' => [
+                '@type' => 'Brand',
+                'name' => $product->brand ?: (string) config('schema.organization.name'),
+            ],
+            'offers' => [
+                '@type' => 'Offer',
+                'url' => $pageUrl,
+                'price' => $this->formatPrice($price ?? 0),
+                'priceCurrency' => 'THB',
+                'availability' => 'https://schema.org/InStock',
+                'itemCondition' => 'https://schema.org/NewCondition',
+                'seller' => ['@id' => $this->localBusinessId()],
+            ],
+        ];
     }
 
     /**
@@ -826,7 +878,7 @@ class JsonLdBuilder
             'priceCurrency' => 'THB',
             'availability' => 'https://schema.org/InStock',
             'itemCondition' => 'https://schema.org/NewCondition',
-            'seller' => ['@id' => $this->organizationId()],
+            'seller' => ['@id' => $this->localBusinessId()],
             'priceValidUntil' => $this->priceValidUntil(),
             'hasMerchantReturnPolicy' => array_merge(
                 ['@type' => 'MerchantReturnPolicy'],
@@ -1033,7 +1085,38 @@ class JsonLdBuilder
 
     private function formatPrice(float $price): string
     {
-        return (string) (int) round($price);
+        return number_format($price, 2, '.', '');
+    }
+
+    private function businessImageUrl(): ?string
+    {
+        $path = config('schema.local_business.image') ?: config('data.hero_image') ?: config('data.logo');
+
+        return MediaUrl::resolve(is_string($path) ? $path : null);
+    }
+
+    /**
+     * @param  array{latitude?: mixed, longitude?: mixed}|null  $geo
+     * @return array<string, mixed>|null
+     */
+    private function geoCoordinates(?array $geo): ?array
+    {
+        if ($geo === null) {
+            return null;
+        }
+
+        $latitude = $geo['latitude'] ?? null;
+        $longitude = $geo['longitude'] ?? null;
+
+        if (! filled($latitude) || ! filled($longitude)) {
+            return null;
+        }
+
+        return [
+            '@type' => 'GeoCoordinates',
+            'latitude' => (string) $latitude,
+            'longitude' => (string) $longitude,
+        ];
     }
 
     private function priceValidUntil(): string

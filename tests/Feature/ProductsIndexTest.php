@@ -58,5 +58,37 @@ class ProductsIndexTest extends TestCase
         $response->assertSee('ขอใบเสนอราคาเครื่องดูดฝุ่นโรงงานอุตสาหกรรม', false);
         $response->assertSee('"@type":"FAQPage"', false);
         $response->assertSee('"@type":"Service"', false);
+        $response->assertSee('"@type":"Product"', false);
+        $response->assertSee('"priceCurrency":"THB"', false);
+        $response->assertSee('"dateModified":"2026-10-07"', false);
+
+        preg_match('/<script type="application\/ld\+json">\s*(.*?)\s*<\/script>/s', $response->getContent(), $matches);
+        $this->assertNotEmpty($matches[1] ?? null);
+        $decoded = json_decode($matches[1], true);
+        $this->assertIsArray($decoded);
+        $this->assertSame(JSON_ERROR_NONE, json_last_error());
+
+        $graph = collect($decoded['@graph']);
+        $productNodes = $graph->where('@type', 'Product')->values();
+        $this->assertCount(2, $productNodes);
+        $this->assertEqualsCanonicalizing(
+            ['WP-BF-575-30', 'WP-BF-585-80'],
+            $productNodes->pluck('name')->all()
+        );
+        foreach ($productNodes as $productNode) {
+            $this->assertArrayHasKey('offers', $productNode);
+            $this->assertSame('Offer', $productNode['offers']['@type']);
+            $this->assertSame('THB', $productNode['offers']['priceCurrency']);
+            $this->assertArrayNotHasKey('aggregateRating', $productNode);
+        }
+
+        $serviceNode = $graph->firstWhere('@type', 'Service');
+        $catalogItems = collect($serviceNode['hasOfferCatalog']['itemListElement'] ?? []);
+        $this->assertTrue($catalogItems->every(
+            fn (array $offer) => ($offer['itemOffered']['@type'] ?? null) === 'Service'
+        ));
+        $this->assertFalse($catalogItems->contains(
+            fn (array $offer) => ($offer['itemOffered']['@type'] ?? null) === 'Product'
+        ));
     }
 }

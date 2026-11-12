@@ -71,7 +71,7 @@ class PortfolioCategorySeeder extends Seeder
             str_contains($haystack, 'คาเฟ่') || str_contains($haystack, 'cafe') || str_contains($haystack, 'cat-cafe') => 'cafe',
             str_contains($haystack, 'คาร์แคร์') || str_contains($haystack, 'carcare') || str_contains($haystack, 'icarwash') || str_contains($haystack, 'car-care') => 'carcare',
             str_contains($haystack, 'โรงงาน') || str_contains($haystack, 'pharma') || str_contains($haystack, 'factory') => 'factory',
-            str_contains($haystack, 'บริษัท') || str_contains($haystack, 'company') || str_contains($haystack, 'midori') => 'company',
+            str_contains($haystack, 'บริษัท') || str_contains($haystack, 'company') || str_contains($haystack, 'midori') || str_contains($haystack, 'โชว์รูม') || str_contains($haystack, 'showroom') || str_contains($haystack, 'วิทยาลัย') || str_contains($haystack, 'โรงเรียน') || str_contains($haystack, 'school') => 'company',
             str_contains($haystack, 'บุคคล') || str_contains($haystack, 'คอนโด') || str_contains($haystack, 'condo') || str_contains($haystack, 'personal') => 'personal',
             default => 'company',
         };

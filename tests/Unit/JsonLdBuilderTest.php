@@ -60,9 +60,13 @@ class JsonLdBuilderTest extends TestCase
         $this->assertNotNull($productNode);
         $this->assertSame($product->name, $productNode['name']);
         $this->assertNotEmpty($productNode['image']);
-        $this->assertSame('16900', $productNode['offers']['price']);
+        $this->assertSame('16900.00', $productNode['offers']['price']);
         $this->assertSame('THB', $productNode['offers']['priceCurrency']);
         $this->assertSame('https://schema.org/InStock', $productNode['offers']['availability']);
+        $this->assertSame(
+            ['@id' => $this->builder->localBusinessId()],
+            $productNode['offers']['seller']
+        );
     }
 
     public function test_service_schema_is_valid_json(): void
@@ -85,8 +89,17 @@ class JsonLdBuilderTest extends TestCase
         $this->assertSame($service->name, $serviceNode['name']);
 
         $localBusiness = collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness');
-        $this->assertSame('13.676007308176997', $localBusiness['geo']['latitude']);
-        $this->assertSame('100.48644460886901', $localBusiness['geo']['longitude']);
+        $this->assertArrayNotHasKey('geo', $localBusiness);
+        $this->assertSame(
+            ['@id' => $this->builder->organizationId()],
+            $localBusiness['parentOrganization']
+        );
+        $this->assertSame(
+            ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            $localBusiness['openingHoursSpecification'][0]['dayOfWeek']
+        );
+        $this->assertSame('TH', $localBusiness['address']['addressCountry']);
+        $this->assertNotEmpty($localBusiness['areaServed']);
     }
 
     public function test_home_schema_has_single_graph_without_duplicate_product_nodes(): void
@@ -100,8 +113,10 @@ class JsonLdBuilderTest extends TestCase
         $this->assertNotNull(collect($decoded['@graph'])->firstWhere('@type', 'WebSite'));
         $localBusiness = collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness');
         $this->assertNotNull($localBusiness);
-        $this->assertSame('13.676007308176997', $localBusiness['geo']['latitude']);
-        $this->assertSame('100.48644460886901', $localBusiness['geo']['longitude']);
+        $this->assertArrayNotHasKey('geo', $localBusiness);
+        $organization = collect($decoded['@graph'])->firstWhere('@type', 'Organization');
+        $this->assertArrayHasKey('address', $organization);
+        $this->assertArrayHasKey('image', $organization);
     }
 
     public function test_price_format_has_no_currency_symbol_or_commas(): void
@@ -116,7 +131,7 @@ class JsonLdBuilderTest extends TestCase
         $schema = $this->builder->buildProductSchema($product, collect());
         $productNode = collect($schema['@graph'])->firstWhere('@type', 'Product');
 
-        $this->assertSame('12501', $productNode['offers']['price']);
+        $this->assertSame('12500.50', $productNode['offers']['price']);
         $this->assertStringNotContainsString('฿', $productNode['offers']['price']);
         $this->assertStringNotContainsString(',', $productNode['offers']['price']);
     }
@@ -150,8 +165,7 @@ class JsonLdBuilderTest extends TestCase
         $this->assertNull($graph->firstWhere('@type', 'HowTo'));
 
         $localBusiness = $graph->firstWhere('@type', 'LocalBusiness');
-        $this->assertSame('13.676007308176997', $localBusiness['geo']['latitude']);
-        $this->assertSame('100.48644460886901', $localBusiness['geo']['longitude']);
+        $this->assertArrayNotHasKey('geo', $localBusiness);
 
         $article = $graph->firstWhere('@type', 'Article');
         $this->assertSame($blog->title, $article['headline']);

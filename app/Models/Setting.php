@@ -176,9 +176,12 @@ class Setting extends Model
         Config::set('schema.website.name', $data['name'] ?? null);
 
         Config::set('schema.local_business.name', $data['name'] ?? null);
-        Config::set('schema.local_business.image', $data['logo'] ?? null);
-        Config::set('schema.local_business.image_width', $data['logo_width'] ?? null);
-        Config::set('schema.local_business.image_height', $data['logo_height'] ?? null);
+        Config::set(
+            'schema.local_business.image',
+            filled($data['hero_image'] ?? null) ? $data['hero_image'] : ($data['logo'] ?? null)
+        );
+        Config::set('schema.local_business.image_width', null);
+        Config::set('schema.local_business.image_height', null);
         Config::set('schema.local_business.telephone', $data['phone'] ?? null);
         Config::set('schema.local_business.address', $data['address_structured'] ?? null);
 

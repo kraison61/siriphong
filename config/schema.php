@@ -25,19 +25,21 @@ return [
 
     'local_business' => [
         'name' => config('data.name'),
-        'image' => config('data.logo'),
-        'image_width' => config('data.logo_width'),
-        'image_height' => config('data.logo_height'),
+        // Prefer storefront/work photo (hero path or URL) over logo-only.
+        'image' => config('data.hero_image') ?: config('data.logo'),
+        'image_width' => null,
+        'image_height' => null,
         'telephone' => config('data.phone'),
         'price_range' => '฿฿',
         'address' => config('data.address_structured'),
+        // Leave empty until filled from Google Maps; JsonLdBuilder omits geo when blank.
         'geo' => [
-            'latitude' => '13.676007308176997',
-            'longitude' => '100.48644460886901',
+            'latitude' => env('BUSINESS_LAT'),
+            'longitude' => env('BUSINESS_LNG'),
         ],
         'opening_hours' => [
             [
-                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 'opens' => '08:00',
                 'closes' => '18:00',
             ],
