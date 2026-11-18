@@ -65,7 +65,8 @@
         </ul>
 
         <div class="flex items-center gap-2.5">
-          <a href="{{ config('data.line') }}" target="_blank" rel="noopener"
+          <a href="{{ config('contact.line') }}" target="_blank" rel="noopener"
+            data-cta="line" data-position="nav" data-page="{{ request()->routeIs('home') ? 'home' : 'site' }}"
             class="hidden md:inline-flex items-center justify-center gap-2 min-h-[40px] px-[18px] py-2 rounded-xl text-sm font-bold text-white bg-line shadow-[0_4px_16px_rgba(6,199,85,.35)] transition-all hover:bg-line-dark hover:-translate-y-0.5"
             aria-label="แอดไลน์">
             <i class="bi bi-chat-dots-fill" aria-hidden="true"></i> แอดไลน์

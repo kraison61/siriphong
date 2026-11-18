@@ -12,17 +12,17 @@
           >
         </div>
         <p class="text-sm text-white/50 leading-[1.7] mt-3">
-          ผู้เชี่ยวชาญซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ด้วยความซื่อสัตย์ ตรงไปตรงมา และประสบการณ์จริงกว่า 20 ปี
+          ร้านซ่อม ขาย และให้เช่าเครื่องดูดฝุ่นอุตสาหกรรมของ{{ config('contact.nickname') }} ซ่อมเองทุกเครื่องมาตั้งแต่ปี {{ config('contact.founding_year_be') }}
         </p>
       </div>
       <div>
         <div class="font-display text-xs font-semibold text-white/40 uppercase tracking-[.1em] mb-4">บริการ</div>
         <ul class="list-none flex flex-col gap-2.5">
-          <li><a href="{{ route('products.index') }}#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมมอเตอร์</a></li>
-          <li><a href="{{ route('products.index') }}#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมระบบกรอง</a></li>
-          <li><a href="{{ route('products.index') }}#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมระบบไฟฟ้า</a></li>
-          <li><a href="{{ route('products.index') }}#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>Overhaul ครบระบบ</a></li>
-          <li><a href="{{ route('products.index') }}#services" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ตรวจสอบฟรี</a></li>
+          <li><a href="{{ route('services.show', 'motor-repair') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมมอเตอร์</a></li>
+          <li><a href="{{ route('services.show', 'filter-repair') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมระบบกรอง</a></li>
+          <li><a href="{{ route('services.show', 'electrical-repair') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ซ่อมระบบไฟฟ้า</a></li>
+          <li><a href="{{ route('services.show', 'full-overhaul') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>Overhaul ครบระบบ</a></li>
+          <li><a href="{{ route('services.show', 'diagnosis') }}" class="flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-orange"><i class="bi bi-chevron-right" aria-hidden="true"></i>ตรวจสอบและวินิจฉัย</a></li>
         </ul>
       </div>
       <div>
@@ -38,10 +38,10 @@
     </div>
 
     <div class="border-t border-white/5 pt-5 flex flex-col md:flex-row md:justify-between items-center md:items-start gap-2 text-center md:text-left">
-      <p class="text-xs text-white/35">© 2568 ศิริพงษ์ vacuum · siriphong-vacuum.com · สงวนลิขสิทธิ์</p>
+      <p class="text-xs text-white/35">© {{ date('Y') + 543 }} ศิริพงษ์ vacuum · siriphong-vacuum.com · สงวนลิขสิทธิ์</p>
       <div class="flex gap-2">
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-shield-check" aria-hidden="true"></i> รับประกัน 3 เดือน</span>
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-award" aria-hidden="true"></i> ประสบการณ์ 20 ปี</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-shield-check" aria-hidden="true"></i> รับประกันงานซ่อม 90 วัน</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[.06] text-[.72rem] text-white/45"><i class="bi bi-award" aria-hidden="true"></i> ตั้งแต่ปี {{ config('contact.founding_year_be') }}</span>
       </div>
     </div>
   </div>

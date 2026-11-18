@@ -97,6 +97,17 @@
     :items="$faqs['items'] ?? []"
   />
 
+  @if ($page->slug === 'vacuum-repair' && ! $page->parent_id)
+    <section class="py-10 bg-white">
+      <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+        <p class="max-w-3xl text-slate-600 leading-relaxed">
+          นอกจากซ่อมแล้ว ร้านยังขายและให้เช่า
+          <a href="{{ route('home') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">เครื่องดูดฝุ่นอุตสาหกรรม</a>
+        </p>
+      </div>
+    </section>
+  @endif
+
   <section class="py-12 bg-navy">
     <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
       <div>

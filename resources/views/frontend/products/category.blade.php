@@ -19,6 +19,12 @@
 
   <section class="py-14 bg-white">
     <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+      @if ($category->slug === 'industrial-vacuum')
+        <p class="mb-8 max-w-3xl text-slate-600 leading-relaxed">
+          ซื้อจากร้านซ่อมโดยตรง เครื่องเสียส่งกลับมาให้ช่างต้อยซ่อมได้ —
+          <a href="{{ route('home') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">ดูบริการซ่อม ขาย เช่าเครื่องดูดฝุ่นอุตสาหกรรม</a>
+        </p>
+      @endif
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse ($items as $item)
           <article class="rounded-[20px] bg-offwhite p-5 shadow-sm">

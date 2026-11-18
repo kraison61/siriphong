@@ -90,10 +90,8 @@ class JsonLdBuilderTest extends TestCase
 
         $localBusiness = collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness');
         $this->assertArrayNotHasKey('geo', $localBusiness);
-        $this->assertSame(
-            ['@id' => $this->builder->organizationId()],
-            $localBusiness['parentOrganization']
-        );
+        $this->assertSame($this->builder->businessId(), $localBusiness['@id']);
+        $this->assertArrayNotHasKey('parentOrganization', $localBusiness);
         $this->assertSame(
             ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             $localBusiness['openingHoursSpecification'][0]['dayOfWeek']
@@ -107,16 +105,22 @@ class JsonLdBuilderTest extends TestCase
         $schema = $this->builder->buildHomeSchema(collect());
         $decoded = json_decode(json_encode($schema), true);
 
-        $productNodes = collect($decoded['@graph'])->where('@type', 'Product');
-        $this->assertCount(0, $productNodes);
-        $this->assertNotNull(collect($decoded['@graph'])->firstWhere('@type', 'Organization'));
-        $this->assertNotNull(collect($decoded['@graph'])->firstWhere('@type', 'WebSite'));
-        $localBusiness = collect($decoded['@graph'])->firstWhere('@type', 'LocalBusiness');
+        $graph = collect($decoded['@graph']);
+        $this->assertCount(0, $graph->where('@type', 'Product'));
+        $this->assertNull($graph->firstWhere('@type', 'Organization'));
+        $this->assertNotNull($graph->firstWhere('@type', 'WebSite'));
+        $this->assertNotNull($graph->firstWhere('@type', 'Person'));
+        $this->assertNotNull($graph->firstWhere('@type', 'FAQPage'));
+        $localBusiness = $graph->firstWhere('@type', 'LocalBusiness');
         $this->assertNotNull($localBusiness);
+        $this->assertSame('https://siriphong-vacuum.com/#business', $localBusiness['@id']);
         $this->assertArrayNotHasKey('geo', $localBusiness);
-        $organization = collect($decoded['@graph'])->firstWhere('@type', 'Organization');
-        $this->assertArrayHasKey('address', $organization);
-        $this->assertArrayHasKey('image', $organization);
+        $this->assertArrayNotHasKey('aggregateRating', $localBusiness);
+        $this->assertStringNotContainsString('www.', $localBusiness['@id']);
+        $this->assertContains('Sunday', $localBusiness['openingHoursSpecification'][0]['dayOfWeek']);
+        $faq = $graph->firstWhere('@type', 'FAQPage');
+        $this->assertCount(count(config('home.faqs')), $faq['mainEntity']);
+        $this->assertSame(config('home.faqs.0.answer'), $faq['mainEntity'][0]['acceptedAnswer']['text']);
     }
 
     public function test_price_format_has_no_currency_symbol_or_commas(): void

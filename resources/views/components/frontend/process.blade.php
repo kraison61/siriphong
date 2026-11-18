@@ -149,7 +149,7 @@
                                     B</span>
                                 <div class="text-sm font-semibold text-navy">ร้านรับ-ส่ง หรือบริการนอกสถานที่ (ประเมิน)
                                 </div>
-                                <div class="text-xs text-slate-400">ค่าเดินทางขาไปคิดตามระยะทางจริง · <a
+                                <div class="text-xs text-slate-400">ช่างไปหน้างาน: ฟรี 10 กม.แรก จากนั้นกิโลเมตรละ 5 บาท (นับระยะเที่ยวเดียวจากร้าน) · <a
                                         href="#calculator" class="text-orange hover:underline">คำนวณ →</a></div>
                             </div>
                         </div>
@@ -174,6 +174,19 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div data-reveal
+                class="opacity-0 translate-y-6 transition duration-700 ease-out delay-300 data-[show=true]:opacity-100 data-[show=true]:translate-y-0 rounded-xl bg-white border border-slate-200 p-6 md:p-7 shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="shrink-0 w-10 h-10 rounded-full bg-orange flex items-center justify-center font-display font-bold text-white text-sm">
+                        4</div>
+                    <div>
+                        <span class="font-display font-bold text-navy text-[1.05rem]">ซ่อม ทดสอบ แล้วส่งคืน พร้อมประกันงาน 90 วัน</span>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">หลังซ่อมจะทดสอบการทำงานก่อนส่งคืน และรับประกันงานซ่อม 90 วัน ถ้าอาการเดิมกลับมาในช่วงประกัน ซ่อมให้ฟรี</p>
+                    </div>
                 </div>
             </div>
 

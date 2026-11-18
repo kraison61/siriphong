@@ -166,6 +166,16 @@ class Setting extends Model
 
         Config::set('data', $data);
 
+        foreach (['phone', 'phone_formatted', 'line', 'email', 'address'] as $contactKey) {
+            if (filled($data[$contactKey] ?? null)) {
+                Config::set('contact.'.$contactKey, $data[$contactKey]);
+            }
+        }
+
+        if (is_array($data['address_structured'] ?? null)) {
+            Config::set('contact.address_structured', $data['address_structured']);
+        }
+
         Config::set('schema.organization.name', $data['name'] ?? null);
         Config::set('schema.organization.logo', $data['logo'] ?? null);
         Config::set('schema.organization.logo_width', $data['logo_width'] ?? null);

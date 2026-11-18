@@ -1,0 +1,43 @@
+<?php
+
+return [
+    'name' => 'ศิริพงษ์ เซอร์วิส',
+    'owner_name' => 'ศิริพงษ์ ชาศรพิทักษ์',
+    'nickname' => 'ช่างต้อย',
+    'url' => 'https://siriphong-vacuum.com',
+    'phone' => '+66817928148',
+    'phone_schema' => '+66-81-792-8148',
+    'phone_formatted' => '081-792-8148',
+    'line' => 'https://line.me/ti/p/Kqsti_kwU9',
+    'email' => 'theeraphong.services@gmail.com',
+    'hours' => 'ทุกวัน 08:00–18:00 น.',
+    'hours_note' => 'รับเรื่องด่วนทาง LINE 24 ชม.',
+    'opens' => '08:00',
+    'closes' => '18:00',
+    'address' => '69 ซอยสุขสวัสดิ์ 26 แยก 10-5 ราษฎร์บูรณะ กรุงเทพฯ 10140',
+    'address_short' => '69 ซ.สุขสวัสดิ์ 26 แยก 10-5 ราษฎร์บูรณะ กทม. 10140',
+    'address_structured' => [
+        'streetAddress' => '69 ซอยสุขสวัสดิ์ 26 แยก 10-5',
+        'addressLocality' => 'ราษฎร์บูรณะ',
+        'addressRegion' => 'กรุงเทพมหานคร',
+        'postalCode' => '10140',
+        'addressCountry' => 'TH',
+    ],
+    'area_served' => 'กทม. สมุทรปราการ สมุทรสาคร นครปฐม นนทบุรี ปทุมธานี',
+    'area_served_schema' => [
+        ['type' => 'City', 'name' => 'กรุงเทพมหานคร'],
+        ['type' => 'AdministrativeArea', 'name' => 'สมุทรปราการ'],
+        ['type' => 'AdministrativeArea', 'name' => 'สมุทรสาคร'],
+        ['type' => 'AdministrativeArea', 'name' => 'นครปฐม'],
+        ['type' => 'AdministrativeArea', 'name' => 'นนทบุรี'],
+        ['type' => 'AdministrativeArea', 'name' => 'ปทุมธานี'],
+    ],
+    'travel_free_km' => 10,
+    'founding_year_be' => 2545,
+    'google_share' => 'https://share.google/1jcdKJVB1hfgj8Lcr',
+    // ซ่อนแผนที่และปุ่มรีวิวจนกว่า GBP จะ verified
+    'google_maps_url' => null,
+    'google_review_url' => null,
+    'hero_image_url' => 'https://pub-a9d72b3edcf74bf293a84deb6ffa217b.r2.dev/siriphong.jpg',
+    'logo_url' => 'https://pub-a9d72b3edcf74bf293a84deb6ffa217b.r2.dev/logo.webp',
+];

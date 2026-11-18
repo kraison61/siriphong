@@ -166,6 +166,12 @@
           <p class="mt-3 text-slate-600 leading-relaxed text-sm">
             โรงงานที่ต้องดูดต่อเนื่องทั้งกะควรใช้รุ่น 3 เฟส มอเตอร์เทอร์ไบน์ไม่มีแปรงถ่าน จึงเดินเครื่องได้นานโดยไม่ต้องพัก
           </p>
+          @if (Route::has('vacuum.3motor'))
+            <p class="mt-3 text-sm">
+              <a href="{{ route('vacuum.3motor') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">เครื่องดูดฝุ่น 3 มอเตอร์</a>
+              — ราคา วิธีเลือก ซ่อม และอะไหล่
+            </p>
+          @endif
         </article>
         <article data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out delay-200 data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
           <h3 class="font-display font-bold text-navy text-xl mb-3">เครื่องดูดฝุ่นอุตสาหกรรม ไร้สาย</h3>

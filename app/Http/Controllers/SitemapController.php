@@ -37,7 +37,7 @@ class SitemapController extends Controller
     private function staticUrls(): Collection
     {
         return collect([
-            $this->entry(route('home'), null, 'daily', '1.0'),
+            $this->entry(route('home'), config('home.meta.date_modified'), 'daily', '1.0'),
             $this->entry(route('products.index'), null, 'weekly', '0.9'),
             $this->entry(route('blogs.index'), null, 'daily', '0.8'),
         ]);

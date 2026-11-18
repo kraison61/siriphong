@@ -19,19 +19,29 @@ class JsonLdBuilder
         return config('schema.site_url');
     }
 
+    public function canonicalBaseUrl(): string
+    {
+        return (string) preg_replace('#^(https?://)www\.#i', '$1', $this->baseUrl());
+    }
+
+    public function businessId(): string
+    {
+        return rtrim((string) config('contact.url'), '/').'/#business';
+    }
+
     public function organizationId(): string
     {
-        return $this->baseUrl().'/#organization';
+        return $this->businessId();
     }
 
     public function websiteId(): string
     {
-        return $this->baseUrl().'/#website';
+        return $this->canonicalBaseUrl().'/#website';
     }
 
     public function localBusinessId(): string
     {
-        return $this->baseUrl().'/#localbusiness';
+        return $this->businessId();
     }
 
     public function authorId(): string
@@ -44,9 +54,38 @@ class JsonLdBuilder
      */
     public function wrapGraph(array $nodes): array
     {
+        $deduped = [];
+        $indexById = [];
+
+        foreach (array_values($nodes) as $node) {
+            if (! is_array($node)) {
+                continue;
+            }
+
+            $id = $node['@id'] ?? null;
+            if (! is_string($id) || $id === '') {
+                $deduped[] = $node;
+
+                continue;
+            }
+
+            if (! isset($indexById[$id])) {
+                $indexById[$id] = count($deduped);
+                $deduped[] = $node;
+
+                continue;
+            }
+
+            $existingType = $deduped[$indexById[$id]]['@type'] ?? '';
+            $newType = $node['@type'] ?? '';
+            if ($newType === 'LocalBusiness' && $existingType !== 'LocalBusiness') {
+                $deduped[$indexById[$id]] = $node;
+            }
+        }
+
         return [
             '@context' => 'https://schema.org',
-            '@graph' => array_values($nodes),
+            '@graph' => array_values($deduped),
         ];
     }
 
@@ -123,8 +162,11 @@ class JsonLdBuilder
                 fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
                 $business['area_served'] ?? []
             ),
-            'parentOrganization' => ['@id' => $this->organizationId()],
         ];
+
+        if ($this->organizationId() !== $this->localBusinessId()) {
+            $node['parentOrganization'] = ['@id' => $this->organizationId()];
+        }
 
         if (filled($imageUrl)) {
             $node['image'] = $this->imageObject(
@@ -535,6 +577,117 @@ class JsonLdBuilder
     }
 
     /**
+     * @param  Collection<int, Product>  $products
+     * @return array<string, mixed>
+     */
+    public function buildThreeMotorPageSchema(Page $page, Collection $products): array
+    {
+        $origin = rtrim((string) config('contact.url'), '/');
+        $pageUrl = $origin.'/industrial-vacuum-3-motor';
+        $schema = is_array($page->block('schema')) ? $page->block('schema') : [];
+        $faqs = $page->faqItems();
+        $imageUrl = $page->heroImageUrl();
+
+        $article = [
+            '@type' => 'Article',
+            '@id' => $pageUrl.'#article',
+            'headline' => $schema['headline'] ?? $page->title,
+            'description' => $schema['description'] ?? strip_tags((string) $page->intro),
+            'author' => ['@id' => $origin.'/#siriphong'],
+            'publisher' => ['@id' => $origin.'/#business'],
+            'datePublished' => $schema['date_published'] ?? '2026-11-18',
+            'dateModified' => $schema['date_modified'] ?? '2026-11-18',
+            'mainEntityOfPage' => $pageUrl,
+            'inLanguage' => 'th-TH',
+            'about' => [
+                'เครื่องดูดฝุ่น 3 มอเตอร์',
+                'เครื่องดูดฝุ่นอุตสาหกรรม',
+            ],
+        ];
+
+        if (filled($imageUrl)) {
+            $article['image'] = $imageUrl;
+        }
+
+        $areaServed = collect(config('contact.area_served_schema', []))
+            ->map(fn (array $area) => [
+                '@type' => $area['type'] ?? 'AdministrativeArea',
+                'name' => $area['name'] ?? '',
+            ])
+            ->filter(fn (array $area) => filled($area['name']))
+            ->values()
+            ->all();
+
+        $serviceNode = [
+            '@type' => 'Service',
+            '@id' => $pageUrl.'#service',
+            'name' => $schema['service_name'] ?? 'ซ่อมเครื่องดูดฝุ่น 3 มอเตอร์',
+            'serviceType' => $schema['service_type'] ?? 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม 3 มอเตอร์',
+            'provider' => ['@id' => $origin.'/#business'],
+            'areaServed' => $areaServed,
+            'offers' => [
+                '@type' => 'Offer',
+                'priceCurrency' => 'THB',
+                'price' => (string) ($schema['service_price'] ?? '1650'),
+                'description' => $schema['service_price_description'] ?? 'ซ่อมหรือเปลี่ยนมอเตอร์ ราคาเริ่มต้นต่อตัว',
+            ],
+        ];
+
+        $productList = [
+            '@type' => 'ItemList',
+            '@id' => $pageUrl.'#products',
+            'name' => 'เครื่องดูดฝุ่น 3 มอเตอร์ที่ศิริพงษ์ เซอร์วิสจำหน่าย',
+            'itemListElement' => $products->values()->map(fn (Product $product, int $index) => [
+                '@type' => 'ListItem',
+                'position' => $index + 1,
+                'name' => $product->name,
+                'url' => $origin.'/products/'.$product->slug,
+            ])->all(),
+        ];
+
+        $breadcrumb = [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'หน้าแรก',
+                    'item' => $origin.'/',
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'เครื่องดูดฝุ่น 3 มอเตอร์',
+                    'item' => $pageUrl,
+                ],
+            ],
+        ];
+
+        $nodes = [
+            $article,
+            $serviceNode,
+            $productList,
+            $breadcrumb,
+        ];
+
+        if ($faqs->isNotEmpty()) {
+            $nodes[] = [
+                '@type' => 'FAQPage',
+                'mainEntity' => $faqs->map(fn ($faq) => [
+                    '@type' => 'Question',
+                    'name' => $faq->question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq->answer,
+                    ],
+                ])->values()->all(),
+            ];
+        }
+
+        return $this->wrapGraph($nodes);
+    }
+
+    /**
      * @param  Collection<int, Blog>  $blogs
      * @return array<string, mixed>
      */
@@ -775,24 +928,105 @@ class JsonLdBuilder
      */
     public function buildHomeSchema(Collection $services): array
     {
-        $pageUrl = $this->baseUrl().'/';
-        $business = config('schema.local_business');
+        unset($services);
 
-        $localBusiness = array_merge($this->localBusinessNode(), [
-            'areaServed' => array_map(
-                fn (string $area) => ['@type' => 'AdministrativeArea', 'name' => $area],
-                $business['area_served']
-            ),
-            'hasOfferCatalog' => $this->serviceOfferCatalog($services),
-        ]);
+        $origin = rtrim((string) config('contact.url'), '/');
+        $pageUrl = $origin.'/';
+        $contact = config('contact');
+        $meta = config('home.meta');
+        $faqs = config('home.faqs', []);
+
+        $areaServed = array_map(
+            fn (array $area) => ['@type' => $area['type'], 'name' => $area['name']],
+            $contact['area_served_schema'] ?? []
+        );
 
         $nodes = [
-            $this->organizationNode(),
-            $this->websiteNode(),
-            $localBusiness,
-            $this->breadcrumbNode($pageUrl, [
-                ['name' => 'หน้าแรก', 'url' => $pageUrl],
-            ]),
+            [
+                '@type' => 'LocalBusiness',
+                '@id' => $origin.'/#business',
+                'name' => $contact['name'],
+                'alternateName' => ['Siriphong Service', 'ร้านช่างต้อย ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม'],
+                'description' => 'ซ่อม ขาย และให้เช่าเครื่องดูดฝุ่นอุตสาหกรรม เครื่องดูดฝุ่นโรงงาน เครื่องดูดฝุ่น 3 มอเตอร์ เครื่องดูดน้ำเชิงพาณิชย์ และเครื่องคาร์แคร์ทุกยี่ห้อ ไฟบ้าน 1 เฟส ตั้งแต่ 30 ลิตรขึ้นไป แจ้งราคาก่อนซ่อม รับประกันงานซ่อม 90 วัน',
+                'url' => $pageUrl,
+                'telephone' => $contact['phone_schema'],
+                'image' => $meta['og_image'],
+                'logo' => $contact['logo_url'],
+                'founder' => ['@id' => $origin.'/#siriphong'],
+                'foundingDate' => '2002',
+                'address' => array_merge(['@type' => 'PostalAddress'], $contact['address_structured'] ?? []),
+                'openingHoursSpecification' => [[
+                    '@type' => 'OpeningHoursSpecification',
+                    'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    'opens' => $contact['opens'],
+                    'closes' => $contact['closes'],
+                ]],
+                'areaServed' => $areaServed,
+                'priceRange' => '฿300 - ฿8,000',
+                'knowsLanguage' => ['th', 'en'],
+                'sameAs' => array_values(array_filter([
+                    $contact['google_share'] ?? null,
+                    $contact['line'] ?? null,
+                ])),
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name' => 'ซ่อม ขาย เช่า เครื่องดูดฝุ่นอุตสาหกรรม',
+                    'itemListElement' => [
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม', 'url' => $origin.'/vacuum-repair']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'ซ่อมมอเตอร์เครื่องดูดฝุ่น', 'url' => $origin.'/services/motor-repair'], 'priceSpecification' => ['@type' => 'PriceSpecification', 'minPrice' => 1650, 'priceCurrency' => 'THB']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'เปลี่ยนแปรงถ่านเครื่องดูดฝุ่น', 'url' => $origin.'/services/carbon-brush'], 'priceSpecification' => ['@type' => 'PriceSpecification', 'minPrice' => 250, 'priceCurrency' => 'THB']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'ตรวจเช็คเครื่องดูดฝุ่น', 'url' => $origin.'/services/diagnosis'], 'priceSpecification' => ['@type' => 'PriceSpecification', 'price' => 250, 'priceCurrency' => 'THB']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'เช่าเครื่องดูดฝุ่นสำรองระหว่างซ่อม'], 'priceSpecification' => ['@type' => 'UnitPriceSpecification', 'price' => 500, 'priceCurrency' => 'THB', 'unitText' => 'เดือน']],
+                        ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Product', 'name' => 'เครื่องดูดฝุ่นอุตสาหกรรม', 'url' => $origin.'/products/category/industrial-vacuum']],
+                    ],
+                ],
+            ],
+            [
+                '@type' => 'Person',
+                '@id' => $origin.'/#siriphong',
+                'name' => $contact['owner_name'],
+                'alternateName' => ['ช่างต้อย', 'เฮียต้อย'],
+                'jobTitle' => 'เจ้าของและช่างซ่อมเครื่องดูดฝุ่นอุตสาหกรรม',
+                'description' => 'ช่างซ่อมเครื่องดูดฝุ่นอุตสาหกรรมและเครื่องคาร์แคร์ ตั้งแต่ปี พ.ศ. 2545',
+                'url' => $origin.'/about-us',
+                'worksFor' => ['@id' => $origin.'/#business'],
+                'knowsAbout' => ['เครื่องดูดฝุ่นอุตสาหกรรม', 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม', 'มอเตอร์เครื่องดูดฝุ่น', 'เครื่องดูดฝุ่น 3 มอเตอร์', 'เครื่องดูดฝุ่นคาร์แคร์', 'เครื่องดูดน้ำเชิงพาณิชย์'],
+            ],
+            [
+                '@type' => 'WebSite',
+                '@id' => $origin.'/#website',
+                'url' => $pageUrl,
+                'name' => $contact['name'],
+                'publisher' => ['@id' => $origin.'/#business'],
+                'inLanguage' => 'th-TH',
+            ],
+            [
+                '@type' => 'WebPage',
+                '@id' => $origin.'/#webpage',
+                'url' => $pageUrl,
+                'name' => $meta['title'],
+                'isPartOf' => ['@id' => $origin.'/#website'],
+                'about' => ['@id' => $origin.'/#business'],
+                'dateModified' => $meta['date_modified'],
+                'inLanguage' => 'th-TH',
+            ],
+            [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    ['@type' => 'ListItem', 'position' => 1, 'name' => 'หน้าแรก', 'item' => $pageUrl],
+                ],
+            ],
+            [
+                '@type' => 'FAQPage',
+                'mainEntity' => array_map(fn (array $faq) => [
+                    '@type' => 'Question',
+                    'name' => $faq['question'],
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq['answer'],
+                    ],
+                ], $faqs),
+            ],
         ];
 
         return $this->wrapGraph($nodes);

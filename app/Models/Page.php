@@ -105,6 +105,7 @@ class Page extends Model
             'pricing' => 'frontend.pages.pricing',
             'portfolio' => 'frontend.pages.portfolio',
             'general' => 'frontend.pages.general',
+            'three-motor' => 'frontend.pages.three-motor',
             default => 'frontend.pages.service',
         };
     }

@@ -65,6 +65,9 @@ Route::permanentRedirect('/ราคาซ่อมเครื่องดู�
 Route::permanentRedirect('/ผลงานซ่อม', '/portfolio');
 Route::permanentRedirect('/projects', '/portfolio');
 
+Route::get('/industrial-vacuum-3-motor', [PageController::class, 'showThreeMotor'])
+    ->name('vacuum.3motor');
+
 // Dynamic content pages (English silo) — must stay last
 Route::get('/{slug}/{childSlug}', [PageController::class, 'showChild'])
     ->where(['slug' => '[a-z0-9\-]+', 'childSlug' => '[a-z0-9\-]+'])

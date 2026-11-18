@@ -48,6 +48,17 @@
   @if ($faqs->isNotEmpty())
     <x-frontend.faq-list :faqs="$faqs" />
   @endif
+
+  @if ($service->slug === 'motor-repair' && Route::has('vacuum.3motor'))
+    <section class="py-10 bg-offwhite">
+      <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
+        <p class="max-w-3xl text-slate-600 leading-relaxed">
+          เครื่องหลายมอเตอร์ช่างต้อยตรวจแยกทีละตัว ดูรายละเอียด
+          <a href="{{ route('vacuum.3motor') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">ซ่อมเครื่องดูดฝุ่น 3 มอเตอร์</a>
+        </p>
+      </div>
+    </section>
+  @endif
 @endsection
 
 @push('jsonld')

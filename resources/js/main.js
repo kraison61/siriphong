@@ -57,6 +57,20 @@ window.filterSection = filterSection;
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('[data-cta]');
+    if (!link || typeof window.gtag !== 'function') return;
+
+    const cta = link.dataset.cta;
+    const eventName = cta === 'line' ? 'click_line' : (cta === 'tel' ? 'click_tel' : null);
+    if (!eventName) return;
+
+    window.gtag('event', eventName, {
+      cta_position: link.dataset.position || '',
+      page: link.dataset.page || '',
+    });
+  });
+
   /* ── Scroll reveal ── */
   const revealEls = document.querySelectorAll('[data-reveal]');
   if (revealEls.length) {

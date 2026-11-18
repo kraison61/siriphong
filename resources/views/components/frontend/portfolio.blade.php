@@ -34,7 +34,7 @@
       <div data-reveal class="opacity-0 translate-y-6 transition duration-700 ease-out data-[show=true]:opacity-100 data-[show=true]:translate-y-0">
         <div class="font-display text-xs font-semibold tracking-[.14em] uppercase text-orange"><i class="bi bi-images" aria-hidden="true"></i> ผลงานที่ผ่านมา</div>
         <h2 class="font-display font-bold leading-tight text-navy mt-2 text-[clamp(1.6rem,4vw,2.4rem)]" id="portfolio-title">
-          Case Studies <span class="text-orange">จากประสบการณ์จริง</span>
+          ผลงานซ่อมเครื่องดูดฝุ่นอุตสาหกรรมจริงจากโต๊ะซ่อม
         </h2>
         @if ($totalSlides > 0)
           <p class="mt-2 text-sm text-slate-500">เลื่อนดูงานซ่อมจริงจากลูกค้า — กดรูปเพื่อขยาย</p>
@@ -140,6 +140,10 @@
     @else
       <p class="mt-10 text-center text-slate-500 py-10 rounded-2xl border border-dashed border-slate-200 bg-white/60">ยังไม่มีผลงานในระบบ</p>
     @endif
+
+    <a href="{{ route('pages.show', 'portfolio') }}" class="mt-8 inline-flex items-center gap-2 font-bold text-navy hover:text-orange">
+      ดูผลงานทั้งหมด →
+    </a>
   </div>
 
   {{-- Lightbox --}}
@@ -187,7 +191,7 @@
       >
       <div class="text-center mt-5">
         <div id="portfolio-lightbox-category" class="text-xs font-bold text-orange uppercase tracking-[.1em] mb-1"></div>
-        <h3 id="portfolio-lightbox-title" class="font-display font-bold text-white text-xl md:text-2xl"></h3>
+        <p id="portfolio-lightbox-title" class="font-display font-bold text-white text-xl md:text-2xl"></p>
         <div id="portfolio-lightbox-counter" class="text-white/50 text-sm mt-2"></div>
       </div>
     </div>

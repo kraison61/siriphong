@@ -4,9 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $title ?? 'ศิริพงษ์ เซอร์วิส | ซ่อมเครื่องดูดฝุ่นอุตสาหกรรม' }}</title>
-  <meta name="description"
-    content="{{ $description ?? 'ซ่อมเครื่องดูดฝุ่นอุตสาหกรรมครบวงจร ประสบการณ์กว่า 20 ปี รับซ่อมทุกยี่ห้อ รับประกันงาน' }}">
+  <title>{{ config('home.meta.title') }}</title>
+  <meta name="description" content="{{ config('home.meta.description') }}">
+  <link rel="canonical" href="{{ rtrim(config('contact.url'), '/') }}/">
+  <meta property="og:title" content="{{ config('home.meta.og_title') }}">
+  <meta property="og:description" content="{{ config('home.meta.description') }}">
+  <meta property="og:image" content="{{ config('home.meta.og_image') }}">
+  <meta property="og:url" content="{{ rtrim(config('contact.url'), '/') }}/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="th_TH">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Chakra+Petch:wght@500;600;700&display=swap"
@@ -30,45 +36,21 @@
     <!-- HERO SECTION                                                 -->
     <!-- ============================================================ -->
     <x-frontend.hero />
-
-    <!-- ============================================================ -->
-    <!-- TRUST STRIP                                                  -->
-    <!-- ============================================================ -->
     <x-frontend.trust />
-
-    <!-- ============================================================ -->
-    <!-- SERVICES SECTION                                             -->
-    <!-- ============================================================ -->
+    <x-frontend.home-summary />
+    <x-frontend.home-compare />
     <x-frontend.services />
-
-    <!-- ============================================================ -->
-    <!-- WHY US SECTION                                               -->
-    <!-- ============================================================ -->
+    <x-frontend.home-three-motor />
+    <x-frontend.home-shop />
+    <x-frontend.home-rental />
+    <x-frontend.home-audiences />
     <x-frontend.why-us />
-
-    <!-- ============================================================ -->
-    <!-- PORTFOLIO SECTION                                            -->
-    <!-- ============================================================ -->
     <x-frontend.portfolio />
-
-    <!-- ============================================================ -->
-    <!-- TESTIMONIALS                                                 -->
-    <!-- ============================================================ -->
     <x-frontend.testimonials />
-
-    <!-- ============================================================ -->
-    <!-- PROCESS & CONDITIONS                                         -->
-    <!-- ============================================================ -->
+    <x-frontend.home-scope />
     <x-frontend.process />
-
-    <!-- ============================================================ -->
-    <!-- SHIPPING CALCULATOR                                          -->
-    <!-- ============================================================ -->
     <x-frontend.cal />
-
-    <!-- ============================================================ -->
-    <!-- CONTACT SECTION                                              -->
-    <!-- ============================================================ -->
+    <x-frontend.home-faq />
     <x-frontend.contact />
   </main>
 

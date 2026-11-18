@@ -141,6 +141,13 @@
                 </div>
               </div>
             </div>
+
+            @if (in_array($product->slug, ['wp-bf-585-60', 'wp-bf-585-80'], true) && Route::has('vacuum.3motor'))
+              <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+                ยังเลือกไม่ได้ระหว่าง 60 กับ 80 ลิตร หรืออยากรู้ว่าเครื่อง 3 มอเตอร์เสียบ่อยตรงไหน อ่าน
+                <a href="{{ route('vacuum.3motor') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">คู่มือเครื่องดูดฝุ่น 3 มอเตอร์</a>
+              </p>
+            @endif
           @endif
 
           @if ($descriptionHtml)

@@ -50,5 +50,11 @@
         </footer>
       </blockquote>
     </div>
+
+    @if (filled(config('contact.google_review_url')))
+      <a href="{{ config('contact.google_review_url') }}" target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-orange">
+        อ่าน/เขียนรีวิวใน Google →
+      </a>
+    @endif
   </div>
 </section>
