@@ -21,6 +21,7 @@ class PortfolioCategorySeeder extends Seeder
             ['name' => 'โรงงาน', 'slug' => 'factory', 'sort_order' => 3],
             ['name' => 'บริษัท', 'slug' => 'company', 'sort_order' => 4],
             ['name' => 'คาเฟ่', 'slug' => 'cafe', 'sort_order' => 5],
+            ['name' => 'โรงแรม', 'slug' => 'hotel', 'sort_order' => 6],
         ];
 
         foreach ($categories as $category) {
@@ -71,6 +72,7 @@ class PortfolioCategorySeeder extends Seeder
             str_contains($haystack, 'คาเฟ่') || str_contains($haystack, 'cafe') || str_contains($haystack, 'cat-cafe') => 'cafe',
             str_contains($haystack, 'คาร์แคร์') || str_contains($haystack, 'carcare') || str_contains($haystack, 'icarwash') || str_contains($haystack, 'car-care') => 'carcare',
             str_contains($haystack, 'โรงงาน') || str_contains($haystack, 'pharma') || str_contains($haystack, 'factory') => 'factory',
+            str_contains($haystack, 'โรงแรม') || str_contains($haystack, 'hotel') || str_contains($haystack, 'centric-place') => 'hotel',
             str_contains($haystack, 'บริษัท') || str_contains($haystack, 'company') || str_contains($haystack, 'midori') || str_contains($haystack, 'โชว์รูม') || str_contains($haystack, 'showroom') || str_contains($haystack, 'วิทยาลัย') || str_contains($haystack, 'โรงเรียน') || str_contains($haystack, 'school') => 'company',
             str_contains($haystack, 'บุคคล') || str_contains($haystack, 'คอนโด') || str_contains($haystack, 'condo') || str_contains($haystack, 'personal') => 'personal',
             default => 'company',
@@ -85,7 +87,7 @@ class PortfolioCategorySeeder extends Seeder
 
         // ถ้า label ตรงกับชื่อหมวดใหญ่แล้ว ไม่ต้องเก็บซ้ำ
         $normalized = trim($label);
-        $known = ['บุคคลทั่วไป', 'คาร์แคร์', 'ร้านคาร์แคร์', 'โรงงาน', 'โรงงานยา', 'บริษัท', 'คาเฟ่', 'คาเฟ่แมว'];
+        $known = ['บุคคลทั่วไป', 'คาร์แคร์', 'ร้านคาร์แคร์', 'โรงงาน', 'โรงงานยา', 'บริษัท', 'คาเฟ่', 'คาเฟ่แมว', 'โรงแรม'];
 
         if (in_array($normalized, $known, true)) {
             return null;

@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ShowroomVacuumOnsiteRepairPortfolioSeeder::class);
         $this->call(SchoolVacuumWontTurnOnPortfolioSeeder::class);
         $this->call(PortfolioCategorySeeder::class);
+        $this->call(CentricPlaceHotelPortfolioSeeder::class);
     }
 }

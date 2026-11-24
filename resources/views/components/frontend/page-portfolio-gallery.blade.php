@@ -217,6 +217,12 @@
                 @elseif (!empty($case['description']))
                   <p class="text-sm text-slate-700 leading-relaxed">{{ $case['description'] }}</p>
                 @endif
+
+                @if (!empty($case['url']))
+                  <a href="{{ url($case['url']) }}" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-orange hover:gap-2.5 transition-all">
+                    อ่านเคสเต็ม <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                  </a>
+                @endif
               </div>
             @endif
           </div>

@@ -1,5 +1,26 @@
 @extends('layout.frontend')
 
+@php
+  $ogImage = $portfolio->imageUrl();
+  $ogTitle = $portfolio->slug === 'pm-replace-motor-centric-place-hotel'
+    ? 'เคสโรงแรม: ซ่อมเครื่องดูดฝุ่น Electrolux + เปลี่ยนมอเตอร์ Karcher รวม 1,750 บาท'
+    : $portfolio->seoTitle();
+  $canonical = url($portfolio->urlPath());
+  $ctaPage = $portfolio->slug ?: 'portfolio-case';
+@endphp
+
+@push('head')
+  <link rel="canonical" href="{{ $canonical }}">
+  <meta property="og:title" content="{{ $ogTitle }}">
+  <meta property="og:description" content="{{ $portfolio->seoDescription() }}">
+  <meta property="og:url" content="{{ $canonical }}">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="th_TH">
+  @if ($ogImage)
+    <meta property="og:image" content="{{ $ogImage }}">
+  @endif
+@endpush
+
 @section('content')
   @php
     $beforeUrl = $portfolio->beforeImageUrl();
@@ -94,6 +115,9 @@
             [&_li]:leading-relaxed
             [&_strong]:text-navy [&_strong]:font-semibold
             [&_a]:text-orange [&_a]:font-semibold [&_a]:underline-offset-2 hover:[&_a]:underline
+            [&_blockquote]:rounded-2xl [&_blockquote]:border [&_blockquote]:border-navy/10 [&_blockquote]:bg-offwhite [&_blockquote]:px-5 [&_blockquote]:py-4 [&_blockquote]:my-6
+            [&_figure]:my-6 [&_figure]:overflow-hidden [&_figure]:rounded-2xl [&_figure]:border [&_figure]:border-slate-200 [&_figure]:bg-slate-50
+            [&_figure_img]:block [&_figure_img]:w-full [&_figure_img]:h-auto
             [&_table]:w-full [&_table]:text-sm [&_table]:border [&_table]:border-slate-200 [&_table]:rounded-xl [&_table]:overflow-hidden
             [&_thead]:bg-navy [&_thead]:text-white
             [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:font-semibold
@@ -132,9 +156,20 @@
       <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div>
           <h2 class="font-display font-bold text-xl md:text-2xl">มีเคสคล้ายกัน? ทักไลน์ได้เลย</h2>
-          <p class="mt-2 text-white/70 text-sm">โทร {{ config('data.phone_formatted') }} | LINE ประเมินอาการฟรี</p>
+          <p class="mt-2 text-white/70 text-sm">โทร {{ config('contact.phone_formatted', config('data.phone_formatted')) }} | LINE ประเมินอาการฟรี</p>
         </div>
-        <x-frontend.page-cta />
+        <div class="flex flex-wrap gap-3">
+          <a href="{{ config('contact.line', config('data.line')) }}" target="_blank" rel="noopener"
+            data-cta="line" data-position="end" data-page="{{ $ctaPage }}"
+            class="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-2.5 rounded-xl font-bold text-white bg-line transition-all hover:bg-line-dark hover:-translate-y-0.5">
+            <i class="bi bi-chat-dots-fill" aria-hidden="true"></i> สอบถามทางไลน์
+          </a>
+          <a href="tel:{{ config('contact.phone', config('data.phone')) }}"
+            data-cta="tel" data-position="end" data-page="{{ $ctaPage }}"
+            class="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-2.5 rounded-xl font-bold text-navy border border-white/20 bg-white transition-all hover:border-orange hover:text-orange">
+            <i class="bi bi-telephone-fill" aria-hidden="true"></i> โทร {{ config('contact.phone_formatted', config('data.phone_formatted')) }}
+          </a>
+        </div>
       </div>
     </section>
   </article>

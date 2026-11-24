@@ -65,7 +65,13 @@
               @if (!empty($case['category']))
                 <div class="text-[.72rem] font-bold text-orange uppercase tracking-[.1em] mb-1.5">{{ $case['category'] }}</div>
               @endif
-              <h3 class="font-display font-bold text-navy text-xl">{{ $case['title'] ?? 'เคสซ่อม' }}</h3>
+              <h3 class="font-display font-bold text-navy text-xl">
+                @if (!empty($case['url']))
+                  <a href="{{ url($case['url']) }}" class="hover:text-orange transition-colors">{{ $case['title'] ?? 'เคสซ่อม' }}</a>
+                @else
+                  {{ $case['title'] ?? 'เคสซ่อม' }}
+                @endif
+              </h3>
 
               @if ($hasDetailFields)
                 <dl class="mt-4 space-y-3 text-sm">
@@ -114,6 +120,12 @@
                   </span>
                 @endif
               </div>
+
+              @if (!empty($case['url']))
+                <a href="{{ url($case['url']) }}" class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-orange hover:gap-2.5 transition-all">
+                  อ่านเคสเต็ม <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </a>
+              @endif
             </div>
           </div>
         </article>

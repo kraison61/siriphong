@@ -2,8 +2,8 @@
   $portfolios = $portfolios ?? \App\Models\Portfolio::query()
     ->with('category')
     ->where('is_active', true)
-    ->orderBy('sort_order')
-    ->orderBy('id')
+    ->orderByDesc('created_at')
+    ->orderByDesc('id')
     ->get();
   $gradients = $gradients ?? [
     'bg-[linear-gradient(135deg,#0f2347,#2a5298)]',

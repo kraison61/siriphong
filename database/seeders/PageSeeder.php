@@ -158,6 +158,17 @@ class PageSeeder extends Seeder
                     'heading' => 'ตัวอย่างงานที่ซ่อมไปแล้ว',
                     'items' => [
                         [
+                            'title' => 'โรงแรม Centric Place ดินแดง — ล้าง 3 เปลี่ยนมอเตอร์ 1',
+                            'category' => 'โรงแรม',
+                            'symptom' => 'Karcher เปิดไม่ติด และให้ตรวจเครื่อง Electrolux / อุตสาหกรรมไปพร้อมกัน',
+                            'found' => 'มอเตอร์ Karcher เสื่อมสภาพตามการใช้งาน ส่วนอีก 3 เครื่องแค่ฝุ่นอัดรอบมอเตอร์',
+                            'fixed' => 'ถอดล้าง 3 เครื่อง + เปลี่ยนมอเตอร์ Karcher รวม 1,750 บาท',
+                            'days' => 'ดำเนินการ 1 วัน',
+                            'price' => '1,750 บาท',
+                            'image' => 'https://pub-a9d72b3edcf74bf293a84deb6ffa217b.r2.dev/portfolio/pm-replace-motor-centric-place-hotel/electrolux-01.webp',
+                            'url' => '/portfolio/pm-replace-motor-centric-place-hotel',
+                        ],
+                        [
                             'title' => 'เครื่องดูดฝุ่นโรงงาน — แรงดูดตกทั้งวัน',
                             'symptom' => 'ลูกค้าแจ้งว่าแรงดูดอ่อนลงเรื่อย ๆ ใช้ได้แค่ครึ่งชั่วโมงแล้วร้อน',
                             'found' => 'กรอง HEPA อุดตันหนา มอเตอร์แบริ่งเริ่มสึก',

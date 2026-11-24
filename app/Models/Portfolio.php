@@ -6,6 +6,7 @@ use App\Support\MediaUrl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Portfolio extends Model
@@ -106,6 +107,36 @@ class Portfolio extends Model
         }
 
         return '/portfolio/'.$this->slug;
+    }
+
+    /**
+     * Extract FAQ pairs from case HTML content (h3 + following p after "คำถามที่พบบ่อย").
+     *
+     * @return Collection<int, object{question: string, answer: string}>
+     */
+    public function faqItems(): Collection
+    {
+        $html = (string) ($this->content ?? '');
+        if ($html === '') {
+            return collect();
+        }
+
+        $faqSection = $html;
+        if (preg_match('/คำถามที่พบบ่อย(.*?)(?:<h2\b|$)/isu', $html, $sectionMatch) === 1) {
+            $faqSection = $sectionMatch[1];
+        }
+
+        if (preg_match_all('/<h3\b[^>]*>(.*?)<\/h3>\s*<p\b[^>]*>(.*?)<\/p>/isu', $faqSection, $matches, PREG_SET_ORDER) !== false) {
+            return collect($matches)
+                ->map(fn (array $match) => (object) [
+                    'question' => trim(html_entity_decode(strip_tags($match[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8')),
+                    'answer' => trim(html_entity_decode(strip_tags($match[2]), ENT_QUOTES | ENT_HTML5, 'UTF-8')),
+                ])
+                ->filter(fn (object $faq) => filled($faq->question) && filled($faq->answer))
+                ->values();
+        }
+
+        return collect();
     }
 
     /**

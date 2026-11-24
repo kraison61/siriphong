@@ -10,8 +10,8 @@
     $caseItems = \App\Models\Portfolio::query()
       ->with('category')
       ->where('is_active', true)
-      ->orderBy('sort_order')
-      ->orderBy('id')
+      ->orderByDesc('created_at')
+      ->orderByDesc('id')
       ->get()
       ->map(fn (\App\Models\Portfolio $item) => $item->toCaseItem())
       ->all();

@@ -140,7 +140,8 @@ class SitemapController extends Controller
             ->active()
             ->whereNotNull('slug')
             ->where('slug', '!=', '')
-            ->orderBy('sort_order')
+            ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->get()
             ->map(fn (Portfolio $portfolio) => $this->entry(
                 url($portfolio->urlPath()),

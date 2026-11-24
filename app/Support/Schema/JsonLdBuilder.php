@@ -785,7 +785,7 @@ class JsonLdBuilder
     }
 
     /**
-     * Short case page: WebPage + LocalBusiness (geo) + BreadcrumbList.
+     * Case page: Article + Person + LocalBusiness + BreadcrumbList + optional FAQPage.
      * Primary keyword differs from related blog to avoid cannibalization.
      *
      * @return array<string, mixed>
@@ -793,44 +793,85 @@ class JsonLdBuilder
     public function buildPortfolioCaseSchema(Portfolio $portfolio): array
     {
         $pageUrl = $this->portfolioCaseUrl($portfolio);
+        $origin = rtrim((string) config('contact.url'), '/');
+        $faqs = $portfolio->faqItems();
 
-        $webPage = [
-            '@type' => 'WebPage',
-            '@id' => $pageUrl,
-            'name' => $portfolio->title,
+        $images = array_values(array_unique(array_filter([
+            MediaUrl::resolve($portfolio->image),
+            $portfolio->beforeImageUrl(),
+            $portfolio->afterImageUrl(),
+        ])));
+
+        $article = [
+            '@type' => 'Article',
+            '@id' => rtrim($pageUrl, '/').'#article',
+            'headline' => $portfolio->title,
             'description' => $portfolio->seoDescription(),
-            'isPartOf' => ['@id' => $this->websiteId()],
-            'about' => ['@id' => $this->localBusinessId()],
-            'inLanguage' => 'th-TH',
+            'author' => ['@id' => $origin.'/#siriphong'],
+            'publisher' => ['@id' => $this->businessId()],
+            'datePublished' => optional($portfolio->created_at)?->toDateString() ?? now()->toDateString(),
+            'dateModified' => optional($portfolio->updated_at)?->toDateString() ?? now()->toDateString(),
+            'inLanguage' => 'th',
+            'mainEntityOfPage' => $pageUrl,
         ];
 
-        if ($image = $portfolio->imageUrl()) {
-            $webPage['primaryImageOfPage'] = $image;
-            $images = array_values(array_unique(array_filter([
-                $portfolio->beforeImageUrl(),
-                $portfolio->afterImageUrl(),
-                MediaUrl::resolve($portfolio->image),
-            ])));
-            if ($images !== []) {
-                $webPage['image'] = count($images) === 1 ? $images[0] : $images;
-            }
+        if ($images !== []) {
+            $article['image'] = count($images) === 1 ? $images[0] : $images;
         }
 
-        if ($portfolio->relatedBlog) {
-            $webPage['relatedLink'] = $this->blogUrl($portfolio->relatedBlog);
+        $about = array_values(array_filter([
+            $portfolio->brands ? 'ซ่อมเครื่องดูดฝุ่น '.$portfolio->brands : null,
+            $portfolio->fault,
+            $portfolio->symptom,
+        ]));
+        if ($about !== []) {
+            $article['about'] = $about;
         }
+
+        $breadcrumbLabel = match ($portfolio->slug) {
+            'pm-replace-motor-centric-place-hotel' => 'ซ่อมเครื่องดูดฝุ่น Electrolux และ Karcher โรงแรม Centric Place',
+            default => $portfolio->title,
+        };
+
+        $contact = config('contact');
+        $person = [
+            '@type' => 'Person',
+            '@id' => $origin.'/#siriphong',
+            'name' => $contact['owner_name'] ?? 'ศิริพงษ์ ชาศรพิทักษ์',
+            'alternateName' => ['ช่างต้อย', 'เฮียต้อย'],
+            'jobTitle' => 'เจ้าของและช่างซ่อมเครื่องดูดฝุ่นอุตสาหกรรม',
+            'description' => 'ช่างซ่อมเครื่องดูดฝุ่นอุตสาหกรรมและเครื่องคาร์แคร์ ตั้งแต่ปี พ.ศ. 2545',
+            'url' => $origin.'/about-us',
+            'worksFor' => ['@id' => $this->businessId()],
+        ];
 
         $nodes = [
             $this->organizationNode(),
             $this->websiteNode(),
             $this->localBusinessWithArea(),
+            $person,
+            $article,
             $this->breadcrumbNode($pageUrl, [
                 ['name' => 'หน้าแรก', 'url' => $this->baseUrl().'/'],
                 ['name' => 'ผลงาน', 'url' => $this->baseUrl().'/portfolio'],
-                ['name' => $portfolio->title, 'url' => null],
+                ['name' => $breadcrumbLabel, 'url' => null],
             ]),
-            $webPage,
         ];
+
+        if ($faqs->isNotEmpty()) {
+            $nodes[] = [
+                '@type' => 'FAQPage',
+                '@id' => rtrim($pageUrl, '/').'#faq',
+                'mainEntity' => $faqs->map(fn ($faq) => [
+                    '@type' => 'Question',
+                    'name' => $faq->question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq->answer,
+                    ],
+                ])->values()->all(),
+            ];
+        }
 
         return $this->wrapGraph($nodes);
     }

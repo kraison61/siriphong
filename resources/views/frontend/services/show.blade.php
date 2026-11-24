@@ -49,12 +49,29 @@
     <x-frontend.faq-list :faqs="$faqs" />
   @endif
 
-  @if ($service->slug === 'motor-repair' && Route::has('vacuum.3motor'))
+  @if ($service->slug === 'motor-repair')
+    <section class="py-10 bg-offwhite">
+      <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8 space-y-3">
+        @if (Route::has('vacuum.3motor'))
+          <p class="max-w-3xl text-slate-600 leading-relaxed">
+            เครื่องหลายมอเตอร์ช่างต้อยตรวจแยกทีละตัว ดูรายละเอียด
+            <a href="{{ route('vacuum.3motor') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">ซ่อมเครื่องดูดฝุ่น 3 มอเตอร์</a>
+          </p>
+        @endif
+        <p class="max-w-3xl text-slate-600 leading-relaxed">
+          ตัวอย่างงานจริง:
+          <a href="{{ url('/portfolio/pm-replace-motor-centric-place-hotel') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">เปลี่ยนมอเตอร์เครื่องดูดฝุ่น Karcher ที่เปิดไม่ติด ให้โรงแรม Centric Place 1,050 บาท</a>
+        </p>
+      </div>
+    </section>
+  @endif
+
+  @if ($service->slug === 'deep-clean')
     <section class="py-10 bg-offwhite">
       <div class="w-full max-w-[1200px] mx-auto px-4 md:px-6 xl:px-8">
         <p class="max-w-3xl text-slate-600 leading-relaxed">
-          เครื่องหลายมอเตอร์ช่างต้อยตรวจแยกทีละตัว ดูรายละเอียด
-          <a href="{{ route('vacuum.3motor') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">ซ่อมเครื่องดูดฝุ่น 3 มอเตอร์</a>
+          ตัวอย่าง:
+          <a href="{{ url('/portfolio/pm-replace-motor-centric-place-hotel') }}" class="font-semibold text-navy underline decoration-orange/50 underline-offset-2 hover:text-orange">ถอดล้างเครื่องดูดฝุ่น Electrolux ของโรงแรมย่านดินแดง 3 เครื่อง 700 บาท</a>
         </p>
       </div>
     </section>
